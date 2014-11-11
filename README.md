@@ -10,4 +10,11 @@ Credits goes to:
 This is American BlackJack ONLY
 
 Needed:
-. SDL / C 1.2 
+. SDL / C 1.2 libs
+	-> lsdl_ttf, lsdl_mixer, lsdl_image, lsdl_gfx, lsdl_console
+
+Specials credits:
+. for High Roller's Club (Splashing Casino).mp3 from NANCO Company Tekken 6(r)
+. for BMPs cards, Patrick MOIRE: http://jeux.cartes.free.fr/
+
+DOES NOT CONTAIN RELEASE, STILL WORKING.

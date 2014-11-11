@@ -12,7 +12,7 @@ void SPI_SDL_Init_Video(int x, int y, char titre[100], int ttf_support, int audi
 int SDL_Create_Menu(TTF_Font *police, int nb_entre, char sommaire[N][M]);
 void SDL_Create_Menu_Ch(TTF_Font *police, int id, char titre[M], int x, int y);
 void SDL_Print_Btn(int id,TTF_Font *police, char titre[30], int x, int y);
-void SDL_Print_bg(char file[50]);
+void SDL_Print_bg(char file[50], int x, int y);
 void SDL_Print_popup();
 int SDL_Souris_Survol(int hauteur, int largeur, int x, int y);
 void SDL_Write_popup(int ligne, TTF_Font *police, char txt_ligne1[200], char txt_ligne2[200], char txt_ligne3[200]);

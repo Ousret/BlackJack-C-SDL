@@ -45,3 +45,5 @@ extern int nb_cartes_banque;
 
 extern t_main mainjoueur[12]; // initialisation de la main du joueur
 extern t_main mainbanque[12]; // initialisation de la main de la banque
+
+extern t_main tas[50];

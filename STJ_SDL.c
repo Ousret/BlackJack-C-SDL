@@ -17,7 +17,7 @@
 #include <SDL_image.h> //Pour imprimer des images
 #include <string.h> //Gestion des chaines
 
-#include "def.h"
+#include "includes/STJ_SDL.h"
 
 void SPI_SDL_Init_Video(int x, int y, char titre[100], int ttf_support, int audio_support) {
 	
@@ -86,15 +86,15 @@ int SDL_Create_Menu(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 	int i = 0, action = 0;
 	int lastevent = -1;
 
-	sound = Mix_LoadWAV("snd/select.wav");
+	sound = Mix_LoadWAV("ressources/snd/select.wav");
 	
 	//On ne quitte pas la boucle tant qu'aucune selection n'a été faite
 	while (1) {
 		
 		action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
 		
-		SDL_Print_bg("ressources/app_bg_cw.png"); //Fond d'Žcran
-		//SDL_Print_bg("ressources/app_bg_menu.png"); //Barre du menu
+		SDL_Print_bg("ressources/images/app_bg.png", 0, 0); //Fond d'Žcran
+		SDL_Print_bg("ressources/images/BarreLaterale.png", 80, 25); //Barre du menu
 		
 		for (i = 0; i < nb_entre; i++) {
 			SDL_Create_Menu_Ch(police, i, sommaire[i], 100, 100+(i*50));
@@ -115,7 +115,7 @@ int SDL_Create_Menu(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		        case SDL_MOUSEBUTTONDOWN: //Si on clique
 		        	
 					if (SDL_Souris_Survol(40, 230, 100, 100+(sel_menu_m*50)) == 1) {
-						sound = Mix_LoadWAV("snd/enter.wav");
+						sound = Mix_LoadWAV("ressources/snd/enter.wav");
 						channel = Mix_PlayChannel(-1, sound, 0);
 						while(Mix_Playing(channel) != 0);
 						return sel_menu_m;
@@ -149,10 +149,10 @@ void SDL_Create_Menu_Ch(TTF_Font *police, int id, char titre[M], int x, int y) {
 	
 	//On charge l'image concernée ++ si souris survol choix
 	if (sel_souris == 1) {
-		imageDeFond = IMG_Load("ressources/m_bg_s1.png");
+		imageDeFond = IMG_Load("ressources/images/m_bg_s1.png");
 		sel_menu_m = id;
 	}else{
-		imageDeFond = IMG_Load("ressources/m_bg_s0.png");
+		imageDeFond = IMG_Load("ressources/images/m_bg_s0.png");
 	}
 	
 	SDL_BlitSurface(imageDeFond, NULL, screen, &positionFond);
@@ -166,15 +166,15 @@ void SDL_Create_Menu_Ch(TTF_Font *police, int id, char titre[M], int x, int y) {
 	
 }
 
-void SDL_Print_bg(char file[50]) {
+void SDL_Print_bg(char file[50], int x, int y) {
 	
 	SDL_Rect positionFond; //(dynamique)
 	SDL_Surface *imageDeFond = NULL;
 	
-	positionFond.x = 0;
-	positionFond.y = 0;
+	positionFond.x = x;
+	positionFond.y = y;
 	
-	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
+	if (x == 0 && y == 0) SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 	
 	imageDeFond = IMG_Load(file);
 	
@@ -194,7 +194,7 @@ void SDL_Print_popup() {
 	
 	//SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 	
-	imageDeFond = IMG_Load("ressources/popup.png");
+	imageDeFond = IMG_Load("ressources/images/popup.png");
 	
 	SDL_BlitSurface(imageDeFond, NULL, screen, &positionFond);
 	
@@ -220,7 +220,7 @@ void SDL_Open_PopUp(int ligne, TTF_Font *police, char txt_ligne1[200], char txt_
 		
 		action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
 		
-		SDL_Print_bg("ressources/");
+		SDL_Print_bg("ressources/images/", 0, 0);
 		SDL_Print_popup();
 		
 		SDL_Write_popup(ligne, police, txt_ligne1, txt_ligne2, txt_ligne3);
@@ -312,10 +312,10 @@ void SDL_Print_Btn(int id,TTF_Font *police, char titre[30], int x, int y) {
 	
 	//On charge l'image concernée ++ si souris survol choix
 	if (sel_souris == 1) {
-		imageDeFond = IMG_Load("ressources/btn_s1.png");
+		imageDeFond = IMG_Load("ressources/images/btn_s1.png");
 		sel_menu_m = id;
 	}else{
-		imageDeFond = IMG_Load("ressources/btn_s0.png");
+		imageDeFond = IMG_Load("ressources/images/btn_s0.png");
 	}
 	
 	SDL_BlitSurface(imageDeFond, NULL, screen, &positionFond);
@@ -359,10 +359,10 @@ void SDL_Print_Form(int id, TTF_Font *police, char titre[30], int etat, char des
 	
 	//On charge l'image concernée ++ si souris survol choix
 	if (etat == 1) {
-		imageDeFond = IMG_Load("ressources/ch_saisie_actif.png");
+		imageDeFond = IMG_Load("ressources/images/ch_saisie_actif.png");
 		//sel_menu_m = id;
 	}else{
-		imageDeFond = IMG_Load("ressources/ch_saisie_grise.png");
+		imageDeFond = IMG_Load("ressources/images/ch_saisie_grise.png");
 	}
 	
 	SDL_BlitSurface(imageDeFond, NULL, screen, &positionFond);

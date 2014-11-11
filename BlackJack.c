@@ -9,6 +9,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <math.h>
 
 #include "includes/BlackJack.h"
 
@@ -43,9 +45,9 @@ short carte_aleatoire(){
 // Retourne une carte encore non utilisée
 short tirer_carte(short joueur, t_main main){
 
-	int carte = carte_aleatoire();
+	short carte = carte_aleatoire();
 	
-	while (tas[carte]!=0){
+	/*while (tas[carte]!=0){
 		carte = carte_aleatoire();
 	}
 	
@@ -53,6 +55,7 @@ short tirer_carte(short joueur, t_main main){
 	main[(main[0].valeur)+1].valeur=carte%13;
 	main[(main[0].valeur)+1].couleur=carte/13;
 	main[0].valeur += 1;
+	*/
 	
 	return carte;
 }
@@ -72,6 +75,7 @@ short donner_valeur_carte (int i){
 		return carte+1;
 	}
 	
+	return 0; //Check this..
 }
 
 // fonction qui donne le score d'un joueur/     
@@ -80,9 +84,9 @@ short evaluer_score(t_main *main, int *nb_cartes, int nb_as){
 	int i, valeur_carte;
 	int points=0;
 	
-	for(i=0;i<nb_cartes;i++)
+	for(i=0; i < (*nb_cartes); i++)
 	{
-		valeur_carte = donner_valeur_carte(*main[i].valeur);
+		valeur_carte = donner_valeur_carte(main[i].valeur);
 		points = points + valeur_carte;
 	}
 	

@@ -42,9 +42,11 @@ int nb_as_banque = 0;
 int nb_cartes_joueur = 0;
 // définition de la variable nb_cartes_banque qui contient le nombre de cartes de la banque
 int nb_cartes_banque = 0;
+
 t_main mainjoueur[12]; // initialisation de la main du joueur
 t_main mainbanque[12]; // initialisation de la main de la banque
 
+t_main tas[50]; //Le tas de cartes
 
 //SDL_mutex *MutexEcran = NULL; Inutile pour l'instant.
 //FILE * fichier_db = NULL;
@@ -61,22 +63,22 @@ int main (int argc, char *argv[]) {
 
 	char sommaire[N][M] = { "Partie locale", "Mes comptes", "Quitter"};
 	
-	TTF_Font *police_menu = NULL; //Police d'Ècriture pour le menu 
+	TTF_Font *police_menu = NULL; //Police d'écriture pour le menu 
 	TTF_Font *police_std = NULL; //Police pour tout le reste sauf menu
 	
 	int MenuChoix = 0;
     
-	SPI_SDL_Init_Video(800,600,"SPITaJoke SDL",1,1); //800x600 +tff_support +audio_support
+	SPI_SDL_Init_Video(800,600,"BlackJack SDL Alpha",1,1); //800x600 +tff_support +audio_support
 	
 	//SDL_Splash("ressources/Splash0.png", 1500);
 	//SDL_Splash("ressources/Splash1.png", 1500);
 	
-	police_menu = TTF_OpenFont("ttf/global.ttf", 30);
-	police_std = TTF_OpenFont("ttf/global.ttf", 20);
+	police_menu = TTF_OpenFont("ressources/ttf/global.ttf", 25);
+	police_std = TTF_OpenFont("ressources/ttf/global.ttf", 20);
 	
 	while (1) {
 		
-		MenuChoix = SDL_Create_Menu(police_menu, 4, sommaire); //On affiche un menu de cinq entrÈe
+		MenuChoix = SDL_Create_Menu(police_menu, 3, sommaire); //On affiche un menu de cinq entrÈe
 		
 		switch (MenuChoix) {
 			
@@ -89,6 +91,7 @@ int main (int argc, char *argv[]) {
 				break;
 			
 			case 2:
+				//ByeBye..
 				exit(0);
 				break;
 				
