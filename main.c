@@ -35,23 +35,6 @@ Mix_Chunk *sound = NULL;
 Mix_Chunk *music = NULL;
 int channel_music = 0;
 
-//BlackJack vars
-// définition d'un tableau de 52 emplacements, représentant le jeu de cartes
-short cartes[52];
-// definition de la variable nb_as_joueur qui contient le nombre d'as d'un joueur
-int nb_as_joueur = 0;
-// définition de la variable nb_as_banque qui contient le nombre d'as de la banque 
-int nb_as_banque = 0;
-// définition de la variable nb_cartes_joueur qui contient le nombre de cartes du joueur
-int nb_cartes_joueur = 0;
-// définition de la variable nb_cartes_banque qui contient le nombre de cartes de la banque
-int nb_cartes_banque = 0;
-
-t_main mainjoueur[12]; // initialisation de la main du joueur
-t_main mainbanque[12]; // initialisation de la main de la banque
-
-t_main tas[50]; //Le tas de cartes
-
 //SDL_mutex *MutexEcran = NULL; Inutile pour l'instant.
 //FILE * fichier_db = NULL;
 

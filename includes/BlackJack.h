@@ -23,12 +23,12 @@ typedef enum {coeurs, carreaux, piques, trefles} t_couleur;
 
 typedef struct {t_valeur valeur; t_couleur couleur;} t_carte;
 
-typedef struct {t_carte carte[12]; int indice; int nb_as; int valeurmain} t_main;
+typedef struct {t_carte carte[12]; int indice; int nb_as; int valeurmain;} t_main;
 
 /* Prototypes */
 void init_game();
 void ajout(t_main * joueur, int valeur, int couleur);
-short carte_aleatoire()
+short carte_aleatoire();
 short tirer_carte(short joueur);
 void afficher_carte(short num, t_carte *main, int* nb_cartes);
 short tirer_carte(short joueur);
