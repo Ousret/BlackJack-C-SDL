@@ -27,9 +27,9 @@ void init_game(){
 
 // Fonction qui ajoute une carte à la main ()
 void ajout(t_main * joueur, int valeur, int couleur){
-	joueur->indice = joueur.indice + 1;
-	joueur->carte.valeur = valeur;
-	joueur->carte.couleur = carte;
+	joueur->indice = joueur->indice + 1;
+	joueur->carte[joueur->indice].valeur = valeur;
+	joueur->carte[joueur->indice].couleur = couleur;
 }
 
 // Fonction qui génère une carte aléatoire (carte)
@@ -56,15 +56,15 @@ short tirer_carte(short joueur){
 	
 	// On attribue la carte à la bonne main
 	if(joueur==BANQUE){
-		if(joueur->indice == -1){
+		if(mainbanque.indice == -1){
 			cartes[carte]=1;
 		}
 		else cartes[carte]=2; // RAJOUTER LA FONCTION CARTE CACHEE
-		ajout(mainbanque,tvaleur,tcouleur);
+		ajout(&mainbanque,tvaleur,tcouleur);
 	}
 	else if(joueur == JOUEUR){
 		cartes[carte]=1; 
-		ajout(mainjoueur,tvaleur,tcouleur);
+		ajout(&mainjoueur,tvaleur,tcouleur);
 	}	
 	
 	return carte;
