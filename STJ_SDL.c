@@ -158,7 +158,8 @@ void SDL_Create_Menu_Ch(TTF_Font *police, int id, char titre[M], int x, int y) {
 	SDL_BlitSurface(imageDeFond, NULL, screen, &positionFond);
 	
 	titre_ttf = TTF_RenderText_Blended(police, titre, couleurBlanche);
-	positionFond.x += 15;
+	positionFond.x += 20;
+	positionFond.y += 5;
 	SDL_BlitSurface(titre_ttf, NULL, screen, &positionFond);
 	
 	SDL_FreeSurface(imageDeFond);
@@ -473,10 +474,12 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 
 void SDL_Ambiance(char musicfic[100]) {
 	
+	char chemin_complet[200];
+	
 	if (Mix_Playing(channel_music) == 0) {
 		
-		//sprintf(musicfic, "ressources/snd/ambiance.wav");
-		music = Mix_LoadWAV("ressources/snd/ambiance.wav");
+		sprintf(chemin_complet, "ressources/snd/%s", musicfic);
+		music = Mix_LoadWAV(chemin_complet);
 		channel_music = Mix_PlayChannel(-1, music, 0);
 		
 	}
@@ -491,7 +494,6 @@ void SDL_Splash(char img[100], int attente) {
 	
 	positionFond.x = 0;
 	positionFond.y = 0;
-	
 
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 	
