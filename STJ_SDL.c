@@ -382,6 +382,107 @@ void SDL_Print_Form(int id, TTF_Font *police, char titre[30], int etat, char des
 	
 }
 
+void SDL_Print_Cards(int id, int x, int y) {
+	
+	SDL_Rect positionFond; //(dynamique)
+	SDL_Surface *imageDeFond = NULL;
+	char msg[100];
+	
+	positionFond.x = x;
+	positionFond.y = y;
+	
+	int sel_souris = SDL_Souris_Survol(71, 96, x, y); //Une carte est de la taille 71x96
+	
+	sprintf(msg, "ressources/images/cartes/%i.BMP", id);
+	
+	//On charge l'image concernée ++ si souris survol choix
+	if (sel_souris == 1) {
+		
+		imageDeFond = IMG_Load(msg);
+		positionFond.y-=50;
+		sel_menu_m = id;
+		
+	}else{
+	
+		imageDeFond = IMG_Load(msg);
+		
+	}
+	
+	SDL_BlitSurface(imageDeFond, NULL, screen, &positionFond);
+	SDL_FreeSurface(imageDeFond);
+	
+}
+
+int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
+
+	int i = 0, action = 0;
+	int lastevent = -1;
+
+	sound = Mix_LoadWAV("ressources/snd/select.wav");
+	
+	//On ne quitte pas la boucle tant qu'aucune selection n'a été faite
+	while (1) {
+		
+		action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
+		
+		SDL_Print_bg("ressources/images/app_bg_ingame.jpg", 0, 0); //Fond d'écran
+		
+		for (i = 0; i < nb_entre; i++) {
+			SDL_Create_Menu_Ch(police, i, sommaire[i], 200+(i*230), 500);
+		}
+		
+		SDL_Print_Cards(33, 350, 380);
+		SDL_Print_Cards(10, 430, 380);
+		
+		if (lastevent != sel_menu_m) {
+		
+			SDL_Flip (screen);
+			channel = Mix_PlayChannel(-1, sound, 0);
+			lastevent = sel_menu_m;
+		
+		}
+		
+		if (action) {
+				
+			switch (GlobalEvent.type)
+        	{
+		        case SDL_MOUSEBUTTONDOWN: //Si on clique
+		        	
+					if (SDL_Souris_Survol(40, 230, 200+(sel_menu_m*230), 500) == 1) {
+						sound = Mix_LoadWAV("ressources/snd/enter.wav");
+						channel = Mix_PlayChannel(-1, sound, 0);
+						while(Mix_Playing(channel) != 0);
+						return sel_menu_m;
+					}
+					
+					break;
+					
+		        case SDL_QUIT:
+		        
+		        	exit (0);
+					break;
+					
+			}
+		}
+		
+		SDL_Delay(20);
+		
+	}
+
+}
+
+void SDL_Ambiance(char musicfic[100]) {
+	
+	if (Mix_Playing(channel_music) == 0) {
+		
+		//sprintf(musicfic, "ressources/snd/ambiance.wav");
+		music = Mix_LoadWAV("ressources/snd/ambiance.wav");
+		channel_music = Mix_PlayChannel(-1, music, 0);
+		
+	}
+	
+}
+
 void SDL_Splash(char img[100], int attente) {
 	
 	SDL_Rect positionFond; //(dynamique)
@@ -399,13 +500,7 @@ void SDL_Splash(char img[100], int attente) {
 	
 		
 	SDL_Flip (screen);
-	
 	SDL_FreeSurface(imageDeFond);
-	
 	SDL_Delay(attente);
 	
-}
-
-void SDL_RAZ_ALL() {
-		
 }

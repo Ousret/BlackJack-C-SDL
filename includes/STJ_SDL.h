@@ -18,6 +18,10 @@ int SDL_Souris_Survol(int hauteur, int largeur, int x, int y);
 void SDL_Write_popup(int ligne, TTF_Font *police, char txt_ligne1[200], char txt_ligne2[200], char txt_ligne3[200]);
 void SDL_Open_PopUp(int ligne, TTF_Font *police, char txt_ligne1[200], char txt_ligne2[200], char txt_ligne3[200]);
 
+void SDL_Print_Cards(int id, int x, int y);
+int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]);
+void SDL_Ambiance(char musicfic[100]);
+
 /* Variable pointeur pour SDL */
 extern SDL_Surface *screen;
 
@@ -31,6 +35,9 @@ extern SDL_Event GlobalEvent;
 /* Variable pour le mixage */
 extern int channel;	
 extern Mix_Chunk *sound;
+
+extern Mix_Chunk *music;
+extern int channel_music;
 
 //SDL_mutex *MutexEcran = NULL; Inutile pour l'instant.. Faut s'en passer.. :D
 //extern FILE * fichier_db;
