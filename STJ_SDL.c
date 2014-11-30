@@ -1,11 +1,11 @@
 /**
- * \file SpiTaJoke_SDL.c
+ * \file STJ_SDL.c
  * \brief Librairies SDL/C 1.2
- * \author TAHRI Ahmed, SIMON Jérémy
+ * \author TAHRI Ahmed, SIMON Jérémy, DEZERE Florian, PROVOST Valentin
  * \version 0.2
  * \date 27 Octobre 2014
  *
- * Toutes les fonctions utiles à la SDL
+ * Toutes les fonctions utiles la SDL
  *
  */
 
@@ -20,6 +20,16 @@
 #include "includes/STJ_SDL.h"
 #include "includes/bj_engine.h"
 
+/** 
+* \fn void SPI_SDL_Init_Video(int x, int y, char titre[100], int ttf_support, int audio_support)
+* \brief Initialise le son, la police d'ecriture et la taille de la fenetre pour l'affichage en SDL du blackjack
+*
+* \param x defini la taille de la fenetre 
+* \param y defini la taille de la fenetre
+* \param titre tableau de caractere contenant le tire de la fenetre 
+* \param ttf_support entier definissant la police d'ecriture 
+* \param audio_support entier definissant le support audio 
+*/
 void SPI_SDL_Init_Video(int x, int y, char titre[100], int ttf_support, int audio_support) {
 	
     int sdl_start = 0;

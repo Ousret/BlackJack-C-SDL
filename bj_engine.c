@@ -131,6 +131,13 @@ int BJ_setBet(int id, long bet) {
 	
 }
 
+/**
+*\fn void BJ_setMonney(int id, long solde)
+*\brief Changer le solde d'un joueur
+*\param int id correspond au joueur qui mise 
+*\param long solde correspond a la valeur du nouveau solde
+*\return Aucune valeur de retour
+*/
 void BJ_setMonney(int id, long solde) {
 /* Remet de l'argent pour.. id */
 
