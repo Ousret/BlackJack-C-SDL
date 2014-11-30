@@ -627,6 +627,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			SDL_Create_Menu_Ch(police, i, sommaire[i], 50+(i*230), 530);
 		}
 		
+		//Si le joueur n'a pas encore reçu de carte..
 		if (firstDraw < 2) {
 			
 			BJ_attrCard(1);
@@ -782,8 +783,6 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			
 		}
 		
-		
-		
 		if (action) {
 				
 			switch (GlobalEvent.type)
@@ -802,7 +801,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 								return sel_menu_m;
 								break;
 								
-							case 1: //Rester.. Prend du recul.. c'est bien !
+							case 1: //Rester.. Prendre du recul.. c'est bien !
 								
 								if (lastMoveDone == 0) {
 									//On prend des cartes pour le banquier jusqu'à au moins 17
