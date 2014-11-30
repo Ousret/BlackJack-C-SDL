@@ -67,7 +67,6 @@ int main (int argc, char *argv[]) {
 	SPI_SDL_Init_Video(800,600,"BlackJack SDL",1,1); //800x600 +tff_support +audio_support
 	
 	//SDL_Splash("ressources/Splash0.png", 1500);
-	//SDL_Splash("ressources/Splash1.png", 1500);
 	
 	police_menu = TTF_OpenFont("ressources/ttf/global.ttf", 25);
 	police_std = TTF_OpenFont("ressources/ttf/global.ttf", 20);
@@ -79,13 +78,14 @@ int main (int argc, char *argv[]) {
 	while (1) {
 		
 		SDL_Ambiance("ambiance.wav");
-		MenuChoix = SDL_Create_Menu(police_menu, 3, sommaire); //On affiche un menu de cinq entrÈe
+		BJ_setGameProperties(((joueurs[1].solde)/10), ((joueurs[1].solde)/2), 0);
+		MenuChoix = SDL_Create_Menu(police_menu, 3, sommaire); //On affiche un menu de cinq entrée
 		
 		switch (MenuChoix) {
 			
 			case 0: 
-				//Contre CPU
-				BJ_setGameProperties(10, 150, 0);
+				
+				//Local!
 				BJ_setCards();
 				
 				videurCheck = BJ_setBet(1, SDL_Ask_Bet(police_std));
@@ -101,7 +101,8 @@ int main (int argc, char *argv[]) {
 					
 				}else{
 					
-					SDL_Open_PopUp(3, police_std, "Mauvaise saisie du montant, le videur ne vous laissera pas entrer !" ,"Mise minimale: 10 euros", "Mise maximale: 150 euros");
+					sprintf(stats, "Mise minimale = %li eur et mise max = %li eur", MinimalBet, MaximalBet);
+					SDL_Open_PopUp(2, police_std, "Mauvaise saisie du montant, le videur ne vous laissera pas entrer !" ,stats, "");
 					
 				}
 				

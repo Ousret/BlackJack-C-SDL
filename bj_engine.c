@@ -23,7 +23,6 @@ t_joueur joueurs[8]; //7 joueurs max. + croupier
 t_carte tas[56];
 int nbCard_tas = 0;
 
-
 /**
 *\fn int BJ_getScore(int id)
 *\brief Fonction renvoyant le score d'un joueur 
@@ -35,10 +34,11 @@ int BJ_getScore(int id) {
 
 	int total = 0;
 	int i = 0;
-	//fprintf(stdout, "Nbcarte de %i : %i\n", id, (joueurs[id].nbCard));
-	for (i = 0; i < (joueurs[id].nbCard)+1; i++) {
+
+	for (i = 0; i < (joueurs[id].nbCard); i++) {
 		
 		switch (joueurs[id].jeu[i].valeur) {
+			
 			case deux:
 				total+=2;
 				break;
@@ -88,8 +88,6 @@ int BJ_getScore(int id) {
 		
 		
 	}
-	
-	
 	
 	return total;
 }
