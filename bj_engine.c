@@ -139,12 +139,12 @@ int BJ_setGameProperties(long MiseMin, long MiseMax, short NbrBot) {
 void BJ_setCards() {
 /* Initialise le tas avec les cartes, fait en sorte de ne pas avoir de doublon.. Sa serai regrettable ! */
 
-	t_valeur tas_coeurs[14] = {un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as};
-	t_valeur tas_carreaux[14] = {un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as};
-	t_valeur tas_piques[14] = {un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as};
-	t_valeur tas_trefles[14] = {un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as};
+	t_valeur tas_coeurs[13] = {deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as};
+	t_valeur tas_carreaux[13] = {deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as};
+	t_valeur tas_piques[13] = {deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as};
+	t_valeur tas_trefles[13] = {deux, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as};
 	
-	int taille_coeurs = 14, taille_carreaux = 14, taille_piques = 14, taille_trefles = 14;
+	int taille_coeurs = 13, taille_carreaux = 13, taille_piques = 13, taille_trefles = 13;
 	int randpos = 0, randtype = 0; //Contiendra le choix au hasard 
 	int c = 0; //On comptera le nombre de carte ajouté au tas !
 	t_carte tmp;
