@@ -307,13 +307,6 @@ void BJ_setCards() {
 	
 }
 
-/**
-*\fn int Random(int _iMin, int _iMax)
-*\brief Fonction permmettant de renvoyer une valeur entiere aleatoire entre 2 valeurs
-*\param int _iMin correspond a la valeur minimale pour effectuer l'aleatoire 
-*\param int _iMax correspond a la valeur maximale pour effectuer l'aleatoire 
-*\return renvoi le nombre choisi aleatoirement 
-*/
 int Random (int _iMin, int _iMax)
 {
 	return (rand() % (_iMax - _iMin) + _iMin);

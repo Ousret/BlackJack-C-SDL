@@ -1,0 +1,195 @@
+\hypertarget{bj__engine_8c}{\section{bj\+\_\+engine.\+c File Reference}
+\label{bj__engine_8c}\index{bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}}
+}
+
+
+Les fonctions de bases du programme de black jack.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$time.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}includes/bj\+\_\+engine.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{bj__engine_8c_abae7d5dcfdbc3ae3412a7b62156c42bd}{B\+J\+\_\+get\+Score} (int id)
+\begin{DoxyCompactList}\small\item\em Fonction renvoyant le score d'un joueur. \end{DoxyCompactList}\item 
+void \hyperlink{bj__engine_8c_a002c5c33c2caf1816d58d5e9b2cff0e8}{B\+J\+\_\+set\+Bot\+Action} (int id)
+\begin{DoxyCompactList}\small\item\em Fonction definissant les actions d'un bot (I\+A) en fonction de son id. \end{DoxyCompactList}\item 
+int \hyperlink{bj__engine_8c_a6afb01df4d3a655be2f76ae1aa63c536}{B\+J\+\_\+set\+Bet} (int id, long bet)
+\begin{DoxyCompactList}\small\item\em Fonction permettant de placer une mise en jeu et de la retirer du solde du joueur. \end{DoxyCompactList}\item 
+int \hyperlink{bj__engine_8c_ac2c0566d0b9bec8d6644ea9add1d2cd5}{B\+J\+\_\+get\+P\+Status} (int id)
+\begin{DoxyCompactList}\small\item\em Fonction permettant de savoir si le joueur gagne. \end{DoxyCompactList}\item 
+\hypertarget{bj__engine_8c_a5ab7f3be1a0f568342d9bd6b88657ea9}{void {\bfseries B\+J\+\_\+attr\+Card} (int id)}\label{bj__engine_8c_a5ab7f3be1a0f568342d9bd6b88657ea9}
+
+\item 
+int \hyperlink{bj__engine_8c_ad77487138018c0c6cd62a3fc6ea598e7}{B\+J\+\_\+set\+Game\+Properties} (long Mise\+Min, long Mise\+Max, short Nbr\+Bot)
+\begin{DoxyCompactList}\small\item\em Fonction definissant les les propriete de la partie. \end{DoxyCompactList}\item 
+\hypertarget{bj__engine_8c_ad5b90e8eae98ecb3ddb8a5793e983c18}{void \hyperlink{bj__engine_8c_ad5b90e8eae98ecb3ddb8a5793e983c18}{B\+J\+\_\+set\+Cards} ()}\label{bj__engine_8c_ad5b90e8eae98ecb3ddb8a5793e983c18}
+
+\begin{DoxyCompactList}\small\item\em Fonction permettant l'initialisation du tas de cartes sans doublons. \end{DoxyCompactList}\item 
+int \hyperlink{bj__engine_8c_a649d4bce850eb3f346d1f0eae4310898}{Random} (int \+\_\+i\+Min, int \+\_\+i\+Max)
+\begin{DoxyCompactList}\small\item\em Fonction permmettant de renvoyer une valeur entiere aleatoire entre 2 valeurs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{bj__engine_8c_a3ba90a5901d2ec032d7214b535873ece}{long {\bfseries Minimal\+Bet} = 0}\label{bj__engine_8c_a3ba90a5901d2ec032d7214b535873ece}
+
+\item 
+\hypertarget{bj__engine_8c_ab9789f1fac4a52da0f0d9b8ba9f92814}{long {\bfseries Maximal\+Bet} = 0}\label{bj__engine_8c_ab9789f1fac4a52da0f0d9b8ba9f92814}
+
+\item 
+\hypertarget{bj__engine_8c_a8d16d4ce976fff18176a2603f3b8c4bf}{short {\bfseries Nb\+Bot} = 0}\label{bj__engine_8c_a8d16d4ce976fff18176a2603f3b8c4bf}
+
+\item 
+\hypertarget{bj__engine_8c_a6b1d9b84873bb9328a4bf3490ab99ee8}{t\+\_\+joueur {\bfseries joueurs} \mbox{[}8\mbox{]}}\label{bj__engine_8c_a6b1d9b84873bb9328a4bf3490ab99ee8}
+
+\item 
+\hypertarget{bj__engine_8c_a2f51f630a63d42c353a3506b7ec8ace7}{t\+\_\+carte {\bfseries tas} \mbox{[}56\mbox{]}}\label{bj__engine_8c_a2f51f630a63d42c353a3506b7ec8ace7}
+
+\item 
+\hypertarget{bj__engine_8c_aa0dc50481d132330a1c0e403700b3239}{int {\bfseries nb\+Card\+\_\+tas} = 0}\label{bj__engine_8c_aa0dc50481d132330a1c0e403700b3239}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Les fonctions de bases du programme de black jack. 
+
+\begin{DoxyAuthor}{Author}
+Groupe 4 du T\+P6 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+21 Octobre 2014 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{bj__engine_8c_ac2c0566d0b9bec8d6644ea9add1d2cd5}{\index{bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}!B\+J\+\_\+get\+P\+Status@{B\+J\+\_\+get\+P\+Status}}
+\index{B\+J\+\_\+get\+P\+Status@{B\+J\+\_\+get\+P\+Status}!bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}}
+\subsubsection[{B\+J\+\_\+get\+P\+Status}]{\setlength{\rightskip}{0pt plus 5cm}B\+J\+\_\+get\+P\+Status (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}}\label{bj__engine_8c_ac2c0566d0b9bec8d6644ea9add1d2cd5}
+
+
+Fonction permettant de savoir si le joueur gagne. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id represente le joueur dont on veut connaitre s'il gagne ou non \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoi 1 si le joueur gagne la manche, 0 si il reprend son argent, et -\/1 si il perd tout 
+\end{DoxyReturn}
+\hypertarget{bj__engine_8c_abae7d5dcfdbc3ae3412a7b62156c42bd}{\index{bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}!B\+J\+\_\+get\+Score@{B\+J\+\_\+get\+Score}}
+\index{B\+J\+\_\+get\+Score@{B\+J\+\_\+get\+Score}!bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}}
+\subsubsection[{B\+J\+\_\+get\+Score}]{\setlength{\rightskip}{0pt plus 5cm}int B\+J\+\_\+get\+Score (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}}\label{bj__engine_8c_abae7d5dcfdbc3ae3412a7b62156c42bd}
+
+
+Fonction renvoyant le score d'un joueur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id permet de savoir qu'elle est le joueur dont il faut recuperer le score \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoi le score du joueur 
+\end{DoxyReturn}
+\hypertarget{bj__engine_8c_a6afb01df4d3a655be2f76ae1aa63c536}{\index{bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}!B\+J\+\_\+set\+Bet@{B\+J\+\_\+set\+Bet}}
+\index{B\+J\+\_\+set\+Bet@{B\+J\+\_\+set\+Bet}!bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}}
+\subsubsection[{B\+J\+\_\+set\+Bet}]{\setlength{\rightskip}{0pt plus 5cm}int B\+J\+\_\+set\+Bet (
+\begin{DoxyParamCaption}
+\item[{int}]{id, }
+\item[{long}]{bet}
+\end{DoxyParamCaption}
+)}}\label{bj__engine_8c_a6afb01df4d3a655be2f76ae1aa63c536}
+
+
+Fonction permettant de placer une mise en jeu et de la retirer du solde du joueur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id correspond au joueur qui mise \\
+\hline
+{\em long} & bet correspond a la valeur de la mise du joueur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoi vrai si la mise peut-\/etre place en jeu faux sinon 
+\end{DoxyReturn}
+\hypertarget{bj__engine_8c_a002c5c33c2caf1816d58d5e9b2cff0e8}{\index{bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}!B\+J\+\_\+set\+Bot\+Action@{B\+J\+\_\+set\+Bot\+Action}}
+\index{B\+J\+\_\+set\+Bot\+Action@{B\+J\+\_\+set\+Bot\+Action}!bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}}
+\subsubsection[{B\+J\+\_\+set\+Bot\+Action}]{\setlength{\rightskip}{0pt plus 5cm}void B\+J\+\_\+set\+Bot\+Action (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}}\label{bj__engine_8c_a002c5c33c2caf1816d58d5e9b2cff0e8}
+
+
+Fonction definissant les actions d'un bot (I\+A) en fonction de son id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & id correspond a l'id du bot qu'il faut faire jouer \\
+\hline
+\end{DoxyParams}
+\hypertarget{bj__engine_8c_ad77487138018c0c6cd62a3fc6ea598e7}{\index{bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}!B\+J\+\_\+set\+Game\+Properties@{B\+J\+\_\+set\+Game\+Properties}}
+\index{B\+J\+\_\+set\+Game\+Properties@{B\+J\+\_\+set\+Game\+Properties}!bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}}
+\subsubsection[{B\+J\+\_\+set\+Game\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}B\+J\+\_\+set\+Game\+Properties (
+\begin{DoxyParamCaption}
+\item[{long}]{Mise\+Min, }
+\item[{long}]{Mise\+Max, }
+\item[{short}]{N\+Brbot}
+\end{DoxyParamCaption}
+)}}\label{bj__engine_8c_ad77487138018c0c6cd62a3fc6ea598e7}
+
+
+Fonction definissant les les propriete de la partie. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em long} & Mise\+Min correspond a la mise minimale \\
+\hline
+{\em long} & Mise\+Max correspond a la mise maximale \\
+\hline
+{\em short} & Nbr\+Bot correspond au nombre de bot dans la partie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoi -\/1 si il y a trop de bot, 0 si les parametres sont correctes 
+\end{DoxyReturn}
+\hypertarget{bj__engine_8c_a649d4bce850eb3f346d1f0eae4310898}{\index{bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}!Random@{Random}}
+\index{Random@{Random}!bj\+\_\+engine.\+c@{bj\+\_\+engine.\+c}}
+\subsubsection[{Random}]{\setlength{\rightskip}{0pt plus 5cm}int Random (
+\begin{DoxyParamCaption}
+\item[{int}]{\+\_\+i\+Min, }
+\item[{int}]{\+\_\+i\+Max}
+\end{DoxyParamCaption}
+)}}\label{bj__engine_8c_a649d4bce850eb3f346d1f0eae4310898}
+
+
+Fonction permmettant de renvoyer une valeur entiere aleatoire entre 2 valeurs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & \+\_\+i\+Min correspond a la valeur minimale pour effectuer l'aleatoire \\
+\hline
+{\em int} & \+\_\+i\+Max correspond a la valeur maximale pour effectuer l'aleatoire \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+renvoi le nombre choisi aleatoirement 
+\end{DoxyReturn}
