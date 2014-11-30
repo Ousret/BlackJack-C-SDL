@@ -13,6 +13,7 @@ extern t_joueur joueurs[8]; //7 joueurs max. + croupier
 extern t_carte tas[56];
 extern int nbCard_tas;
 
+extern int nbVictoireConseq;
 
 /* Prototype des fonctions BJ_ */
 int BJ_getScore(int id);
