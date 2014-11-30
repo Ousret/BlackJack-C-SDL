@@ -222,7 +222,7 @@ void SDL_Open_PopUp(int ligne, TTF_Font *police, char txt_ligne1[200], char txt_
 		
 		action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
 		
-		SDL_Print_bg("ressources/images/", 0, 0);
+		//SDL_Print_bg("ressources/images/", 0, 0);
 		SDL_Print_popup();
 		
 		SDL_Write_popup(ligne, police, txt_ligne1, txt_ligne2, txt_ligne3);
@@ -349,11 +349,11 @@ void SDL_Print_Form(int id, TTF_Font *police, char titre[30], int etat, char des
 		*sel_souris_form = id;
 		strcpy (saisie_content,dest);
   		strcat (saisie_content,"|");
-  		puts (saisie_content);
+  		//puts (saisie_content);
 	}else if(id == *sel_souris_form) {
 		strcpy (saisie_content,dest);
   		strcat (saisie_content,"|");
-  		puts (saisie_content);
+  		//puts (saisie_content);
 	}else{
 		strcpy (saisie_content,dest);
 	}
@@ -480,10 +480,87 @@ void SDL_Print_Score(TTF_Font *police, int score, int x, int y) {
 
 }
 
+int SDL_Ask_Bet(TTF_Font *police){
+	
+	int action = 0, sel_saisie = 0, taille_saisie = 0;
+	char str_betvalue[100], temps = 0;
+	
+	memset(str_betvalue, 0, sizeof(str_betvalue));
+	
+	while (1) {
+		
+		action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
+		
+		//SDL_Print_bg("ressources/images/", 0, 0);
+		SDL_Print_popup();
+		SDL_Print_Form(1, police, "Bet:", 1, str_betvalue, &sel_saisie, 165, 150);
+		//SDL_Write_popup(ligne, police, txt_ligne1, txt_ligne2, txt_ligne3);
+		SDL_Print_Btn(1, police, "Let's roll", 270, 300);
+		
+		SDL_Flip (screen);
+		
+		if (action) {
+			switch (GlobalEvent.type)
+        	{
+		        case SDL_MOUSEBUTTONDOWN: //Si on clique
+		        	
+					if (SDL_Souris_Survol(40, 140, 270, 300) == 1) {
+					
+						return atoi(str_betvalue);
+						
+					}
+					break;
+					
+				case SDL_KEYDOWN: //Si on enfonce une touche
+                   
+                    temps=GlobalEvent.key.keysym.unicode;
+                   
+                    switch (sel_saisie) {
+                       
+                        case 1: //Saisie bet..
+                           
+                            if (taille_saisie < 35) {
+                               
+                                if (temps == '\b') {
+                               
+                                    if (taille_saisie > 0) {
+                                        taille_saisie--;
+                                        str_betvalue[taille_saisie] = 0;
+                                    }           
+                                           
+                                }else if (temps >= '0' && temps <= '9') {
+                                           
+                                    str_betvalue[taille_saisie] = temps;
+                                    taille_saisie++; 
+                                   
+                                }
+                               
+                            }
+                           
+                        break;
+                        
+                    }
+                    break;
+					
+		        case SDL_QUIT:
+		        	exit (0);
+					break;
+			}
+		}
+		
+		
+		SDL_Delay (20);
+		
+	}
+	
+}
+
 int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 
 	int i = 0, action = 0;
 	int lastevent = -1;
+	
+	int firstDraw = 0;
 
 	sound = Mix_LoadWAV("ressources/snd/select.wav");
 	
@@ -495,14 +572,18 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		SDL_Print_bg("ressources/images/app_bg_ingame.png", 0, 0); //Fond d'écran
 		
 		for (i = 0; i < nb_entre; i++) {
-			SDL_Create_Menu_Ch(police, i, sommaire[i], 200+(i*230), 500);
+			SDL_Create_Menu_Ch(police, i, sommaire[i], 80+(i*230), 500);
 		}
 		
-		BJ_attrCard(1);
-		BJ_attrCard(0);
+		if (firstDraw == 0) {
+			
+			BJ_attrCard(1);
+			BJ_attrCard(1);
 		
-		fprintf(stdout, "P1 score: %i\n", BJ_getScore(1));
-		fprintf(stdout, "Bank score: %i\n", BJ_getScore(0));
+			BJ_attrCard(0);
+			firstDraw++;
+		}
+		
 		
 		//On imprime les cartes du joueurs
 		for (i = 0; i < joueurs[1].nbCard; i++) {
@@ -518,9 +599,6 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		
 		SDL_Print_Score(police, BJ_getScore(0) , 330, 100);
 		
-		//SDL_Print_Cards(33, 350, 380);
-		//SDL_Print_Cards(10, 430, 380);
-		
 		if (lastevent != sel_menu_m) {
 		
 			SDL_Flip (screen);
@@ -535,11 +613,24 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
         	{
 		        case SDL_MOUSEBUTTONDOWN: //Si on clique
 		        	
-					if (SDL_Souris_Survol(40, 230, 200+(sel_menu_m*230), 500) == 1) {
+					if (SDL_Souris_Survol(40, 230, 80+(sel_menu_m*230), 500) == 1) {
 						sound = Mix_LoadWAV("ressources/snd/enter.wav");
 						channel = Mix_PlayChannel(-1, sound, 0);
 						while(Mix_Playing(channel) != 0);
-						return sel_menu_m;
+						
+						switch (sel_menu_m) {
+							case 0: //Abandon
+								return sel_menu_m;
+								break;
+							case 1: //Rester.. Prend du recul.. c'est bien !
+								//O
+								break;
+							case 2: //Frapper.. Courageux..!
+								BJ_attrCard(1);
+								break;
+						}
+						
+						
 					}
 					
 					break;

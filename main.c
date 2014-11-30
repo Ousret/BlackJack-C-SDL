@@ -49,7 +49,7 @@ int sel_menu_m = 0;
 int main (int argc, char *argv[]) {
 
 	char sommaire[N][M] = { "Partie locale", "Mes comptes", "Quitter"};
-	char ingame[N][M] = { "Abandon", "Quitter"};
+	char ingame[N][M] = { "Abandon", "Rester", "Frapper"};
 	
 	TTF_Font *police_menu = NULL; //Police d'écriture pour le menu 
 	TTF_Font *police_std = NULL; //Police pour tout le reste sauf menu
@@ -77,11 +77,22 @@ int main (int argc, char *argv[]) {
 				//Contre CPU
 				BJ_setGameProperties(10, 150, 0);
 				BJ_setCards();
-				SDL_Create_Local(police_std, 2, ingame);
+				
+				if (BJ_setBet(1, SDL_Ask_Bet(police_std)) == 1) {
+				
+					SDL_Create_Local(police_std, 3, ingame);
+					
+				}else{
+					
+					SDL_Open_PopUp(3, police_std, "Mauvaise saisie du montant, vous n'etes pas accepte !" ,"Mise minimale: 10 euros", "Mise maximale: 150 euros");
+					
+				}
+				
 				break;
 				
 			case 1:
 				//Mes comptes
+				SDL_Open_PopUp(3, police_std, "Il vous reste 300 euros" ,"Attention, les jeux d'argents peuvent rendre addict.", "Effet secondaire(?): Richesse, exil fiscal.. (Non exhaustif)");
 				break;
 			
 			case 2:
