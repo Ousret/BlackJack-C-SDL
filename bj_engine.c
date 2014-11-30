@@ -35,7 +35,7 @@ int BJ_getScore(int id) {
 
 	int total = 0;
 	int i = 0;
-	
+	//fprintf(stdout, "Nbcarte de %i : %i\n", id, (joueurs[id].nbCard));
 	for (i = 0; i < (joueurs[id].nbCard)+1; i++) {
 		
 		switch (joueurs[id].jeu[i].valeur) {
@@ -193,20 +193,17 @@ int BJ_setGameProperties(long MiseMin, long MiseMax, short NbrBot) {
 	MinimalBet = MiseMin;
 	MaximalBet = MiseMax;
 	NbBot = NbrBot;
+	nbCard_tas = 0;
 	
 	for (i = 0; i <= (NbrBot+2); i++) {
 		
 		//Banque, emplacement 0 et 1 emplacement joueur !
 		if (i > 1) {
 			joueurs[i].solde = Random(300, 10000);
-		}else{
-			//On prend dans profil.sav
 		}
 		
 		joueurs[i].mise = 0;
-		
 		joueurs[i].nbCard = 0;
-		
 		joueurs[i].points = 0;
 		
 	}

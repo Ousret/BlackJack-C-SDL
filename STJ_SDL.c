@@ -579,7 +579,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 	int i = 0, action = 0;
 	int lastevent = -1;
 	
-	int firstDraw = 0;
+	int firstDraw = 0, lastMoveDone = 0, lastMoveBk = 0;
 
 	sound = Mix_LoadWAV("ressources/snd/select.wav");
 	BJ_attrCard(0); //Donne une carte au dealer
@@ -604,6 +604,23 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			
 			firstDraw++;
 			lastevent = 0;
+			
+			//Check if immediate BlackJack!
+			if (BJ_getScore(1) == 21) {
+				SDL_Open_PopUp(3, police, "Holy shit! Vous etes pas trop rentable comme joueur..!", "Beau BlackJack !", "Partie finie..");
+				return 0;
+			}
+			
+		}else if ((lastMoveDone == 1)&&(BJ_getScore(0) < 17)){
+			
+			BJ_attrCard(0);
+			
+			effect = Mix_LoadWAV("ressources/snd/deal.wav");
+			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			
+			lastevent = 0;
+			if (BJ_getScore(0) >= 17) lastMoveBk = 1;
+			
 		}
 		
 		//On imprime les cartes du joueurs
@@ -623,12 +640,49 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		
 		
 		if (BJ_getScore(1) > 21) {
+			
 			//GrillŽ..
 			effect = Mix_LoadWAV("ressources/snd/lose.wav");
 			channel_effect = Mix_PlayChannel(-1, effect, 0);
 			SDL_Open_PopUp(2, police, "Vous etes crame.. Merci pour les sous !", "La partie est finie", "");
+			
 			return 0;
+			
+		}else if (BJ_getScore(0) > 21) {
+		
+			SDL_Open_PopUp(2, police, "Vous avez gagne.. Je me suis grille!", "La partie est finie", "");
+			
+			return 0;
+		
 		}
+		
+		
+		if (lastMoveBk == 1) {
+			
+			if (BJ_getScore(1) > BJ_getScore(0)) {
+			
+				SDL_Open_PopUp(2, police, "Vous avez gagne.. C'est juste de la chance !", "La partie est finie", "");
+			
+				return 0;
+			}else if (BJ_getScore(1) < BJ_getScore(0)) {
+			
+				//HumiliŽ
+				effect = Mix_LoadWAV("ressources/snd/lose.wav");
+				channel_effect = Mix_PlayChannel(-1, effect, 0);
+				SDL_Open_PopUp(2, police, "Qui a le plus gros score..? Merci pour les sous !", "La partie est finie", "");
+			
+				return 0;
+			}else if (BJ_getScore(1) == BJ_getScore(0)) {
+				
+				SDL_Open_PopUp(2, police, "Draw..! egalite!", "La partie est finie", "");
+			
+				return 0;
+				
+			}
+			
+		}
+		
+		
 		
 		if (lastevent != sel_menu_m) {
 		
@@ -658,19 +712,26 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 								
 							case 1: //Rester.. Prend du recul.. c'est bien !
 								
-								//On prend des cartes pour le banquier jusqu'ˆ au moins 17
-								sound = Mix_LoadWAV("ressources/snd/enter.wav");
-								channel = Mix_PlayChannel(-1, sound, 0);
+								if (lastMoveDone == 0) {
+									//On prend des cartes pour le banquier jusqu'ˆ au moins 17
+									sound = Mix_LoadWAV("ressources/snd/enter.wav");
+									channel = Mix_PlayChannel(-1, sound, 0);
+									lastMoveDone = 1;
+								}
+								
 								break;
 								
 							case 2: //Frapper.. Courageux..! On demande une autre carte
 							
-								BJ_attrCard(1);
+								if (lastMoveDone == 0) {
+									BJ_attrCard(1);
 								
-								effect = Mix_LoadWAV("ressources/snd/deal.wav");
-								channel_effect = Mix_PlayChannel(-1, effect, 0);
+									effect = Mix_LoadWAV("ressources/snd/deal.wav");
+									channel_effect = Mix_PlayChannel(-1, effect, 0);
 								
-								lastevent = 0;
+									lastevent = 0;
+								}
+								
 								break;
 								
 						}

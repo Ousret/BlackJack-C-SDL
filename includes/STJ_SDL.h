@@ -21,6 +21,7 @@ void SDL_Print_Form(int id, TTF_Font *police, char titre[30], int etat, char des
 
 void SDL_Print_Cards(int id, int cardid, int x, int y);
 void SDL_Print_Score(TTF_Font *police, int score, int x, int y);
+void SDL_Print_Bet(TTF_Font *police, long bet, int x, int y);
 int SDL_Ask_Bet(TTF_Font *police);
 int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]);
 void SDL_Ambiance(char musicfic[100]);
@@ -41,6 +42,9 @@ extern Mix_Chunk *sound;
 
 extern Mix_Chunk *music;
 extern int channel_music;
+
+extern int channel_effect;	
+extern Mix_Chunk *effect;
 
 //SDL_mutex *MutexEcran = NULL; Inutile pour l'instant.. Faut s'en passer.. :D
 //extern FILE * fichier_db;
