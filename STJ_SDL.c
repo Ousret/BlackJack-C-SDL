@@ -480,6 +480,25 @@ void SDL_Print_Score(TTF_Font *police, int score, int x, int y) {
 
 }
 
+void SDL_Print_Bet(TTF_Font *police, long bet, int x, int y) {
+
+	SDL_Rect positionFond; //(dynamique)
+	SDL_Surface *titre_ttf = NULL;
+	char ScoreStr[50];
+	
+	sprintf(ScoreStr, "%li euros", bet);
+	
+	positionFond.x = x;
+	positionFond.y = y;
+	
+	titre_ttf = TTF_RenderText_Blended(police, ScoreStr, couleurBlanche);
+	
+	SDL_BlitSurface(titre_ttf, NULL, screen, &positionFond);
+	SDL_FreeSurface(titre_ttf);
+
+}
+
+
 int SDL_Ask_Bet(TTF_Font *police){
 	
 	int action = 0, sel_saisie = 0, taille_saisie = 0;
@@ -493,7 +512,7 @@ int SDL_Ask_Bet(TTF_Font *police){
 		
 		//SDL_Print_bg("ressources/images/", 0, 0);
 		SDL_Print_popup();
-		SDL_Print_Form(1, police, "Bet:", 1, str_betvalue, &sel_saisie, 165, 150);
+		SDL_Print_Form(1, police, "Mise:", 1, str_betvalue, &sel_saisie, 165, 150);
 		//SDL_Write_popup(ligne, police, txt_ligne1, txt_ligne2, txt_ligne3);
 		SDL_Print_Btn(1, police, "Let's roll", 270, 300);
 		
@@ -563,6 +582,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 	int firstDraw = 0;
 
 	sound = Mix_LoadWAV("ressources/snd/select.wav");
+	BJ_attrCard(0); //Donne une carte au dealer
 	
 	//On ne quitte pas la boucle tant qu'aucune selection n'a été faite
 	while (1) {
@@ -575,15 +595,16 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			SDL_Create_Menu_Ch(police, i, sommaire[i], 80+(i*230), 500);
 		}
 		
-		if (firstDraw == 0) {
+		if (firstDraw < 2) {
 			
 			BJ_attrCard(1);
-			BJ_attrCard(1);
-		
-			BJ_attrCard(0);
+			
+			effect = Mix_LoadWAV("ressources/snd/deal.wav");
+			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			
 			firstDraw++;
+			lastevent = 0;
 		}
-		
 		
 		//On imprime les cartes du joueurs
 		for (i = 0; i < joueurs[1].nbCard; i++) {
@@ -591,6 +612,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		}
 		
 		SDL_Print_Score(police, BJ_getScore(1) , 330, 380);
+		SDL_Print_Bet(police, joueurs[1].mise, 350, 360);
 		
 		//Aussi celle du banquier ..!
 		for (i = 0; i < joueurs[0].nbCard; i++) {
@@ -598,6 +620,15 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		}
 		
 		SDL_Print_Score(police, BJ_getScore(0) , 330, 100);
+		
+		
+		if (BJ_getScore(1) > 21) {
+			//GrillŽ..
+			effect = Mix_LoadWAV("ressources/snd/lose.wav");
+			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			SDL_Open_PopUp(2, police, "Vous etes crame.. Merci pour les sous !", "La partie est finie", "");
+			return 0;
+		}
 		
 		if (lastevent != sel_menu_m) {
 		
@@ -614,22 +645,37 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		        case SDL_MOUSEBUTTONDOWN: //Si on clique
 		        	
 					if (SDL_Souris_Survol(40, 230, 80+(sel_menu_m*230), 500) == 1) {
-						sound = Mix_LoadWAV("ressources/snd/enter.wav");
-						channel = Mix_PlayChannel(-1, sound, 0);
-						while(Mix_Playing(channel) != 0);
 						
 						switch (sel_menu_m) {
+							
 							case 0: //Abandon
+								
+								sound = Mix_LoadWAV("ressources/snd/enter.wav");
+								channel = Mix_PlayChannel(-1, sound, 0);
+								while(Mix_Playing(channel) != 0);
 								return sel_menu_m;
 								break;
+								
 							case 1: //Rester.. Prend du recul.. c'est bien !
-								//O
+								
+								//On prend des cartes pour le banquier jusqu'ˆ au moins 17
+								sound = Mix_LoadWAV("ressources/snd/enter.wav");
+								channel = Mix_PlayChannel(-1, sound, 0);
 								break;
-							case 2: //Frapper.. Courageux..!
+								
+							case 2: //Frapper.. Courageux..! On demande une autre carte
+							
 								BJ_attrCard(1);
+								
+								effect = Mix_LoadWAV("ressources/snd/deal.wav");
+								channel_effect = Mix_PlayChannel(-1, effect, 0);
+								
+								lastevent = 0;
 								break;
+								
 						}
 						
+						sound = Mix_LoadWAV("ressources/snd/select.wav");
 						
 					}
 					
@@ -643,7 +689,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			}
 		}
 		
-		SDL_Delay(20);
+		SDL_Delay(50);
 		
 	}
 
@@ -658,7 +704,7 @@ void SDL_Ambiance(char musicfic[100]) {
 		sprintf(chemin_complet, "ressources/snd/%s", musicfic);
 		music = Mix_LoadWAV(chemin_complet);
 		channel_music = Mix_PlayChannel(-1, music, 0);
-		
+		Mix_Volume(channel_music, 10);
 	}
 	
 }

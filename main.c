@@ -30,6 +30,9 @@ SDL_Event GlobalEvent;
 int channel = 0;	
 Mix_Chunk *sound = NULL;
 
+int channel_effect = 0;	
+Mix_Chunk *effect = NULL;
+
 Mix_Chunk *music = NULL;
 int channel_music = 0;
 
