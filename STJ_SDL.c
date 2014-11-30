@@ -407,6 +407,7 @@ void SDL_Print_Cards(int id, int cardid, int x, int y) {
 		}
 			
 		switch (joueurs[id].jeu[cardid].valeur) {
+			
 			case deux:
 				calcPos+=1;
 				break;
@@ -417,34 +418,35 @@ void SDL_Print_Cards(int id, int cardid, int x, int y) {
 				calcPos+=3;
 				break;
 			case cinq:
-				calcPos+=5;
+				calcPos+=4;
 				break;
 			case six:
-				calcPos+=6;
+				calcPos+=5;
 				break;
 			case sept:
-				calcPos+=7;
+				calcPos+=6;
 				break;
 			case huit:
-				calcPos+=8;
+				calcPos+=7;
 				break;
 			case neuf:
-				calcPos+=9;
+				calcPos+=8;
 				break;
 			case dix:
-				calcPos+=10;
+				calcPos+=9;
 				break;
 			case valet:
-				calcPos+=11;
+				calcPos+=10;
 				break;
 			case dame:
-				calcPos+=12;
+				calcPos+=11;
 				break;
 			case roi:
-				calcPos+=13;
+				calcPos+=12;
 				break;
 			case as:
 				break;
+				
 		}
 			
 	
@@ -454,6 +456,28 @@ void SDL_Print_Cards(int id, int cardid, int x, int y) {
 	SDL_BlitSurface(imageDeFond, NULL, screen, &positionFond);
 	SDL_FreeSurface(imageDeFond);
 	
+}
+
+void SDL_Print_Score(TTF_Font *police, int score, int x, int y) {
+
+	SDL_Rect positionFond; //(dynamique)
+	SDL_Surface *titre_ttf = NULL;
+	char ScoreStr[4];
+	
+	sprintf(ScoreStr, "%i", score);
+	
+	positionFond.x = x;
+	positionFond.y = y;
+	
+	if (score <= 21) {
+		titre_ttf = TTF_RenderText_Blended(police, ScoreStr, couleurNoire);
+	}else{
+		titre_ttf = TTF_RenderText_Blended(police, ScoreStr, couleurRouge);
+	}
+	
+	SDL_BlitSurface(titre_ttf, NULL, screen, &positionFond);
+	SDL_FreeSurface(titre_ttf);
+
 }
 
 int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
@@ -477,14 +501,22 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		BJ_attrCard(1);
 		BJ_attrCard(0);
 		
+		fprintf(stdout, "P1 score: %i\n", BJ_getScore(1));
+		fprintf(stdout, "Bank score: %i\n", BJ_getScore(0));
+		
 		//On imprime les cartes du joueurs
 		for (i = 0; i < joueurs[1].nbCard; i++) {
 			SDL_Print_Cards(1, i, 350+(30*i), 380);
 		}
+		
+		SDL_Print_Score(police, BJ_getScore(1) , 330, 380);
+		
 		//Aussi celle du banquier ..!
 		for (i = 0; i < joueurs[0].nbCard; i++) {
 			SDL_Print_Cards(0, i, 350+(30*i), 100);
 		}
+		
+		SDL_Print_Score(police, BJ_getScore(0) , 330, 100);
 		
 		//SDL_Print_Cards(33, 350, 380);
 		//SDL_Print_Cards(10, 430, 380);

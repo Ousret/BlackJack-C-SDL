@@ -27,10 +27,9 @@ int BJ_getScore(int id) {
 /* Renvoi le score */
 
 	int total = 0;
-	int compteur_AS = 0;
 	int i = 0;
 	
-	for (i = 0; i < (joueurs[id].nbCard); i++) {
+	for (i = 0; i < (joueurs[id].nbCard)+1; i++) {
 		
 		switch (joueurs[id].jeu[i].valeur) {
 			case deux:
@@ -70,19 +69,20 @@ int BJ_getScore(int id) {
 				total+=10;
 				break;
 			case as:
-				total+=11;
+				//On n'oublie pas de rétrograder l'AS si on est cramé !
+				if ((total + 11) > 21) {
+					total+=1;
+				}else{
+					total+=11;
+				}
+				
 				break;
 		}
-		
-		if (joueurs[id].jeu[i].valeur == as) compteur_AS++; 
 		
 		
 	}
 	
-	//On n'oublie pas de rétrograder l'AS si on est cramé !
-	if (compteur_AS > 0 && total > 21) {
-		total-=10;
-	}
+	
 	
 	return total;
 }
@@ -133,7 +133,7 @@ void BJ_attrCard(int id) {
 
 	if (joueurs[id].nbCard < 8) {
 		
-		joueurs[id].jeu[(joueurs[id].nbCard)+1] = tas[0];
+		joueurs[id].jeu[(joueurs[id].nbCard)] = tas[0];
 		
 		for (i = 0; i < nbCard_tas; i++) {
 			tas[i] = tas[i+1];
