@@ -1,5 +1,5 @@
 //En ce qui concerne les valeurs de cartes
-typedef enum {deux = 2, trois, quatre, cinq, six, sept, huit, neuf, dix, valet = 10, dame = 10, roi = 10, as = 11} t_valeur;
+typedef enum {deux = 2, trois, quatre, cinq, six, sept, huit, neuf, dix, valet, dame, roi, as = 1} t_valeur;
 typedef enum {coeurs, carreaux, piques, trefles} t_couleur;
 
 typedef struct {t_valeur valeur; t_couleur couleur; } t_carte;

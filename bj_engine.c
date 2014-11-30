@@ -31,8 +31,49 @@ int BJ_getScore(int id) {
 	int i = 0;
 	
 	for (i = 0; i < (joueurs[id].nbCard); i++) {
-			
-		total+=joueurs[id].jeu[i].valeur;
+		
+		switch (joueurs[id].jeu[i].valeur) {
+			case deux:
+				total+=2;
+				break;
+			case trois:
+				total+=3;
+				break;
+			case quatre:
+				total+=4;
+				break;
+			case cinq:
+				total+=5;
+				break;
+			case six:
+				total+=6;
+				break;
+			case sept:
+				total+=7;
+				break;
+			case huit:
+				total+=8;
+				break;
+			case neuf:
+				total+=9;
+				break;
+			case dix:
+				total+=10;
+				break;
+			case valet:
+				total+=10;
+				break;
+			case dame:
+				total+=10;
+				break;
+			case roi:
+				total+=10;
+				break;
+			case as:
+				total+=11;
+				break;
+		}
+		
 		if (joueurs[id].jeu[i].valeur == as) compteur_AS++; 
 		
 		
