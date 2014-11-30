@@ -458,6 +458,28 @@ void SDL_Print_Cards(int id, int cardid, int x, int y) {
 	
 }
 
+void SDL_Print_Score(TTF_Font *police, int score, int x, int y) {
+
+	SDL_Rect positionFond; //(dynamique)
+	SDL_Surface *titre_ttf = NULL;
+	char ScoreStr[4];
+	
+	sprintf(ScoreStr, "%i", score);
+	
+	positionFond.x = x;
+	positionFond.y = y;
+	
+	if (score <= 21) {
+		titre_ttf = TTF_RenderText_Blended(police, ScoreStr, couleurNoire);
+	}else{
+		titre_ttf = TTF_RenderText_Blended(police, ScoreStr, couleurRouge);
+	}
+	
+	SDL_BlitSurface(titre_ttf, NULL, screen, &positionFond);
+	SDL_FreeSurface(titre_ttf);
+
+}
+
 int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 
 	int i = 0, action = 0;
@@ -486,10 +508,15 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		for (i = 0; i < joueurs[1].nbCard; i++) {
 			SDL_Print_Cards(1, i, 350+(30*i), 380);
 		}
+		
+		SDL_Print_Score(police, BJ_getScore(1) , 330, 380);
+		
 		//Aussi celle du banquier ..!
 		for (i = 0; i < joueurs[0].nbCard; i++) {
 			SDL_Print_Cards(0, i, 350+(30*i), 100);
 		}
+		
+		SDL_Print_Score(police, BJ_getScore(0) , 330, 100);
 		
 		//SDL_Print_Cards(33, 350, 380);
 		//SDL_Print_Cards(10, 430, 380);
