@@ -708,6 +708,15 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			
 			return 0;
 		
+		}else if (BJ_getScore(0) == 21) {
+			
+			effect = Mix_LoadWAV("ressources/snd/gotblackjack.wav");
+			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			
+			SDL_Open_PopUp(2, police, "Vous avez gagne.. BlackJack!!", "La partie est finie", "");
+			BJ_setMonney(1, (joueurs[1].mise)*2);
+			return 0;
+			
 		}
 		
 		
