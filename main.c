@@ -1,24 +1,24 @@
 /**
  * \file main.c
- * \brief Mot-mêlés - Projet Info SPI L2
- * \author TAHRI Ahmed, SIMON Jérémy
+ * \brief BlackJack - Algorithme Avance L2 SPI
+ * \author TAHRI Ahmed, SIMON Jérémy, DEZERE Florian, PROVOST Valentin
  * \version 0.1
  * \date 29 Octobre 2014
  *
- * Générateur de mot-meles avec la SDL/C 1.2
+ * Generation du jeu du blackjack
  *
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <SDL.h>
-#include <SDL_mixer.h>
+#include <SDL.h> //librairie contenant toutes les fonctions de base de la SDL
+#include <SDL_mixer.h> //Librairies du mixage.. ( LOVE PARAPHRASE :-D )
 #include <SDL_ttf.h> //Pour imprimer du texte graphiquement
 #include <SDL_image.h> //Pour imprimer des images
 #include <string.h> //Gestion des chaines
 
-#include "includes/STJ_SDL.h"
-#include "includes/BlackJack.h"
+#include "includes/STJ_SDL.h" // librairie contenant la SDL pour le blackjack
+#include "includes/BlackJack.h"	
 
 SDL_Surface *screen = NULL;
 
@@ -56,6 +56,8 @@ int sel_menu_m = 0;
 /**
  * \fn int main (int argc, char *argv[])
  * \brief Entrée du programme.
+ * \param argc entree standard du main
+ * \param argv entree standard du main
  *
  * \return 0 - Arrêt normal du programme.
  */
@@ -101,5 +103,5 @@ int main (int argc, char *argv[]) {
 		}
 		
 	}
-
+	return 0;
 }
