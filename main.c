@@ -11,15 +11,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <SDL.h> //librairie contenant toutes les fonctions de base de la SDL
-#include <SDL_mixer.h> //Librairies du mixage.. ( LOVE PARAPHRASE :-D )
+#include <time.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
 #include <SDL_ttf.h> //Pour imprimer du texte graphiquement
 #include <SDL_image.h> //Pour imprimer des images
 #include <string.h> //Gestion des chaines
-
-#include "includes/STJ_SDL.h" // librairie contenant la SDL pour le blackjack
-#include "includes/BlackJack.h"	
-
+#include "includes/STJ_SDL.h"
+#include "includes/bj_engine.h"
 SDL_Surface *screen = NULL;
 
 SDL_Color couleurRouge = {255, 0, 0};
@@ -31,22 +30,8 @@ SDL_Event GlobalEvent;
 int channel = 0;	
 Mix_Chunk *sound = NULL;
 
-//BlackJack vars
-// définition d'un tableau de 52 emplacements, représentant le jeu de cartes
-short cartes[52];
-// definition de la variable nb_as_joueur qui contient le nombre d'as d'un joueur
-int nb_as_joueur = 0;
-// définition de la variable nb_as_banque qui contient le nombre d'as de la banque 
-int nb_as_banque = 0;
-// définition de la variable nb_cartes_joueur qui contient le nombre de cartes du joueur
-int nb_cartes_joueur = 0;
-// définition de la variable nb_cartes_banque qui contient le nombre de cartes de la banque
-int nb_cartes_banque = 0;
-
-t_main mainjoueur[12]; // initialisation de la main du joueur
-t_main mainbanque[12]; // initialisation de la main de la banque
-
-t_main tas[50]; //Le tas de cartes
+Mix_Chunk *music = NULL;
+int channel_music = 0;
 
 //SDL_mutex *MutexEcran = NULL; Inutile pour l'instant.
 //FILE * fichier_db = NULL;
@@ -64,6 +49,7 @@ int sel_menu_m = 0;
 int main (int argc, char *argv[]) {
 
 	char sommaire[N][M] = { "Partie locale", "Mes comptes", "Quitter"};
+	char ingame[N][M] = { "Abandon", "Quitter"};
 	
 	TTF_Font *police_menu = NULL; //Police d'écriture pour le menu 
 	TTF_Font *police_std = NULL; //Police pour tout le reste sauf menu
@@ -78,14 +64,20 @@ int main (int argc, char *argv[]) {
 	police_menu = TTF_OpenFont("ressources/ttf/global.ttf", 25);
 	police_std = TTF_OpenFont("ressources/ttf/global.ttf", 20);
 	
+	srand( time (NULL));
+	
 	while (1) {
 		
+		SDL_Ambiance("ambiance.wav");
 		MenuChoix = SDL_Create_Menu(police_menu, 3, sommaire); //On affiche un menu de cinq entrÈe
 		
 		switch (MenuChoix) {
 			
 			case 0: 
 				//Contre CPU
+				BJ_setGameProperties(10, 150, 0);
+				BJ_setCards();
+				SDL_Create_Local(police_std, 2, ingame);
 				break;
 				
 			case 1:
