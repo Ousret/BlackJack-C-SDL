@@ -665,6 +665,15 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		SDL_Print_Score(police, BJ_getScore(0) , 330, 100);
 		SDL_Print_Money(police, joueurs[1].solde, 115, 580);
 		
+		
+		if (lastevent != sel_menu_m) {
+		
+			SDL_Flip (screen);
+			channel = Mix_PlayChannel(-1, sound, 0);
+			lastevent = sel_menu_m;
+		
+		}
+		
 		//First blood!
 		if (instantBlackJack == 1) {
 			
@@ -693,7 +702,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 					
 				effect = Mix_LoadWAV("ressources/snd/female/dominating.wav");
 				channel_effect = Mix_PlayChannel(-1, effect, 0);
-					
+				
 			}else if(nbVictoireConseq > 2) {
 					
 				effect = Mix_LoadWAV("ressources/snd/female/unstoppable.wav");
@@ -708,7 +717,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			
 			return 0;
 		
-		}else if (BJ_getScore(0) == 21) {
+		}else if (BJ_getScore(1) == 21) {
 			
 			effect = Mix_LoadWAV("ressources/snd/gotblackjack.wav");
 			channel_effect = Mix_PlayChannel(-1, effect, 0);
@@ -764,13 +773,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			
 		}
 		
-		if (lastevent != sel_menu_m) {
 		
-			SDL_Flip (screen);
-			channel = Mix_PlayChannel(-1, sound, 0);
-			lastevent = sel_menu_m;
-		
-		}
 		
 		if (action) {
 				
