@@ -118,6 +118,10 @@ int BJ_setBet(int id, long bet) {
 	
 		return 0;
 		
+	}else if (bet > joueurs[id].solde) {
+	
+		return -1;
+		
 	}else{
 	
 		joueurs[id].mise+=bet;
@@ -125,6 +129,14 @@ int BJ_setBet(int id, long bet) {
 		
 		return 1;
 	}
+	
+}
+
+void BJ_setMonney(int id, long solde) {
+/* Remet de l'argent pour.. id */
+
+	joueurs[id].solde+=solde;
+		
 	
 }
 

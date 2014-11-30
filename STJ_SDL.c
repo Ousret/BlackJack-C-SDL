@@ -498,6 +498,24 @@ void SDL_Print_Bet(TTF_Font *police, long bet, int x, int y) {
 
 }
 
+void SDL_Print_Money(TTF_Font *police, long solde, int x, int y) {
+
+	SDL_Rect positionFond; //(dynamique)
+	SDL_Surface *titre_ttf = NULL;
+	char ScoreStr[50];
+	
+	sprintf(ScoreStr, "%li", solde);
+	
+	positionFond.x = x;
+	positionFond.y = y;
+	
+	titre_ttf = TTF_RenderText_Blended(police, ScoreStr, couleurBlanche);
+	
+	SDL_BlitSurface(titre_ttf, NULL, screen, &positionFond);
+	SDL_FreeSurface(titre_ttf);
+
+}
+
 
 int SDL_Ask_Bet(TTF_Font *police){
 	
@@ -580,6 +598,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 	int lastevent = -1;
 	
 	int firstDraw = 0, lastMoveDone = 0, lastMoveBk = 0;
+	int setWaitEvent = 0;
 
 	sound = Mix_LoadWAV("ressources/snd/select.wav");
 	BJ_attrCard(0); //Donne une carte au dealer
@@ -587,7 +606,10 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 	//On ne quitte pas la boucle tant qu'aucune selection n'a été faite
 	while (1) {
 		
-		action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
+		if (setWaitEvent == 1) {
+			action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
+		}
+		
 		
 		SDL_Print_bg("ressources/images/app_bg_ingame.png", 0, 0); //Fond d'écran
 		
@@ -603,6 +625,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			channel_effect = Mix_PlayChannel(-1, effect, 0);
 			
 			firstDraw++;
+			if (firstDraw >= 2) setWaitEvent = 1;
 			lastevent = 0;
 			
 			//Check if immediate BlackJack!
@@ -619,8 +642,11 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			channel_effect = Mix_PlayChannel(-1, effect, 0);
 			
 			lastevent = 0;
-			if (BJ_getScore(0) >= 17) lastMoveBk = 1;
 			
+			if (BJ_getScore(0) >= 17) {
+				lastMoveBk = 1;
+				setWaitEvent = 1;
+			}
 		}
 		
 		//On imprime les cartes du joueurs
@@ -637,6 +663,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		}
 		
 		SDL_Print_Score(police, BJ_getScore(0) , 330, 100);
+		SDL_Print_Money(police, joueurs[1].solde, 115, 580);
 		
 		
 		if (BJ_getScore(1) > 21) {
@@ -651,6 +678,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		}else if (BJ_getScore(0) > 21) {
 		
 			SDL_Open_PopUp(2, police, "Vous avez gagne.. Je me suis grille!", "La partie est finie", "");
+			BJ_setMonney(1, (joueurs[1].mise)*2);
 			
 			return 0;
 		
@@ -662,8 +690,10 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			if (BJ_getScore(1) > BJ_getScore(0)) {
 			
 				SDL_Open_PopUp(2, police, "Vous avez gagne.. C'est juste de la chance !", "La partie est finie", "");
-			
+				BJ_setMonney(1, (joueurs[1].mise)*2);
+				
 				return 0;
+				
 			}else if (BJ_getScore(1) < BJ_getScore(0)) {
 			
 				//HumiliŽ
@@ -672,17 +702,16 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 				SDL_Open_PopUp(2, police, "Qui a le plus gros score..? Merci pour les sous !", "La partie est finie", "");
 			
 				return 0;
+				
 			}else if (BJ_getScore(1) == BJ_getScore(0)) {
 				
 				SDL_Open_PopUp(2, police, "Draw..! egalite!", "La partie est finie", "");
-			
+				BJ_setMonney(1, joueurs[1].mise);
 				return 0;
 				
 			}
 			
 		}
-		
-		
 		
 		if (lastevent != sel_menu_m) {
 		
@@ -717,6 +746,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 									sound = Mix_LoadWAV("ressources/snd/enter.wav");
 									channel = Mix_PlayChannel(-1, sound, 0);
 									lastMoveDone = 1;
+									setWaitEvent = 0;
 								}
 								
 								break;
@@ -728,7 +758,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 								
 									effect = Mix_LoadWAV("ressources/snd/deal.wav");
 									channel_effect = Mix_PlayChannel(-1, effect, 0);
-								
+									
 									lastevent = 0;
 								}
 								
@@ -750,7 +780,12 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			}
 		}
 		
-		SDL_Delay(50);
+		if (setWaitEvent == 0) {
+			SDL_Delay(400);
+		}else{
+			SDL_Delay(25);
+		}
+		
 		
 	}
 

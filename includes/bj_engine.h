@@ -18,6 +18,7 @@ extern int nbCard_tas;
 int BJ_getScore(int id);
 void BJ_setBotAction(int id);
 int BJ_setBet(int id, long bet);
+void BJ_setMonney(int id, long solde);
 int BJ_getPStatus(int id);
 void BJ_attrCard(int id);
 int BJ_setGameProperties(long MiseMin, long MiseMax, short NbrBot);
