@@ -56,7 +56,7 @@ int main (int argc, char *argv[]) {
 	
 	int MenuChoix = 0;
     
-	SPI_SDL_Init_Video(800,600,"BlackJack SDL Alpha",1,1); //800x600 +tff_support +audio_support
+	SPI_SDL_Init_Video(800,600,"BlackJack SDL",1,1); //800x600 +tff_support +audio_support
 	
 	//SDL_Splash("ressources/Splash0.png", 1500);
 	//SDL_Splash("ressources/Splash1.png", 1500);
@@ -64,7 +64,7 @@ int main (int argc, char *argv[]) {
 	police_menu = TTF_OpenFont("ressources/ttf/global.ttf", 25);
 	police_std = TTF_OpenFont("ressources/ttf/global.ttf", 20);
 	
-	srand( time (NULL));
+	srand(time (NULL));
 	
 	while (1) {
 		
