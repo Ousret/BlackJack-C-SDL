@@ -558,7 +558,7 @@ int SDL_Ask_Bet(TTF_Font *police){
                            
                             if (taille_saisie < 35) {
                                
-                                if (temps == '\b') {
+                                if (temps == '\b' || temps == 127) { //127 pour clavier MacOS X BT
                                
                                     if (taille_saisie > 0) {
                                         taille_saisie--;
@@ -599,6 +599,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 	
 	int firstDraw = 0, lastMoveDone = 0, lastMoveBk = 0;
 	int setWaitEvent = 0;
+	int instantBlackJack = 0; 
 
 	sound = Mix_LoadWAV("ressources/snd/select.wav");
 	BJ_attrCard(0); //Donne une carte au dealer
@@ -630,8 +631,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			
 			//Check if immediate BlackJack!
 			if (BJ_getScore(1) == 21) {
-				SDL_Open_PopUp(3, police, "Holy shit! Vous etes pas trop rentable comme joueur..!", "Beau BlackJack !", "Partie finie..");
-				return 0;
+				instantBlackJack = 1;
 			}
 			
 		}else if ((lastMoveDone == 1)&&(BJ_getScore(0) < 17)){
@@ -665,18 +665,44 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		SDL_Print_Score(police, BJ_getScore(0) , 330, 100);
 		SDL_Print_Money(police, joueurs[1].solde, 115, 580);
 		
+		//First blood!
+		if (instantBlackJack == 1) {
+			
+			nbVictoireConseq++;
+			effect = Mix_LoadWAV("ressources/snd/female/killingspree.wav");
+			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			SDL_Open_PopUp(3, police, "Holy shit! Vous etes pas trop rentable comme joueur..!", "Beau BlackJack !", "Partie finie..");
+			BJ_setMonney(1, ((joueurs[1].mise)*2)+((joueurs[1].mise)/2));
+			return 0;
+		}
 		
 		if (BJ_getScore(1) > 21) {
 			
 			//GrillŽ..
 			effect = Mix_LoadWAV("ressources/snd/lose.wav");
 			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			nbVictoireConseq = 0;
 			SDL_Open_PopUp(2, police, "Vous etes crame.. Merci pour les sous !", "La partie est finie", "");
 			
 			return 0;
 			
 		}else if (BJ_getScore(0) > 21) {
-		
+			
+			nbVictoireConseq++;
+			if (nbVictoireConseq == 2) {
+					
+				effect = Mix_LoadWAV("ressources/snd/female/dominating.wav");
+				channel_effect = Mix_PlayChannel(-1, effect, 0);
+					
+			}else if(nbVictoireConseq > 2) {
+					
+				effect = Mix_LoadWAV("ressources/snd/female/unstoppable.wav");
+				channel_effect = Mix_PlayChannel(-1, effect, 0);
+					
+			}else {
+				effect = Mix_LoadWAV("ressources/snd/aplause.wav");
+				channel_effect = Mix_PlayChannel(-1, effect, 0);
+			}
 			SDL_Open_PopUp(2, police, "Vous avez gagne.. Je me suis grille!", "La partie est finie", "");
 			BJ_setMonney(1, (joueurs[1].mise)*2);
 			
@@ -688,7 +714,22 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		if (lastMoveBk == 1) {
 			
 			if (BJ_getScore(1) > BJ_getScore(0)) {
-			
+				
+				nbVictoireConseq++;
+				if (nbVictoireConseq == 2) {
+					
+					effect = Mix_LoadWAV("ressources/snd/female/dominating.wav");
+					channel_effect = Mix_PlayChannel(-1, effect, 0);
+					
+				}else if(nbVictoireConseq > 2) {
+					
+					effect = Mix_LoadWAV("ressources/snd/female/unstoppable.wav");
+					channel_effect = Mix_PlayChannel(-1, effect, 0);
+					
+				}else {
+					effect = Mix_LoadWAV("ressources/snd/aplause.wav");
+					channel_effect = Mix_PlayChannel(-1, effect, 0);
+				}
 				SDL_Open_PopUp(2, police, "Vous avez gagne.. C'est juste de la chance !", "La partie est finie", "");
 				BJ_setMonney(1, (joueurs[1].mise)*2);
 				
@@ -697,6 +738,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			}else if (BJ_getScore(1) < BJ_getScore(0)) {
 			
 				//HumiliŽ
+				nbVictoireConseq = 0;
 				effect = Mix_LoadWAV("ressources/snd/lose.wav");
 				channel_effect = Mix_PlayChannel(-1, effect, 0);
 				SDL_Open_PopUp(2, police, "Qui a le plus gros score..? Merci pour les sous !", "La partie est finie", "");

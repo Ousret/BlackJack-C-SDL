@@ -22,6 +22,7 @@ t_joueur joueurs[8]; //7 joueurs max. + croupier
 
 t_carte tas[56];
 int nbCard_tas = 0;
+int nbVictoireConseq = 0;
 
 /**
 *\fn int BJ_getScore(int id)
