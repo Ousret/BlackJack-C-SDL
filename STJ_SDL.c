@@ -426,7 +426,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		
 		action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
 		
-		SDL_Print_bg("ressources/images/app_bg_ingame.jpg", 0, 0); //Fond d'écran
+		SDL_Print_bg("ressources/images/app_bg_ingame.png", 0, 0); //Fond d'écran
 		
 		for (i = 0; i < nb_entre; i++) {
 			SDL_Create_Menu_Ch(police, i, sommaire[i], 200+(i*230), 500);

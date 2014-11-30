@@ -19,7 +19,7 @@
 #include <string.h> //Gestion des chaines
 
 #include "includes/STJ_SDL.h"
-#include "includes/BlackJack.h"
+#include "includes/bj_engine.h"
 
 SDL_Surface *screen = NULL;
 
@@ -34,14 +34,6 @@ Mix_Chunk *sound = NULL;
 
 Mix_Chunk *music = NULL;
 int channel_music = 0;
-
-// définition d'un tableau de 52 emplacements, représentant le jeu de cartes
-short cartes[52];
-
-// définition des structures t_main
-t_main mainjoueur; // déclaration de la main du joueur
-t_main mainbanque; // déclaration de la main de la banque
-
 
 //SDL_mutex *MutexEcran = NULL; Inutile pour l'instant.
 //FILE * fichier_db = NULL;
@@ -83,6 +75,8 @@ int main (int argc, char *argv[]) {
 			
 			case 0: 
 				//Contre CPU
+				BJ_setGameProperties(10, 150, 0);
+				BJ_setCards();
 				SDL_Create_Local(police_std, 2, ingame);
 				break;
 				
