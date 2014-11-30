@@ -611,7 +611,6 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			action = SDL_WaitEvent(&GlobalEvent); /* Récupération de l'événement dans event (non-blocant) */
 		}
 		
-		
 		SDL_Print_bg("ressources/images/app_bg_ingame.png", 0, 0); //Fond d'écran
 		
 		for (i = 0; i < nb_entre; i++) {

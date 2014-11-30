@@ -17,8 +17,11 @@
 #include <SDL_ttf.h> //Pour imprimer du texte graphiquement
 #include <SDL_image.h> //Pour imprimer des images
 #include <string.h> //Gestion des chaines
+
 #include "includes/STJ_SDL.h"
 #include "includes/bj_engine.h"
+
+
 SDL_Surface *screen = NULL;
 
 SDL_Color couleurRouge = {255, 0, 0};
@@ -78,7 +81,7 @@ int main (int argc, char *argv[]) {
 	while (1) {
 		
 		SDL_Ambiance("ambiance.wav");
-		BJ_setGameProperties(((joueurs[1].solde)/100), ((joueurs[1].solde)/2), 0);
+		BJ_setGameProperties((((joueurs[1].solde)/100)+1), ((joueurs[1].solde)/2), 0);
 		
 		if ((joueurs[1].solde) < 40) {
 		
