@@ -51,7 +51,7 @@ int sel_menu_m = 0;
  */
 int main (int argc, char *argv[]) {
 
-	char sommaire[N][M] = { "Partie locale", "Mes comptes", "Quitter"};
+	char sommaire[N][M] = { "Partie locale", "Mes comptes", "Quitter", "Quitter"};
 	char ingame[N][M] = { "Abandon", "Rester", "Frapper"};
 	
 	char stats[200];
@@ -62,7 +62,7 @@ int main (int argc, char *argv[]) {
 	TTF_Font *police_menu = NULL; //Police d'écriture pour le menu 
 	TTF_Font *police_std = NULL; //Police pour tout le reste sauf menu
 	
-	int MenuChoix = 0;
+	int MenuChoix = 0, NbOption = 3;
     
 	SPI_SDL_Init_Video(800,600,"BlackJack SDL",1,1); //800x600 +tff_support +audio_support
 	
@@ -78,8 +78,21 @@ int main (int argc, char *argv[]) {
 	while (1) {
 		
 		SDL_Ambiance("ambiance.wav");
-		BJ_setGameProperties(((joueurs[1].solde)/10), ((joueurs[1].solde)/2), 0);
-		MenuChoix = SDL_Create_Menu(police_menu, 3, sommaire); //On affiche un menu de cinq entrée
+		BJ_setGameProperties(((joueurs[1].solde)/100), ((joueurs[1].solde)/2), 0);
+		
+		if ((joueurs[1].solde) < 40) {
+		
+			strcpy(sommaire[2], "Hypotheque");
+			NbOption = 4;
+			
+		}else{
+		
+			strcpy(sommaire[2], "Quitter");
+			NbOption = 3;
+			
+		}
+		
+		MenuChoix = SDL_Create_Menu(police_menu, NbOption, sommaire); //On affiche un menu de cinq entrée
 		
 		switch (MenuChoix) {
 			
@@ -87,7 +100,6 @@ int main (int argc, char *argv[]) {
 				
 				//Local!
 				BJ_setCards();
-				
 				videurCheck = BJ_setBet(1, SDL_Ask_Bet(police_std));
 				
 				if (videurCheck == 1) {
@@ -102,7 +114,7 @@ int main (int argc, char *argv[]) {
 				}else{
 					
 					sprintf(stats, "Mise minimale = %li eur et mise max = %li eur", MinimalBet, MaximalBet);
-					SDL_Open_PopUp(2, police_std, "Mauvaise saisie du montant, le videur ne vous laissera pas entrer !" ,stats, "");
+					SDL_Open_PopUp(2, police_std, "Mauvaise saisie du montant !" ,stats, "");
 					
 				}
 				
@@ -115,7 +127,21 @@ int main (int argc, char *argv[]) {
 				break;
 			
 			case 2:
-				//ByeBye..
+				
+				if (NbOption == 3) {
+					//ByeBye..
+					exit(0);
+				}else{
+					sprintf(stats, "Vous avez %li euro(s) restant, cliquez sur OK pour accepter!", joueurs[1].solde);
+					SDL_Open_PopUp(3, police_std, stats ,"Vous n'avez plus grand chose a nous offrir..?", "C'est soit en nature ou on viendra prendre votre batterie..");
+					SDL_Open_PopUp(1, police_std, "+1000 euros, bouger pas, on arrive !", "", "");
+					BJ_setMonney(1, 1000);
+				}
+				
+				break;
+				
+			case 3:
+			
 				exit(0);
 				break;
 				

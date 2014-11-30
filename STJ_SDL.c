@@ -615,7 +615,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		SDL_Print_bg("ressources/images/app_bg_ingame.png", 0, 0); //Fond d'écran
 		
 		for (i = 0; i < nb_entre; i++) {
-			SDL_Create_Menu_Ch(police, i, sommaire[i], 80+(i*230), 500);
+			SDL_Create_Menu_Ch(police, i, sommaire[i], 50+(i*230), 530);
 		}
 		
 		if (firstDraw < 2) {
@@ -781,7 +781,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
         	{
 		        case SDL_MOUSEBUTTONDOWN: //Si on clique
 		        	
-					if (SDL_Souris_Survol(40, 230, 80+(sel_menu_m*230), 500) == 1) {
+					if (SDL_Souris_Survol(40, 230, 50+(sel_menu_m*230), 530) == 1) {
 						
 						switch (sel_menu_m) {
 							
