@@ -18,6 +18,7 @@
 #include <string.h> //Gestion des chaines
 
 #include "includes/STJ_SDL.h"
+#include "includes/bj_engine.h"
 
 void SPI_SDL_Init_Video(int x, int y, char titre[100], int ttf_support, int audio_support) {
 	
@@ -383,31 +384,72 @@ void SDL_Print_Form(int id, TTF_Font *police, char titre[30], int etat, char des
 	
 }
 
-void SDL_Print_Cards(int id, int x, int y) {
+void SDL_Print_Cards(int id, int cardid, int x, int y) {
 	
 	SDL_Rect positionFond; //(dynamique)
 	SDL_Surface *imageDeFond = NULL;
 	char msg[100];
+	int calcPos = 0;
 	
 	positionFond.x = x;
 	positionFond.y = y;
 	
-	int sel_souris = SDL_Souris_Survol(71, 96, x, y); //Une carte est de la taille 71x96
+	//int sel_souris = SDL_Souris_Survol(71, 96, x, y); //Une carte est de la taille 71x96
+				
+		if ((joueurs[id].jeu[cardid].couleur) == trefles) {
+			calcPos = 1;
+		}else if ((joueurs[id].jeu[cardid].couleur) == carreaux) {
+			calcPos = 14;
+		}else if ((joueurs[id].jeu[cardid].couleur) == coeurs) {
+			calcPos = 27;
+		}else{
+			calcPos = 40;
+		}
+			
+		switch (joueurs[id].jeu[cardid].valeur) {
+			case deux:
+				calcPos+=1;
+				break;
+			case trois:
+				calcPos+=2;
+				break;
+			case quatre:
+				calcPos+=3;
+				break;
+			case cinq:
+				calcPos+=5;
+				break;
+			case six:
+				calcPos+=6;
+				break;
+			case sept:
+				calcPos+=7;
+				break;
+			case huit:
+				calcPos+=8;
+				break;
+			case neuf:
+				calcPos+=9;
+				break;
+			case dix:
+				calcPos+=10;
+				break;
+			case valet:
+				calcPos+=11;
+				break;
+			case dame:
+				calcPos+=12;
+				break;
+			case roi:
+				calcPos+=13;
+				break;
+			case as:
+				break;
+		}
+			
 	
-	sprintf(msg, "ressources/images/cartes/%i.BMP", id);
-	
-	//On charge l'image concernée ++ si souris survol choix
-	if (sel_souris == 1) {
-		
-		imageDeFond = IMG_Load(msg);
-		positionFond.y-=50;
-		sel_menu_m = id;
-		
-	}else{
-	
-		imageDeFond = IMG_Load(msg);
-		
-	}
+	sprintf(msg, "ressources/images/cartes/%i.BMP", calcPos);
+	imageDeFond = IMG_Load(msg);
 	
 	SDL_BlitSurface(imageDeFond, NULL, screen, &positionFond);
 	SDL_FreeSurface(imageDeFond);
@@ -432,8 +474,20 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			SDL_Create_Menu_Ch(police, i, sommaire[i], 200+(i*230), 500);
 		}
 		
-		SDL_Print_Cards(33, 350, 380);
-		SDL_Print_Cards(10, 430, 380);
+		BJ_attrCard(1);
+		BJ_attrCard(0);
+		
+		//On imprime les cartes du joueurs
+		for (i = 0; i < joueurs[1].nbCard; i++) {
+			SDL_Print_Cards(1, i, 350+(30*i), 380);
+		}
+		//Aussi celle du banquier ..!
+		for (i = 0; i < joueurs[0].nbCard; i++) {
+			SDL_Print_Cards(0, i, 350+(30*i), 100);
+		}
+		
+		//SDL_Print_Cards(33, 350, 380);
+		//SDL_Print_Cards(10, 430, 380);
 		
 		if (lastevent != sel_menu_m) {
 		

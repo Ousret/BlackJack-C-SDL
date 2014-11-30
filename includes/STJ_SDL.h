@@ -18,7 +18,7 @@ int SDL_Souris_Survol(int hauteur, int largeur, int x, int y);
 void SDL_Write_popup(int ligne, TTF_Font *police, char txt_ligne1[200], char txt_ligne2[200], char txt_ligne3[200]);
 void SDL_Open_PopUp(int ligne, TTF_Font *police, char txt_ligne1[200], char txt_ligne2[200], char txt_ligne3[200]);
 
-void SDL_Print_Cards(int id, int x, int y);
+void SDL_Print_Cards(int id, int cardid, int x, int y);
 int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]);
 void SDL_Ambiance(char musicfic[100]);
 
