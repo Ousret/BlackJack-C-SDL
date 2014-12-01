@@ -21,7 +21,6 @@
 #include "includes/STJ_SDL.h"
 #include "includes/bj_engine.h"
 
-
 SDL_Surface *screen = NULL;
 
 SDL_Color couleurRouge = {255, 0, 0};

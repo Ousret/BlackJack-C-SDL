@@ -20,16 +20,7 @@
 #include "includes/STJ_SDL.h"
 #include "includes/bj_engine.h"
 
-/** 
-* \fn void SPI_SDL_Init_Video(int x, int y, char titre[100], int ttf_support, int audio_support)
-* \brief Initialise le son, la police d'ecriture et la taille de la fenetre pour l'affichage en SDL du blackjack
-*
-* \param x defini la taille de la fenetre 
-* \param y defini la taille de la fenetre
-* \param titre tableau de caractere contenant le tire de la fenetre 
-* \param ttf_support entier definissant la police d'ecriture 
-* \param audio_support entier definissant le support audio 
-*/
+
 void SPI_SDL_Init_Video(int x, int y, char titre[100], int ttf_support, int audio_support) {
 	
     int sdl_start = 0;
@@ -92,6 +83,7 @@ void SPI_SDL_Init_Video(int x, int y, char titre[100], int ttf_support, int audi
 	
 }
 
+
 int SDL_Create_Menu(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 	
 	int i = 0, action = 0;
@@ -147,6 +139,7 @@ int SDL_Create_Menu(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 	}
 	
 }
+
 
 void SDL_Create_Menu_Ch(TTF_Font *police, int id, char titre[M], int x, int y) {
 	
@@ -311,6 +304,7 @@ void SDL_Write_popup(int ligne, TTF_Font *police, char txt_ligne1[200], char txt
 	
 	
 }
+
 
 void SDL_Print_Btn(int id,TTF_Font *police, char titre[30], int x, int y) {
 	
