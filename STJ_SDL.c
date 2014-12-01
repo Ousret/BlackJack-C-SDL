@@ -688,7 +688,7 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 		if (instantBlackJack == 1) {
 			
 			nbVictoireConseq++;
-			effect = Mix_LoadWAV("ressources/snd/female/killingspree.wav");
+			effect = Mix_LoadWAV("ressources/snd/Female/killingspree.wav");
 			channel_effect = Mix_PlayChannel(-1, effect, 0);
 			SDL_Open_PopUp(3, police, "Holy shit! Vous etes pas trop rentable comme joueur..!", "Beau BlackJack !", "Partie finie..");
 			BJ_setMonney(1, ((joueurs[1].mise)*2)+((joueurs[1].mise)/2));
@@ -710,12 +710,12 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 			nbVictoireConseq++;
 			if (nbVictoireConseq == 2) {
 					
-				effect = Mix_LoadWAV("ressources/snd/female/dominating.wav");
+				effect = Mix_LoadWAV("ressources/snd/Female/dominating.wav");
 				channel_effect = Mix_PlayChannel(-1, effect, 0);
 				
 			}else if(nbVictoireConseq > 2) {
 					
-				effect = Mix_LoadWAV("ressources/snd/female/unstoppable.wav");
+				effect = Mix_LoadWAV("ressources/snd/Female/unstoppable.wav");
 				channel_effect = Mix_PlayChannel(-1, effect, 0);
 					
 			}else {
@@ -746,12 +746,12 @@ int SDL_Create_Local(TTF_Font *police, int nb_entre, char sommaire[N][M]) {
 				nbVictoireConseq++;
 				if (nbVictoireConseq == 2) {
 					
-					effect = Mix_LoadWAV("ressources/snd/female/dominating.wav");
+					effect = Mix_LoadWAV("ressources/snd/Female/dominating.wav");
 					channel_effect = Mix_PlayChannel(-1, effect, 0);
 					
 				}else if(nbVictoireConseq > 2) {
 					
-					effect = Mix_LoadWAV("ressources/snd/female/unstoppable.wav");
+					effect = Mix_LoadWAV("ressources/snd/Female/unstoppable.wav");
 					channel_effect = Mix_PlayChannel(-1, effect, 0);
 					
 				}else {
