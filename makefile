@@ -7,7 +7,7 @@ CSDL = `sdl-config --cflags`
 $(BIN): main.o bj_engine.o
 	$(CC) main.o bj_engine.o -o $(BIN) -lm $(CFLAGS)
 
-main.o: main.c $(INC)STJ_SDL.h $(INC)bj_engine.h
+main.o: main.c $(INC)bj_engine.h
 	$(CC) -c main.c $(CSDL)
 	
 bj_engine.o: bj_engine.c $(INC)bj_engine.h
