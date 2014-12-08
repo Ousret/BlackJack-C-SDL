@@ -1,4 +1,4 @@
-BlackJack Game in C with SDL libs
+﻿BlackJack Game in C with SDL libs
 ----------------------------------
 
 Credits goes to:
