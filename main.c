@@ -59,15 +59,15 @@ int main (int argc, char *argv[]) {
 				SDL_newTexture(popup, NULL, "popup.png", 0, 0, 500, 250);
 				
 				SDL_newObj(popup, NULL, 1, "Mise", mise, NUMERIC,70, 70, 40, 400);
-				SDL_newText(popup, NULL, "Avant de rejoindre le salon, placez une mise.", couleurBlanche, 10, 40);
+				SDL_newText(popup, NULL, "Avant de rejoindre le salon, placez une mise.", colorWhite, 10, 40);
 				
 				sprintf(miseMin, "Mise minimale: %li euro(s)", MinimalBet);
 				sprintf(miseMax, "Mise maximale: %li euro(s)", MaximalBet);
 				sprintf(stats, "Il vous reste %li euro(s)", joueurs[1].solde);
 				
-				SDL_newText(popup, NULL, stats, couleurRouge, 80, 110);
-				SDL_newText(popup, NULL, miseMin, couleurBlanche, 80, 140);
-				SDL_newText(popup, NULL, miseMax, couleurBlanche, 80, 160);
+				SDL_newText(popup, NULL, stats, colorRed, 80, 110);
+				SDL_newText(popup, NULL, miseMin, colorWhite, 80, 140);
+				SDL_newText(popup, NULL, miseMax, colorWhite, 80, 160);
 				
 				SDL_newObj(popup, &btnOK, 0, "OK", NULL , ALL, 10, 200, 40, 230);
 				SDL_newObj(popup, NULL, 0, "Annuler", NULL, ALL, 240, 200, 40, 230);
@@ -87,7 +87,7 @@ int main (int argc, char *argv[]) {
 						SDL_delText(popup, 2);
 						SDL_delText(popup, 1);
 						
-						SDL_modText(popup, 0, "La saisie est incorrecte !", couleurRouge, 30, 100);
+						SDL_modText(popup, 0, "La saisie est incorrecte !", colorRed, 30, 100);
 						
 						SDL_generate(popup);
 						
@@ -104,19 +104,19 @@ int main (int argc, char *argv[]) {
 				popup = SDL_newWindow("Mes comptes", 200, 200, 500, 250);
 				
 				SDL_newTexture(popup, NULL, "popup.png", 0, 0, 500, 250);
-				SDL_newText(popup, NULL, "Voici le recapitulatif de votre session", couleurBlanche, 10, 40);
+				SDL_newText(popup, NULL, "Voici le recapitulatif de votre session", colorWhite, 10, 40);
 				SDL_newObj(popup, NULL, 1, "Pseudo", name , ALL, 70, 70, 40, 400);
 				
 				sprintf(miseMin, "Mise minimale: %li euro(s)", MinimalBet);
 				sprintf(miseMax, "Mise maximale: %li euro(s)", MaximalBet);
 				sprintf(stats, "Il vous reste %li euro(s)", joueurs[1].solde);
 				
-				SDL_newText(popup, NULL, stats, couleurRouge, 80, 110);
-				SDL_newText(popup, NULL, miseMin, couleurBlanche, 80, 130);
-				SDL_newText(popup, NULL, miseMax, couleurBlanche, 80, 150);
+				SDL_newText(popup, NULL, stats, colorRed, 80, 110);
+				SDL_newText(popup, NULL, miseMin, colorWhite, 80, 130);
+				SDL_newText(popup, NULL, miseMax, colorWhite, 80, 150);
 				
 				sprintf(ratio, "Ratio: %i V / %i D", nbVictoire, nbDefaite);
-				SDL_newText(popup, NULL, ratio, couleurBlanche, 80, 170);
+				SDL_newText(popup, NULL, ratio, colorWhite, 80, 170);
 				SDL_newObj(popup, &btnOK, 0, "Fermer", NULL , ALL, 150, 200, 40, 230);
 				
 				SDL_generate(popup);
@@ -176,7 +176,7 @@ void handleBlackJack() {
 		effect = Mix_LoadWAV("ressources/snd/Female/killingspree.wav");
 		channel_effect = Mix_PlayChannel(-1, effect, 0);
 		BJ_setMonney(1, ((joueurs[1].mise)*2)+((joueurs[1].mise)/2));
-		ingameAnnouncement("BlackJack au service..! Pas mal.", couleurBlanche);
+		ingameAnnouncement("BlackJack au service..! Pas mal.", colorWhite);
 		SDL_freeWindow(ingame);
 		return;
 	}
@@ -204,7 +204,7 @@ void handleBlackJack() {
 			nbVictoireConseq = 0;
 			nbDefaite++;
 			SDL_Delay(1000);
-			ingameAnnouncement("T'es crame, tu depasse 21 mon vieux.", couleurRouge);
+			ingameAnnouncement("T'es crame, tu depasse 21 mon vieux.", colorRed);
 			SDL_freeWindow(ingame);
 			
 			return;
@@ -221,7 +221,7 @@ void handleBlackJack() {
 			channel_effect = Mix_PlayChannel(-1, effect, 0);
 			SDL_Delay(1000);
 			BJ_setMonney(1, (joueurs[1].mise)*2);
-			ingameAnnouncement("BlackJack ! Bon jeu..! Revenez, la prochaine je gagne..", couleurBlanche);
+			ingameAnnouncement("BlackJack ! Bon jeu..! Revenez, la prochaine je gagne..", colorWhite);
 			SDL_freeWindow(ingame);
 			
 			return;
@@ -236,7 +236,7 @@ void handleBlackJack() {
 		//popup instant BJ
 		nbVictoireConseq = 0;
 		nbDefaite++;
-		ingameAnnouncement("Bonne ou mauvaise idee, tu ne le saura jamais.", couleurRouge);
+		ingameAnnouncement("Bonne ou mauvaise idee, tu ne le saura jamais.", colorRed);
 		SDL_freeWindow(ingame);
 		return;
 	}
@@ -272,7 +272,7 @@ void handleBlackJack() {
 		nbVictoireConseq++;
 		nbVictoire++;
 		BJ_setMonney(1, (joueurs[1].mise)*2);
-		ingameAnnouncement("Je me suis crame, une revanche ?", couleurBlanche);
+		ingameAnnouncement("Je me suis crame, une revanche ?", colorWhite);
 		SDL_freeWindow(ingame);
 		
 	}else if(BJ_getScore(0) > BJ_getScore(1)) {
@@ -282,7 +282,7 @@ void handleBlackJack() {
 		nbVictoireConseq = 0;
 		nbDefaite++;
 		SDL_Delay(1000);
-		ingameAnnouncement("Les jeux sont fait, n'hesite pas a revenir !", couleurRouge);
+		ingameAnnouncement("Les jeux sont fait, n'hesite pas a revenir !", colorRed);
 		SDL_freeWindow(ingame);
 		
 	}else if(BJ_getScore(0) < BJ_getScore(1)) {
@@ -302,14 +302,14 @@ void handleBlackJack() {
 		nbVictoireConseq++;
 		nbVictoire++;
 		BJ_setMonney(1, (joueurs[1].mise)*2);
-		ingameAnnouncement("Pas mal du tout !", couleurBlanche);
+		ingameAnnouncement("Pas mal du tout !", colorWhite);
 		SDL_freeWindow(ingame);
 		
 	}else if(BJ_getScore(0) == BJ_getScore(1)) {
 		
 		SDL_Delay(1000);
 		BJ_setMonney(1, joueurs[1].mise);
-		ingameAnnouncement("Sa ce termine sur une belle egalite..! Revanche ?", couleurBlanche);
+		ingameAnnouncement("Sa ce termine sur une belle egalite..! Revanche ?", colorWhite);
 		SDL_freeWindow(ingame);
 		
 	}
@@ -325,7 +325,7 @@ int ingameAnnouncement(char * message, SDL_Color couleur) {
 	
 	SDL_newText(popup, NULL, message, couleur, 50, 100);
 	sprintf(ratio, "Ratio: %i V / %i D", nbVictoire, nbDefaite);
-	SDL_newText(popup, NULL, ratio, couleurBlanche, 50, 120);
+	SDL_newText(popup, NULL, ratio, colorWhite, 50, 120);
 	
 	SDL_newObj(popup, NULL, 0, "OK", NULL , ALL, 150, 200, 40, 230);
 	
@@ -371,35 +371,35 @@ void handleHUD(t_window * window, char * scoreDealer, char * scorePlayer, char *
 	
 	if (window->nbText == 0) {
 		
-		SDL_newText(window, NULL, scoreDealer, couleurBlanche, 330, 100);
-		SDL_newText(window, NULL, scorePlayer, couleurBlanche, 330, 380);
-		SDL_newText(window, NULL, betPlayer, couleurBlanche, 350, 360);
-		SDL_newText(window, NULL, soldePlayer, couleurBlanche, 115, 580);
+		SDL_newText(window, NULL, scoreDealer, colorWhite, 330, 100);
+		SDL_newText(window, NULL, scorePlayer, colorWhite, 330, 380);
+		SDL_newText(window, NULL, betPlayer, colorWhite, 350, 360);
+		SDL_newText(window, NULL, soldePlayer, colorWhite, 115, 580);
 		
 	}else{
 		
 		if (BJ_getScore(0) > 21) {
 		
-			SDL_modText(window, 0, scoreDealer, couleurRouge, 330, 100);
+			SDL_modText(window, 0, scoreDealer, colorRed, 330, 100);
 			
 		}else{
 		
-			SDL_modText(window, 0, scoreDealer, couleurBlanche, 330, 100);
+			SDL_modText(window, 0, scoreDealer, colorWhite, 330, 100);
 			
 		}
 		
 		if (BJ_getScore(1) > 21) {
 		
-			SDL_modText(window, 1, scorePlayer, couleurRouge, 330, 380);
+			SDL_modText(window, 1, scorePlayer, colorRed, 330, 380);
 			
 		}else{
 		
-			SDL_modText(window, 1, scorePlayer, couleurBlanche, 330, 380);
+			SDL_modText(window, 1, scorePlayer, colorWhite, 330, 380);
 			
 		}
 		
-		SDL_modText(window, 2, betPlayer, couleurBlanche, 350, 360);
-		SDL_modText(window, 3, soldePlayer, couleurBlanche, 115, 580);
+		SDL_modText(window, 2, betPlayer, colorWhite, 350, 360);
+		SDL_modText(window, 3, soldePlayer, colorWhite, 115, 580);
 		
 	}
 
