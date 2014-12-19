@@ -14,8 +14,6 @@
 #include <time.h>
 #include <SDL.h>
 #include <SDL_mixer.h>
-#include <SDL_ttf.h> //Pour imprimer du texte graphiquement
-#include <SDL_image.h> //Pour imprimer des images
 #include <ESDL.h> //EasySDL
 #include <string.h> //Gestion des chaines
 
@@ -39,9 +37,10 @@ int main (int argc, char *argv[]) {
     
     memset(name, 0, sizeof(name));
     
-	SDL_init(800, 600, "BlackJack ESDL 0.2", 1, "global.ttf", 20, 1); //800x600 +tff_support +audio_support
+	SDL_init(800, 600, "BlackJack ESDL 0.4.1", 1, "global.ttf", 20, 1); //800x600 +tff_support +audio_support
 	joueurs[1].solde = 300;
 	srand(time (NULL));
+	
 	
 	while (1) {
 		
@@ -71,6 +70,8 @@ int main (int argc, char *argv[]) {
 				
 				SDL_newObj(popup, &btnOK, 0, "OK", NULL , ALL, 10, 200, 40, 230);
 				SDL_newObj(popup, NULL, 0, "Annuler", NULL, ALL, 240, 200, 40, 230);
+				
+				strcpy(mise, "50");
 				
 				if (SDL_generate(popup) == btnOK) {
 				
@@ -173,8 +174,9 @@ void handleBlackJack() {
 		//popup instant BJ
 		nbVictoireConseq++;
 		nbVictoire++;
-		effect = Mix_LoadWAV("ressources/snd/Female/killingspree.wav");
-		channel_effect = Mix_PlayChannel(-1, effect, 0);
+		
+		SDL_playwav("Female/killingspree.wav", 0, NULL);
+		
 		BJ_setMonney(1, ((joueurs[1].mise)*2)+((joueurs[1].mise)/2));
 		ingameAnnouncement("BlackJack au service..! Pas mal.", colorWhite);
 		SDL_freeWindow(ingame);
@@ -199,8 +201,9 @@ void handleBlackJack() {
 			SDL_delObj(ingame, 1);
 			SDL_delObj(ingame, 0);
 			SDL_generate(ingame);
-			effect = Mix_LoadWAV("ressources/snd/lose.wav");
-			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			
+			SDL_playwav("lose.wav", 0, NULL);
+			
 			nbVictoireConseq = 0;
 			nbDefaite++;
 			SDL_Delay(1000);
@@ -217,8 +220,9 @@ void handleBlackJack() {
 			SDL_generate(ingame);
 			nbVictoireConseq++;
 			nbVictoire++;
-			effect = Mix_LoadWAV("ressources/snd/gotblackjack.wav");
-			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			
+			SDL_playwav("gotblackjack.wav", 0, NULL);
+			
 			SDL_Delay(1000);
 			BJ_setMonney(1, (joueurs[1].mise)*2);
 			ingameAnnouncement("BlackJack ! Bon jeu..! Revenez, la prochaine je gagne..", colorWhite);
@@ -258,14 +262,11 @@ void handleBlackJack() {
 		
 		
 		if (nbVictoireConseq == 2) {
-			effect = Mix_LoadWAV("ressources/snd/Female/dominating.wav");
-			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			SDL_playwav("Female/dominating.wav", 0, NULL);
 		}else if(nbVictoireConseq > 2) {
-			effect = Mix_LoadWAV("ressources/snd/Female/unstoppable.wav");
-			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			SDL_playwav("Female/unstoppable.wav", 0, NULL);
 		}else {
-			effect = Mix_LoadWAV("ressources/snd/aplause.wav");
-			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			SDL_playwav("aplause.wav", 0, NULL);
 		}
 		
 		SDL_Delay(1000);
@@ -277,8 +278,8 @@ void handleBlackJack() {
 		
 	}else if(BJ_getScore(0) > BJ_getScore(1)) {
 		
-		effect = Mix_LoadWAV("ressources/snd/lose.wav");
-		channel_effect = Mix_PlayChannel(-1, effect, 0);
+		SDL_playwav("lose.wav", 0, NULL);
+		
 		nbVictoireConseq = 0;
 		nbDefaite++;
 		SDL_Delay(1000);
@@ -288,17 +289,14 @@ void handleBlackJack() {
 	}else if(BJ_getScore(0) < BJ_getScore(1)) {
 		
 		if (nbVictoireConseq == 2) {
-			effect = Mix_LoadWAV("ressources/snd/Female/dominating.wav");
-			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			SDL_playwav("Female/dominating.wav", 0, NULL);
 		}else if(nbVictoireConseq > 2) {
-			effect = Mix_LoadWAV("ressources/snd/Female/unstoppable.wav");
-			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			SDL_playwav("Female/unstoppable.wav", 0, NULL);
 		}else {
-			effect = Mix_LoadWAV("ressources/snd/aplause.wav");
-			channel_effect = Mix_PlayChannel(-1, effect, 0);
+			SDL_playwav("aplause.wav", 0, NULL);
 		}
 		
-		SDL_Delay(1000);
+		
 		nbVictoireConseq++;
 		nbVictoire++;
 		BJ_setMonney(1, (joueurs[1].mise)*2);
@@ -344,8 +342,7 @@ void giveawayCard(t_window * window, int idplayer) {
 	/*Begin, give away card to idplayer*/
 	BJ_attrCard(idplayer); 
 	
-	effect = Mix_LoadWAV("ressources/snd/deal.wav");
-	channel_effect = Mix_PlayChannel(-1, effect, 0);
+	SDL_playwav("deal.wav", 0, NULL);
 	
 	BJ_getCardfilename(idplayer, (joueurs[idplayer].nbCard-1), fileName);
 	
