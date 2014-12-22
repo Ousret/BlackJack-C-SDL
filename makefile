@@ -1,4 +1,4 @@
-CC  = gcc -Wall
+CC  = gcc -Wall -Wextra -g
 BIN = BlackJack
 INC = includes/
 CFLAGS =`sdl-config --libs --cflags` -lSDL_image -lSDL_ttf -lSDL_mixer -lESDL #-lGL -lGLU -lGLEW -lSDL2_gpu 

@@ -28,7 +28,7 @@ int ingameAnnouncement(char * message, SDL_Color couleur);
 
 int main (int argc, char *argv[]) {
 
-	char menu_content[N][M] = { "Nouvelle partie", "Mes comptes", "Quitter"};
+	char menu_content[][M] = { "Nouvelle partie", "Mes comptes", "Quitter"};
 	char name[50], mise[50], miseMin[100], miseMax[100], stats[100], ratio[100];
 	
 	int UserChoise = 0, NbEntry = 3;
@@ -37,10 +37,9 @@ int main (int argc, char *argv[]) {
     
     memset(name, 0, sizeof(name));
     
-	SDL_init(800, 600, "BlackJack ESDL 0.4.1", 1, "global.ttf", 20, 1); //800x600 +tff_support +audio_support
-	joueurs[1].solde = 300;
+	SDL_init(800, 600, 0, "BlackJack ESDL 0.4.3", 1, "global.ttf", 20, 1); //800x600 +tff_support +audio_support
+	joueurs[1].solde = 30000;
 	srand(time (NULL));
-	
 	
 	while (1) {
 		
@@ -71,7 +70,7 @@ int main (int argc, char *argv[]) {
 				SDL_newObj(popup, &btnOK, 0, "OK", NULL , ALL, 10, 200, 40, 230);
 				SDL_newObj(popup, NULL, 0, "Annuler", NULL, ALL, 240, 200, 40, 230);
 				
-				strcpy(mise, "50");
+				//strcpy(mise, "50");
 				
 				if (SDL_generate(popup) == btnOK) {
 				
@@ -144,7 +143,7 @@ int main (int argc, char *argv[]) {
 void handleBlackJack() {
 
 	t_window * ingame = SDL_newWindow("BlackJack", 0, 0, 800, 600);
-	char * scoreDealer = malloc(sizeof(char) * 50), *scorePlayer = malloc(sizeof(char) * 50), *betPlayer = malloc(sizeof(char) * 50), *soldePlayer = malloc(sizeof(char) * 50);
+	char scoreDealer[50], scorePlayer[50], betPlayer[50], soldePlayer[50];
 	int choise = 0;
 	
 	SDL_newTexture(ingame, NULL, "app_bg_ingame.png", 0, 0, 800, 600);
@@ -336,8 +335,8 @@ int ingameAnnouncement(char * message, SDL_Color couleur) {
 
 void giveawayCard(t_window * window, int idplayer) {
 	
-	char * fileName = malloc(sizeof(char) * 50);
-	memset(fileName, 0, sizeof(char)*50);
+	char * fileName = calloc(50, sizeof(char));
+	//memset(fileName, 0, sizeof(char)*50);
 	
 	/*Begin, give away card to idplayer*/
 	BJ_attrCard(idplayer); 
@@ -356,6 +355,8 @@ void giveawayCard(t_window * window, int idplayer) {
 			break;
 			
 	}
+	
+	free(fileName);
 	
 }
 
