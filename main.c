@@ -12,8 +12,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <SDL.h>
-#include <SDL_mixer.h>
 #include <ESDL.h> //EasySDL
 #include <string.h> //Gestion des chaines
 
@@ -37,7 +35,7 @@ int main (int argc, char *argv[]) {
     
     memset(name, 0, sizeof(name));
     
-	SDL_init(800, 600, 0, "BlackJack ESDL 0.4.3", 1, "global.ttf", 20, 1); //800x600 +tff_support +audio_support
+	SDL_init(800, 600, 0, "BlackJack ESDL 0.4.3", "M_ICON.png", 1, "global.ttf", 20, 1); //800x600 +tff_support +audio_support
 	joueurs[1].solde = 30000;
 	srand(time (NULL));
 	
@@ -118,6 +116,8 @@ int main (int argc, char *argv[]) {
 				sprintf(ratio, "Ratio: %i V / %i D", nbVictoire, nbDefaite);
 				SDL_newText(popup, NULL, ratio, colorWhite, 80, 170);
 				SDL_newObj(popup, &btnOK, 0, "Fermer", NULL , ALL, 150, 200, 40, 230);
+				
+				SDL_newSprite(popup, "panda_sp.png", colorGreenLight, 132, 144, 35, 35, 10, 100, 4, 4, 0); //Just for testing sprite
 				
 				SDL_generate(popup);
 				SDL_freeWindow(popup);
