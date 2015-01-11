@@ -174,7 +174,7 @@ void handleBlackJack() {
 		nbVictoireConseq++;
 		nbVictoire++;
 		
-		SDL_playwav("Female/killingspree.wav", 0, NULL);
+		SDL_playSound("Female/killingspree.wav", 0);
 		
 		BJ_setMonney(1, ((joueurs[1].mise)*2)+((joueurs[1].mise)/2));
 		ingameAnnouncement("BlackJack au service..! Pas mal.", colorWhite);
@@ -201,7 +201,7 @@ void handleBlackJack() {
 			SDL_delObj(ingame, 0);
 			SDL_generate(ingame);
 			
-			SDL_playwav("lose.wav", 0, NULL);
+			SDL_playSound("lose.wav", 0);
 			
 			nbVictoireConseq = 0;
 			nbDefaite++;
@@ -220,7 +220,7 @@ void handleBlackJack() {
 			nbVictoireConseq++;
 			nbVictoire++;
 			
-			SDL_playwav("gotblackjack.wav", 0, NULL);
+			SDL_playSound("gotblackjack.wav", 0);
 			
 			SDL_Delay(1000);
 			BJ_setMonney(1, (joueurs[1].mise)*2);
@@ -261,11 +261,11 @@ void handleBlackJack() {
 		
 		
 		if (nbVictoireConseq == 2) {
-			SDL_playwav("Female/dominating.wav", 0, NULL);
+			SDL_playSound("Female/dominating.wav", 0);
 		}else if(nbVictoireConseq > 2) {
-			SDL_playwav("Female/unstoppable.wav", 0, NULL);
+			SDL_playSound("Female/unstoppable.wav", 0);
 		}else {
-			SDL_playwav("aplause.wav", 0, NULL);
+			SDL_playSound("aplause.wav", 0);
 		}
 		
 		SDL_Delay(1000);
@@ -277,7 +277,7 @@ void handleBlackJack() {
 		
 	}else if(BJ_getScore(0) > BJ_getScore(1)) {
 		
-		SDL_playwav("lose.wav", 0, NULL);
+		SDL_playSound("lose.wav", 0);
 		
 		nbVictoireConseq = 0;
 		nbDefaite++;
@@ -288,11 +288,11 @@ void handleBlackJack() {
 	}else if(BJ_getScore(0) < BJ_getScore(1)) {
 		
 		if (nbVictoireConseq == 2) {
-			SDL_playwav("Female/dominating.wav", 0, NULL);
+			SDL_playSound("Female/dominating.wav", 0);
 		}else if(nbVictoireConseq > 2) {
-			SDL_playwav("Female/unstoppable.wav", 0, NULL);
+			SDL_playSound("Female/unstoppable.wav", 0);
 		}else {
-			SDL_playwav("aplause.wav", 0, NULL);
+			SDL_playSound("aplause.wav", 0);
 		}
 		
 		
@@ -341,7 +341,7 @@ void giveawayCard(t_window * window, int idplayer) {
 	/*Begin, give away card to idplayer*/
 	BJ_attrCard(idplayer); 
 	
-	SDL_playwav("deal.wav", 0, NULL);
+	SDL_playSound("deal.wav", 0);
 	
 	BJ_getCardfilename(idplayer, (joueurs[idplayer].nbCard-1), fileName);
 	

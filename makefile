@@ -1,7 +1,7 @@
-CC  = gcc -Wall -Wextra -g
+CC  = gcc -Wall -Wextra
 BIN = BlackJack
 INC = includes/
-CFLAGS =`sdl-config --libs --cflags` -lSDL_image -lSDL_ttf -lSDL_mixer -lESDL #-lGL -lGLU -lGLEW -lSDL2_gpu 
+CFLAGS =`sdl-config --libs --cflags` -lSDL_image -lSDL_ttf -lfmodex -lESDL #-lGL -lGLU -lGLEW -lSDL2_gpu 
 CSDL = `sdl-config --cflags`
 
 $(BIN): main.o bj_engine.o
