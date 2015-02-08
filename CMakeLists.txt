@@ -16,6 +16,7 @@ endif()
 
 #include local package of EasySDL 0.6.x
 ADD_SUBDIRECTORY(${CMAKE_SOURCE_DIR}/deps/easysdl)
+include_directories(${ESDL_HEADER})
 
 file(
         GLOB_RECURSE

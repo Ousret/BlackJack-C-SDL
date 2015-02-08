@@ -85,6 +85,9 @@ add_library(
         ${source_files}
 )
 
+SET(ESDL_HEADER "${CMAKE_SOURCE_DIR}/deps/easysdl/include")
+SET(ESDL_LIBRARY "${CMAKE_SOURCE_DIR}/deps/easysdl/bin")
+
 if (NOT OPENSSL_FOUND)
 	add_dependencies(ESDL crypto)
 endif()
