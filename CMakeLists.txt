@@ -3,6 +3,7 @@ project(BlackJack-ESDL)
 
 set(EXECUTABLE_OUTPUT_PATH bin)
 add_definitions(-Wall -Wextra)
+set(CMAKE_C_FLAGS "`sdl-config --libs`")
 
 include_directories(include)
 
@@ -27,7 +28,7 @@ add_executable(
 
 )
 
-add_dependencies(blackjack ESDL)
+#add_dependencies(blackjack ESDL)
 
 target_link_libraries(
 
