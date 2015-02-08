@@ -3,7 +3,12 @@ project(BlackJack-ESDL)
 
 set(EXECUTABLE_OUTPUT_PATH bin)
 add_definitions(-Wall -Wextra)
-set(CMAKE_C_FLAGS "`sdl-config --libs`")
+#set(SDLCONF_OS "sdl-config --libs")
+
+#set(CMAKE_C_FLAGS "`sdl-config --cflags`")
+
+execute_process(COMMAND sdl-config --libs
+                OUTPUT_VARIABLE SDLCONF_OS)
 
 include_directories(include)
 
@@ -34,5 +39,6 @@ target_link_libraries(
 
         blackjack
         ESDL
+        ${SDLCONF_OS}
 
 )
