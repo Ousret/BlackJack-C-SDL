@@ -43,5 +43,6 @@ target_link_libraries(
         blackjack
         ESDL
         ${SDLCONF_OS}
+        fmodex
 
 )
