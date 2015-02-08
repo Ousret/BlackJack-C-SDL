@@ -32,7 +32,7 @@ add_executable(
         ${source_files}
 
 )
-set_target_properties(blackjack PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
+set_target_properties(blackjack PROPERTIES INSTALL_RPATH_USE_LINK_PATH FALSE)
 #add_dependencies(blackjack ESDL)
 
 target_link_libraries(
