@@ -1,4 +1,4 @@
-﻿BlackJack Game in C with SDL libs
+﻿BlackJack Game in C with SDL libs [![Build Status](https://travis-ci.org/Ousret/BlackJack-C-SDL.svg)](https://travis-ci.org/Ousret/BlackJack-C-SDL)
 ----------------------------------
 
 Credits goes to:
@@ -17,16 +17,12 @@ Needed:
 
 . ESDL from http://www.github.com/Ousret/ESDL
 
-. SDL / C 1.2 libs
-
-	-> + lsdl_ttf, lsdl_mixer, lsdl_image, lESDL
+	-> -lESDL
 
 Specials credits:
-. for High Roller's Club (Splashing Casino).mp3 from NANCO Company Tekken 6(r) 
 
 . for BMPs cards, Patrick MOIRE: http://jeux.cartes.free.fr/
 
 . for BlackJack rules, my dear friend FROMONT Axel
 
 
-WORKING BETA PRESENT.
