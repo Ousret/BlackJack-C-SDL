@@ -1,0 +1,1657 @@
+\hypertarget{_e_s_d_l_8h}{\section{Référence du fichier E\+S\+D\+L.\+h}
+\label{_e_s_d_l_8h}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+}
+
+
+Easy\+S\+D\+L header.  
+
+
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L.\+h$>$}\\*
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+ttf.\+h$>$}\\*
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+image.\+h$>$}\\*
+{\ttfamily \#include $<$fmodex/fmod.\+h$>$}\\*
+{\ttfamily \#include $<$openssl/aes.\+h$>$}\\*
+{\ttfamily \#include $<$openssl/evp.\+h$>$}\\*
+{\ttfamily \#include $<$sqlite3.\+h$>$}\\*
+\subsection*{Structures de données}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structt__object}{t\+\_\+object}
+\begin{DoxyCompactList}\small\item\em Décrit de quoi est fait un objet. \end{DoxyCompactList}\item 
+struct \hyperlink{structt__rect}{t\+\_\+rect}
+\begin{DoxyCompactList}\small\item\em Décrit un rectangle simple avec une couleur. \end{DoxyCompactList}\item 
+struct \hyperlink{structt__text}{t\+\_\+text}
+\begin{DoxyCompactList}\small\item\em Contient une ligne de texte pour un rendu S\+D\+L. \end{DoxyCompactList}\item 
+struct \hyperlink{structt__image}{t\+\_\+image}
+\begin{DoxyCompactList}\small\item\em Une image et ses paramètres. \end{DoxyCompactList}\item 
+struct \hyperlink{structt__audio}{t\+\_\+audio}
+\begin{DoxyCompactList}\small\item\em Un son avec le nom fichier associé \end{DoxyCompactList}\item 
+struct \hyperlink{structt__sprite}{t\+\_\+sprite}
+\begin{DoxyCompactList}\small\item\em Une image sprite et ses paramètres. \end{DoxyCompactList}\item 
+struct \hyperlink{structt__context}{t\+\_\+context}
+\begin{DoxyCompactList}\small\item\em Représentation d'un contexte et son rendu. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_input}{Input}
+\begin{DoxyCompactList}\small\item\em Contient le mapping des évènements liés au clavier et la souris. \end{DoxyCompactList}\item 
+struct \hyperlink{structd__param}{d\+\_\+param}
+\begin{DoxyCompactList}\small\item\em Contient un couple (Paramètre, Valeur) \end{DoxyCompactList}\item 
+struct \hyperlink{structd__save}{d\+\_\+save}
+\begin{DoxyCompactList}\small\item\em Décrit un jeu de données. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{_e_s_d_l_8h_a839fa0b1d8cc59fa3577b7638937bf22}{\#define {\bfseries D\+E\+B\+U\+G\+L\+I\+N\+E}~fprintf(stdout, \char`\"{}$<$? Debug$>$ \%s \%i\textbackslash{}n\char`\"{}, \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+);}\label{_e_s_d_l_8h_a839fa0b1d8cc59fa3577b7638937bf22}
+
+\end{DoxyCompactItemize}
+\subsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0}{t\+\_\+type\+Align} \{ \hyperlink{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a5624165187e56db612253e608a45b1c6}{A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+E\+R} = 1, 
+\hyperlink{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a6ec599857e15466988726932dd592305}{A\+L\+I\+G\+N\+\_\+\+L\+E\+F\+T}, 
+\hyperlink{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a9c81840e8cad46418b39a8b74a246354}{A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+H\+T}
+ \}
+\item 
+enum \hyperlink{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361}{t\+\_\+type\+Form} \{ \\*
+\hyperlink{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a8036f3be5700d4eb67d27fab554d5e0c}{N\+U\+M\+E\+R\+I\+C}, 
+\hyperlink{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a47e073572a47a01522b766b027f1a16c}{A\+L\+P\+H\+A}, 
+\hyperlink{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a9eb4563050fa6be12859bf9d7c0a690e}{A\+L\+P\+H\+A\+N\+U\+M\+E\+R\+I\+C}, 
+\hyperlink{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361aef8f0c1b507b09c6d3538644944d9bb3}{N\+O\+M\+A\+S\+K}, 
+\\*
+\hyperlink{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361ac157bdf0b85a40d2619cbc8bc1ae5fe2}{N\+O\+N\+E}
+ \}
+\item 
+enum \hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3d}{t\+\_\+type\+Data} \{ \\*
+\hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da7d67f007544f534278ecca3cdca12565}{B\+U\+T\+T\+O\+N}, 
+\hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3dae310c909d76b003d016bef8bdf16936a}{I\+N\+P\+U\+T}, 
+\hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da1e00c983d4be44226a3b1ba10382e3e9}{I\+M\+G}, 
+\hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da2dd609ad1f04fe6e979d97ae1276f880}{S\+P\+R\+I\+T\+E}, 
+\\*
+\hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da9a4a47c1606e295076055a9cc4373197}{T\+E\+X\+T}, 
+\hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3dae552ab0a96c0384a6e918e726b7f6102}{R\+E\+C\+T\+A\+N\+G\+L\+E}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{_e_s_d_l_8h_a903d4e706938a4ab4b921858b9d6053c}{S\+D\+L\+\_\+init\+Window} (int width, int height, int fullscreen, char $\ast$title, char $\ast$icon\+\_\+name, int ttf\+\_\+support, char $\ast$police\+\_\+name, int police\+\_\+size, int audio\+\_\+support)
+\begin{DoxyCompactList}\small\item\em Initialise les modules de base et ouvre une fenêtre S\+D\+L. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_acf1652604c91cfcd0571b35c2132d0aa}{S\+D\+L\+\_\+unload} ()
+\begin{DoxyCompactList}\small\item\em Décharge la mémoire des modules précédemment chargés et ferme le processus. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a5e6af77d47af2dd61ba898c9922f6d76}{S\+D\+L\+\_\+generate\+Menu} (char $\ast$background\+Pic, int nb\+Entries, char $\ast$$\ast$captions)
+\begin{DoxyCompactList}\small\item\em Génère un menu générique et attends que l'utilisateur fasse un choix. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_aab803843ca7ea680a4bab19a24317979}{S\+D\+L\+\_\+ismouseover\+Area} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int height, int width, int x, int y)
+\begin{DoxyCompactList}\small\item\em Vérifie si la souris est dans la zone définie en paramètre. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a5c4a6319ee688992b017aee43a205253}{S\+D\+L\+\_\+ismouseover} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, \hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3d}{t\+\_\+type\+Data} type)
+\begin{DoxyCompactList}\small\item\em Renvoie l'identifiant d'un objet (bouton, champ de saisie, image, sprite, texte) sur lequel la souris survol le-\/dit objet. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_a85cd8c78336d5d4843e35f48a4beada9}{S\+D\+L\+\_\+generate\+Frame} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Construit une frame pour un contexte donnée et la stocke dans la surface principale en attente de rafraichissement. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_ad155eac070cf8f59b88077e50fae0f61}{S\+D\+L\+\_\+\+Update\+Events} (\hyperlink{struct_input}{Input} $\ast$in)
+\begin{DoxyCompactList}\small\item\em Met à jour la table des évènements à un instant t. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_aa7bd3bd537cb03abab4b56700557120a}{S\+D\+L\+\_\+capture\+Input} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int obj)
+\begin{DoxyCompactList}\small\item\em Copie le dernier caractère capturé dans la bonne destination. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_af55473e46dd66808a20cadb546423285}{S\+D\+L\+\_\+new\+Obj} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int $\ast$id, \hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3d}{t\+\_\+type\+Data} type, char $\ast$title, int align, char $\ast$dest, \hyperlink{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361}{t\+\_\+type\+Form} type\+Form, int x, int y)
+\begin{DoxyCompactList}\small\item\em Création d'un nouvelle objet (bouton ou champs de saisie) \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_ad6cdd9e87529ffb5380e2de13885727f}{S\+D\+L\+\_\+edit\+Obj} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int obj, \hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3d}{t\+\_\+type\+Data} type, char $\ast$title, int align, char $\ast$dest, \hyperlink{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361}{t\+\_\+type\+Form} type\+Form, int x, int y)
+\begin{DoxyCompactList}\small\item\em Modifie les propriétés d'un objet. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a350187f323b084a6c77dfc11518309e2}{S\+D\+L\+\_\+del\+Obj} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int obj)
+\begin{DoxyCompactList}\small\item\em Supprime d'un contexte un objet. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a580996d9860e68cddb24dc6e7e12241f}{S\+D\+L\+\_\+new\+Text} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int $\ast$id, char $\ast$content, S\+D\+L\+\_\+\+Color couleur, int x, int y)
+\begin{DoxyCompactList}\small\item\em Créer une ligne de texte à afficher pour un contexte. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a5c0919aa6e89dc3da09f1a627803d214}{S\+D\+L\+\_\+edit\+Text} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int idtext, char $\ast$content, S\+D\+L\+\_\+\+Color couleur, int x, int y)
+\begin{DoxyCompactList}\small\item\em Modifie une entrée texte au préalable chargée avec \hyperlink{_e_s_d_l_8h_a580996d9860e68cddb24dc6e7e12241f}{S\+D\+L\+\_\+new\+Text()} \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_ac041e0aef6e1ab6939ef527880bf85ba}{S\+D\+L\+\_\+del\+Text} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int idtext)
+\begin{DoxyCompactList}\small\item\em Supprime d'un contexte un objet texte. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_ab3b350fae11af5ce5df871ae884008bd}{S\+D\+L\+\_\+new\+Image} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int $\ast$id, char $\ast$file, int x, int y)
+\begin{DoxyCompactList}\small\item\em Ajoute une image à un contexte. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a54afe7a4d2164a4ca5ab080ebe013b5f}{S\+D\+L\+\_\+edit\+Image} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int idimg, int x, int y)
+\begin{DoxyCompactList}\small\item\em Modifie les propriétés d'une image. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_aa220f313688a61600a39bed8712fba2b}{S\+D\+L\+\_\+del\+Image} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int idimg)
+\begin{DoxyCompactList}\small\item\em Supprimer une image d'un contexte. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_ac520f947f5f3d7a0efca3068294d2d18}{S\+D\+L\+\_\+new\+Sprite} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, char $\ast$filename, S\+D\+L\+\_\+\+Color transparancy, int sp\+\_\+height, int sp\+\_\+width, int x, int y, int position, int animation, int hide)
+\begin{DoxyCompactList}\small\item\em Ajoute un sprite pour un contexte. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a41d51a1d1bfdef4ffb041cba7ca26356}{S\+D\+L\+\_\+edit\+Sprite} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int id\+Sprite, int x, int y, int position, int animation, int hide)
+\begin{DoxyCompactList}\small\item\em Modifie le sprite d'un contexte donnée à condition qu'il soit déjà chargé avec \hyperlink{_e_s_d_l_8h_ac520f947f5f3d7a0efca3068294d2d18}{S\+D\+L\+\_\+new\+Sprite()} \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a5a31bac8e6a4ac6f17a1e22e88f37179}{S\+D\+L\+\_\+del\+Sprite} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int id\+Sprite)
+\begin{DoxyCompactList}\small\item\em Supprime un sprite d'un contexte donnée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a8b79b4db20298f0b54aea9a4bf3668fa}{S\+D\+L\+\_\+new\+Rect} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int $\ast$idrect, S\+D\+L\+\_\+\+Color color, int height, int width, int x, int y)
+\begin{DoxyCompactList}\small\item\em Ajoute un nouveau rectangle pour un contexte donnée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a2b84e16b696a4a6d3d0b276ed5fd3c45}{S\+D\+L\+\_\+edit\+Rect} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int idrect, S\+D\+L\+\_\+\+Color color, int height, int width, int x, int y)
+\begin{DoxyCompactList}\small\item\em Modifie un rectangle existant dans un contexte donnée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a5e67425b0774f62401160f9e7117c67b}{S\+D\+L\+\_\+del\+Rect} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int idrect)
+\begin{DoxyCompactList}\small\item\em Supprime un rectangle existant dans un contexte donnée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a91456bae8ffea1a6ea5841ea009f88db}{S\+D\+L\+\_\+generate} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Génère une frame et l'affiche à l'écran, fonction blocante s'il existe des objets (bouton(s) ou champ(s) de saisie). \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a5498ffcab426f58f9dcad7c4d3adc4eb}{S\+D\+L\+\_\+nb\+Obj} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Compte le nombre d'objet chargée en mémoire pour un contexte donnée (Comprend les bouttons et les champs de saisie) \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a4c85afa2353ec15ed5af9d14d5df96de}{S\+D\+L\+\_\+nb\+Text} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Compte le nombre d'objet texte chargée en mémoire pour un contexte donnée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a0f38c5178aef2188696dcbb9f97b9950}{S\+D\+L\+\_\+nb\+Image} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Compte le nombre d'image chargée en mémoire pour un contexte donnée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a746810f1b4826d90608695548b034764}{S\+D\+L\+\_\+nb\+Sprite} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Compte le nombre de sprite chargée en mémoire pour un contexte donnée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_ac5e2820a5985aa4b7295eb706308fcb7}{S\+D\+L\+\_\+context\+Empty} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Vérifie si un contexte n'a pas de donnée chargé en mémoire. \end{DoxyCompactList}\item 
+\hyperlink{structt__context}{t\+\_\+context} $\ast$ \hyperlink{_e_s_d_l_8h_aadb4f3ad267385aab2202b7b2fef2ebc}{S\+D\+L\+\_\+new\+Context} (char $\ast$title, int x, int y, int height, int width)
+\begin{DoxyCompactList}\small\item\em Création d'un nouveau contexte. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_ab7e2ffc47a30e31d5a8393befe0b7933}{S\+D\+L\+\_\+free\+Context} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context)
+\begin{DoxyCompactList}\small\item\em Libère la mémoire, supprime les données chargés pour un contexte donnée. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_a35e30287a7fc99af32ff23fd86b8a195}{S\+D\+L\+\_\+load\+Ressources} ()
+\begin{DoxyCompactList}\small\item\em Charge en mémoire les ressources de base (Image bouton, champ saisie, son de selection, etc..) \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_a69cc0f15e05dd15c21793a2e8dccc0cf}{S\+D\+L\+\_\+unload\+Ressources} ()
+\begin{DoxyCompactList}\small\item\em Libère la mémoire des ressources de base, précédemment chargées avec \hyperlink{_e_s_d_l_8h_a35e30287a7fc99af32ff23fd86b8a195}{S\+D\+L\+\_\+load\+Ressources()} \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a038beb15b30727bfdc316b8514947364}{S\+D\+L\+\_\+is\+Key\+Pressed} (int K\+E\+Y\+\_\+\+S)
+\begin{DoxyCompactList}\small\item\em Vérifie si une touche du clavier est enfoncée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a0cfcec545e0c5fb0e8b231980dec8afe}{S\+D\+L\+\_\+is\+Mouse\+Pressed} (int M\+O\+U\+S\+E\+\_\+\+S)
+\begin{DoxyCompactList}\small\item\em Vérifie si une touche de la souris est enfoncée. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_aa099c01d45ce935e0f99580273285d57}{S\+D\+L\+\_\+play\+Sound} (char $\ast$sndfile)
+\begin{DoxyCompactList}\small\item\em Lecture d'un fichier son court au préalable chargé avec S\+D\+L\+\_\+load\+Sound. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a4b95ccd8fcf9f5350b423277eb8d0a9c}{S\+D\+L\+\_\+load\+Sound} (char $\ast$sndfile)
+\begin{DoxyCompactList}\small\item\em Chargement en mémoire d'un fichier audio. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_ad14d22fa736edc1bca148db64d5a6c66}{S\+D\+L\+\_\+unload\+Sound} (char $\ast$sndfile)
+\begin{DoxyCompactList}\small\item\em Libérer un fichier audio de la mémoire au préalable chargé avec S\+D\+L\+\_\+load\+Sound. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a2fa80b6dece5664515f166254c6b8342}{S\+D\+L\+\_\+unloadall\+Sound} ()
+\begin{DoxyCompactList}\small\item\em Libère tout les fichiers audio chargé avec S\+D\+L\+\_\+load\+Sound. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_ace7633b1594edfa3b7a081190949ec64}{S\+D\+L\+\_\+set\+Delay\+Single\+Frame} (int delay)
+\begin{DoxyCompactList}\small\item\em Le temps de rafraichissement entre chaque frame, par défault 50 ms. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a6e838b1c779505c8228d986116b029f3}{S\+D\+L\+\_\+request\+Exit} ()
+\begin{DoxyCompactList}\small\item\em Vérifie si l'utilisateur requiert la fermeture du programme. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_acdc769a1c19af2b121774e5efe0e079e}{S\+D\+L\+\_\+getmousex} ()
+\begin{DoxyCompactList}\small\item\em Rend la position x de la souris par rapport à la fenêtre. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a0c1274143109aec6191ccf23ce0665b6}{S\+D\+L\+\_\+getmousey} ()
+\begin{DoxyCompactList}\small\item\em Rend la position y de la souris par rapport à la fenêtre. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a2c6c1e4b6bf182f21bc82dee3ab04680}{S\+D\+L\+\_\+getimagewidth} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int imgid)
+\begin{DoxyCompactList}\small\item\em Nous informe de la largeur d'une image depuis un contexte précis. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_ab889914f885936ad7556bddb79290381}{S\+D\+L\+\_\+getimageheight} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int imgid)
+\begin{DoxyCompactList}\small\item\em Nous informe de la hauteur d'une image depuis un contexte précis. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a8b3f17e51b66b76d5a45627a10a0a48e}{S\+D\+L\+\_\+getposx} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int id, \hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3d}{t\+\_\+type\+Data} type)
+\begin{DoxyCompactList}\small\item\em Nous informe de la position x d'un objet depuis un contexte précis. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_af7f194402a559e02891fe757bee60c7c}{S\+D\+L\+\_\+getposy} (\hyperlink{structt__context}{t\+\_\+context} $\ast$context, int id, \hyperlink{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3d}{t\+\_\+type\+Data} type)
+\begin{DoxyCompactList}\small\item\em Nous informe de la position y d'un objet depuis un contexte précis. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_a6d568d5b4bc5c0c9eb669472e79f81f3}{S\+D\+L\+\_\+set\+S\+N\+D\+Folder} (char $\ast$new\+Folder)
+\begin{DoxyCompactList}\small\item\em Change le dossier source pour les sons. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_ab8bbb4217359e952a864cbb0c97f64b3}{S\+D\+L\+\_\+set\+T\+T\+F\+Folder} (char $\ast$new\+Folder)
+\begin{DoxyCompactList}\small\item\em Change le dossier source pour les polices d'écritures. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_af37fa01e7446357cd563202000c7fa84}{S\+D\+L\+\_\+set\+I\+M\+G\+Folder} (char $\ast$new\+Folder)
+\begin{DoxyCompactList}\small\item\em Change le dossier source pour les images. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a50cbff1421d8783fdf04791ca51d4188}{save\+Profil} (\hyperlink{structd__save}{d\+\_\+save} $\ast$profil)
+\begin{DoxyCompactList}\small\item\em Sauvegarde le profil de données dans le fichier. \end{DoxyCompactList}\item 
+int \hyperlink{_e_s_d_l_8h_a3d1c16f62bc4427cc46f054a230940dc}{write\+Param} (\hyperlink{structd__save}{d\+\_\+save} $\ast$profil, char $\ast$param, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em Sauve un paramètre avec sa valeur dans la mémoire (crypté) \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{_e_s_d_l_8h_a967e38c7eaeeda8539fa462d5475b1a6}{read\+Param} (\hyperlink{structd__save}{d\+\_\+save} $\ast$profil, char $\ast$param)
+\begin{DoxyCompactList}\small\item\em Récupère le contenu associé au paramètre. \end{DoxyCompactList}\item 
+\hyperlink{structd__save}{d\+\_\+save} $\ast$ \hyperlink{_e_s_d_l_8h_ae35cd624ea55c660e8333f484bad25b1}{init\+Profil} (char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Initialise le profil, obligatoire pour manipuler un profil de donnée. \end{DoxyCompactList}\item 
+void \hyperlink{_e_s_d_l_8h_a9d9541bc4b96fce03fbf72b517def649}{free\+Profil} (\hyperlink{structd__save}{d\+\_\+save} $\ast$profil)
+\begin{DoxyCompactList}\small\item\em Libère le profil. \end{DoxyCompactList}\item 
+\hypertarget{_e_s_d_l_8h_a19d6c794cbd33f23eed0ee96e13f2f15}{int {\bfseries db\+\_\+open} (char $\ast$filename)}\label{_e_s_d_l_8h_a19d6c794cbd33f23eed0ee96e13f2f15}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a9130d3b5560da57a53135491d888c7b7}{void {\bfseries db\+\_\+close} ()}\label{_e_s_d_l_8h_a9130d3b5560da57a53135491d888c7b7}
+
+\item 
+\hypertarget{_e_s_d_l_8h_ac7d37bc93fd9d7eabc756bccc7cb8ae4}{int {\bfseries write\+Blob} (sqlite3 $\ast$db, const char $\ast$z\+Key, const unsigned char $\ast$z\+Blob, int n\+Blob)}\label{_e_s_d_l_8h_ac7d37bc93fd9d7eabc756bccc7cb8ae4}
+
+\item 
+\hypertarget{_e_s_d_l_8h_acb8e4fa5e9ca638d6483ae2f958cba2a}{int {\bfseries read\+Blob} (sqlite3 $\ast$db, const char $\ast$z\+Key, unsigned char $\ast$$\ast$pz\+Blob, int $\ast$pn\+Blob)}\label{_e_s_d_l_8h_acb8e4fa5e9ca638d6483ae2f958cba2a}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a7d63a2524ba92cfda6cfd84e3a1d13bc}{int {\bfseries read\+Text} (sqlite3 $\ast$db, int z\+I\+D, unsigned char $\ast$$\ast$pz\+Blob, int $\ast$pn\+Blob)}\label{_e_s_d_l_8h_a7d63a2524ba92cfda6cfd84e3a1d13bc}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a52673269febb7c7deaa7e5e96895cc7e}{int {\bfseries drop\+Blob\+Table} (sqlite3 $\ast$db)}\label{_e_s_d_l_8h_a52673269febb7c7deaa7e5e96895cc7e}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a6cc75d78e1b647ecee1a74dd8065f4ad}{int {\bfseries create\+Blob\+Table} (sqlite3 $\ast$db)}\label{_e_s_d_l_8h_a6cc75d78e1b647ecee1a74dd8065f4ad}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a3826c10056b489bbb049603782497d5a}{long {\bfseries getcharocc} (char $\ast$text, char elem)}\label{_e_s_d_l_8h_a3826c10056b489bbb049603782497d5a}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a67137e9285bed9cb45d74a745ee0e423}{void {\bfseries replaceinstring} (char $\ast$text, char elem, char newc)}\label{_e_s_d_l_8h_a67137e9285bed9cb45d74a745ee0e423}
+
+\item 
+\hypertarget{_e_s_d_l_8h_adc1bcc7346601377234657162059d992}{void {\bfseries unsignedchar\+\_\+memcpy} (unsigned char $\ast$dest, unsigned char $\ast$src, size\+\_\+t len)}\label{_e_s_d_l_8h_adc1bcc7346601377234657162059d992}
+
+\item 
+\hypertarget{_e_s_d_l_8h_ad61c7567fe00f91f20f2e2acafb39ec3}{void {\bfseries formatedcpy} (char $\ast$dst, char $\ast$src, size\+\_\+t srclen)}\label{_e_s_d_l_8h_ad61c7567fe00f91f20f2e2acafb39ec3}
+
+\item 
+int \hyperlink{_e_s_d_l_8h_a63ceff76b4f55f38d68b116c517a371b}{aes\+\_\+init} (unsigned char $\ast$key\+\_\+data, int key\+\_\+data\+\_\+len, unsigned char $\ast$salt, E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$e\+\_\+ctx, E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$d\+\_\+ctx)
+\item 
+\hypertarget{_e_s_d_l_8h_a379ce5b2ca63f180a575e637d58221b0}{void {\bfseries aes\+\_\+clean} ()}\label{_e_s_d_l_8h_a379ce5b2ca63f180a575e637d58221b0}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a95bf2e0085af471ccb1a2112eafe42db}{unsigned char $\ast$ {\bfseries aes\+\_\+decrypt} (E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$e, unsigned char $\ast$ciphertext, int $\ast$len)}\label{_e_s_d_l_8h_a95bf2e0085af471ccb1a2112eafe42db}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a66d21d83db31f2c8a0a552eaff985698}{unsigned char $\ast$ {\bfseries aes\+\_\+encrypt} (E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$e, unsigned char $\ast$plaintext, int $\ast$len)}\label{_e_s_d_l_8h_a66d21d83db31f2c8a0a552eaff985698}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a4f0182811cb1b839d08984f0db12c0bd}{int {\bfseries aes\+\_\+custom\+\_\+32key} (const unsigned char $\ast$key32)}\label{_e_s_d_l_8h_a4f0182811cb1b839d08984f0db12c0bd}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{_e_s_d_l_8h_ad6e663497d2c934364b3bcf07496b30b}{sqlite3 $\ast$ {\bfseries db}}\label{_e_s_d_l_8h_ad6e663497d2c934364b3bcf07496b30b}
+
+\item 
+\hypertarget{_e_s_d_l_8h_ac638f815d6ea12514f8fa77411edbbf7}{E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X {\bfseries en}}\label{_e_s_d_l_8h_ac638f815d6ea12514f8fa77411edbbf7}
+
+\item 
+\hypertarget{_e_s_d_l_8h_adee768efeaabf64acf53158d667a5c3a}{E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X {\bfseries de}}\label{_e_s_d_l_8h_adee768efeaabf64acf53158d667a5c3a}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a7e3d6b0fb59b168df75990bb1bc4b60d}{unsigned int {\bfseries salt} \mbox{[}$\,$\mbox{]}}\label{_e_s_d_l_8h_a7e3d6b0fb59b168df75990bb1bc4b60d}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a1bb0d0041196bc347e7bab0715da2e1c}{const unsigned char {\bfseries key\+\_\+data} \mbox{[}$\,$\mbox{]}}\label{_e_s_d_l_8h_a1bb0d0041196bc347e7bab0715da2e1c}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a51f4eb9943d584656495e7e885f58728}{const int {\bfseries key\+\_\+data\+\_\+len}}\label{_e_s_d_l_8h_a51f4eb9943d584656495e7e885f58728}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a24b5fd099e3d5dc6503ac8a7b18b05c6}{int {\bfseries D\+E\+L\+A\+Y\+\_\+\+E\+A\+C\+H\+\_\+\+F\+R\+A\+M\+E}}\label{_e_s_d_l_8h_a24b5fd099e3d5dc6503ac8a7b18b05c6}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a78fa3957d73de49cb81d047857504218}{S\+D\+L\+\_\+\+Surface $\ast$ {\bfseries screen}}\label{_e_s_d_l_8h_a78fa3957d73de49cb81d047857504218}
+
+\item 
+\hypertarget{_e_s_d_l_8h_af47caca3f0146dc682c076741f35e139}{S\+D\+L\+\_\+\+Color {\bfseries color\+Red}}\label{_e_s_d_l_8h_af47caca3f0146dc682c076741f35e139}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a266261060239190bcd2de6436c53f3bd}{S\+D\+L\+\_\+\+Color {\bfseries color\+White}}\label{_e_s_d_l_8h_a266261060239190bcd2de6436c53f3bd}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a9980d2727e0671f914fcf9ae3029b45b}{S\+D\+L\+\_\+\+Color {\bfseries color\+Black}}\label{_e_s_d_l_8h_a9980d2727e0671f914fcf9ae3029b45b}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a81a604577f00b4147da45d44a3b68dbc}{S\+D\+L\+\_\+\+Color {\bfseries color\+Green\+Light}}\label{_e_s_d_l_8h_a81a604577f00b4147da45d44a3b68dbc}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a903698253c07bf10546483ab645e095d}{S\+D\+L\+\_\+\+Event \hyperlink{_e_s_d_l_8h_a903698253c07bf10546483ab645e095d}{Global\+Event}}\label{_e_s_d_l_8h_a903698253c07bf10546483ab645e095d}
+
+\begin{DoxyCompactList}\small\item\em Contient la suite des événements capturés par la S\+D\+L (Clavier+\+Souris) \end{DoxyCompactList}\item 
+\hypertarget{_e_s_d_l_8h_a70c6b0883e7f0c106bae0f41a4e85760}{char \hyperlink{_e_s_d_l_8h_a70c6b0883e7f0c106bae0f41a4e85760}{buffer}}\label{_e_s_d_l_8h_a70c6b0883e7f0c106bae0f41a4e85760}
+
+\begin{DoxyCompactList}\small\item\em Identifiant du bouton survolé \end{DoxyCompactList}\item 
+\hypertarget{_e_s_d_l_8h_a807dc4555059eac04a8c4ee037138fdc}{int {\bfseries buffer\+\_\+deliver}}\label{_e_s_d_l_8h_a807dc4555059eac04a8c4ee037138fdc}
+
+\item 
+\hypertarget{_e_s_d_l_8h_a6b44e467c3653d025ec4c6f4f19598fe}{\hyperlink{struct_input}{Input} {\bfseries in}}\label{_e_s_d_l_8h_a6b44e467c3653d025ec4c6f4f19598fe}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Easy\+S\+D\+L header. 
+
+\begin{DoxyAuthor}{Auteur}
+T\+A\+H\+R\+I Ahmed, S\+I\+M\+O\+N Jérémy 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+6.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+25-\/01-\/2015
+\end{DoxyDate}
+Easy\+S\+D\+L est une extension de la librairie S\+D\+L standard 
+
+\subsection{Documentation du type de l'énumération}
+\hypertarget{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!t\+\_\+type\+Align@{t\+\_\+type\+Align}}
+\index{t\+\_\+type\+Align@{t\+\_\+type\+Align}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{t\+\_\+type\+Align}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf t\+\_\+type\+Align}}}\label{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0}
+\begin{Desc}
+\item[Valeurs énumérées]\par
+\begin{description}
+\index{A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+E\+R@{A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+E\+R}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+E\+R@{A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+E\+R}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a5624165187e56db612253e608a45b1c6}{A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+E\+R}\label{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a5624165187e56db612253e608a45b1c6}
+}]Texte aligné au centre \index{A\+L\+I\+G\+N\+\_\+\+L\+E\+F\+T@{A\+L\+I\+G\+N\+\_\+\+L\+E\+F\+T}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!A\+L\+I\+G\+N\+\_\+\+L\+E\+F\+T@{A\+L\+I\+G\+N\+\_\+\+L\+E\+F\+T}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a6ec599857e15466988726932dd592305}{A\+L\+I\+G\+N\+\_\+\+L\+E\+F\+T}\label{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a6ec599857e15466988726932dd592305}
+}]Texte aligné à gauche \index{A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+H\+T@{A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+H\+T}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+H\+T@{A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+H\+T}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a9c81840e8cad46418b39a8b74a246354}{A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+H\+T}\label{_e_s_d_l_8h_a4b36ee6f9167822151b97ef39f89e1b0a9c81840e8cad46418b39a8b74a246354}
+}]Texte aligné à droite \end{description}
+\end{Desc}
+\hypertarget{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3d}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!t\+\_\+type\+Data@{t\+\_\+type\+Data}}
+\index{t\+\_\+type\+Data@{t\+\_\+type\+Data}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{t\+\_\+type\+Data}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf t\+\_\+type\+Data}}}\label{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3d}
+\begin{Desc}
+\item[Valeurs énumérées]\par
+\begin{description}
+\index{B\+U\+T\+T\+O\+N@{B\+U\+T\+T\+O\+N}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!B\+U\+T\+T\+O\+N@{B\+U\+T\+T\+O\+N}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da7d67f007544f534278ecca3cdca12565}{B\+U\+T\+T\+O\+N}\label{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da7d67f007544f534278ecca3cdca12565}
+}]Les boutons interactifs \index{I\+N\+P\+U\+T@{I\+N\+P\+U\+T}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!I\+N\+P\+U\+T@{I\+N\+P\+U\+T}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3dae310c909d76b003d016bef8bdf16936a}{I\+N\+P\+U\+T}\label{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3dae310c909d76b003d016bef8bdf16936a}
+}]Les champs de saisie \index{I\+M\+G@{I\+M\+G}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!I\+M\+G@{I\+M\+G}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da1e00c983d4be44226a3b1ba10382e3e9}{I\+M\+G}\label{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da1e00c983d4be44226a3b1ba10382e3e9}
+}]Les images \index{S\+P\+R\+I\+T\+E@{S\+P\+R\+I\+T\+E}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+P\+R\+I\+T\+E@{S\+P\+R\+I\+T\+E}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da2dd609ad1f04fe6e979d97ae1276f880}{S\+P\+R\+I\+T\+E}\label{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da2dd609ad1f04fe6e979d97ae1276f880}
+}]Les sprites \index{T\+E\+X\+T@{T\+E\+X\+T}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!T\+E\+X\+T@{T\+E\+X\+T}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da9a4a47c1606e295076055a9cc4373197}{T\+E\+X\+T}\label{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3da9a4a47c1606e295076055a9cc4373197}
+}]Le texte \index{R\+E\+C\+T\+A\+N\+G\+L\+E@{R\+E\+C\+T\+A\+N\+G\+L\+E}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!R\+E\+C\+T\+A\+N\+G\+L\+E@{R\+E\+C\+T\+A\+N\+G\+L\+E}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3dae552ab0a96c0384a6e918e726b7f6102}{R\+E\+C\+T\+A\+N\+G\+L\+E}\label{_e_s_d_l_8h_a5e16dfc72aa0207fce4ffef348faac3dae552ab0a96c0384a6e918e726b7f6102}
+}]Rectangles \end{description}
+\end{Desc}
+\hypertarget{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!t\+\_\+type\+Form@{t\+\_\+type\+Form}}
+\index{t\+\_\+type\+Form@{t\+\_\+type\+Form}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{t\+\_\+type\+Form}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf t\+\_\+type\+Form}}}\label{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361}
+\begin{Desc}
+\item[Valeurs énumérées]\par
+\begin{description}
+\index{N\+U\+M\+E\+R\+I\+C@{N\+U\+M\+E\+R\+I\+C}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!N\+U\+M\+E\+R\+I\+C@{N\+U\+M\+E\+R\+I\+C}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a8036f3be5700d4eb67d27fab554d5e0c}{N\+U\+M\+E\+R\+I\+C}\label{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a8036f3be5700d4eb67d27fab554d5e0c}
+}]Capture uniquement les chiffres de 0 à 9 \index{A\+L\+P\+H\+A@{A\+L\+P\+H\+A}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!A\+L\+P\+H\+A@{A\+L\+P\+H\+A}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a47e073572a47a01522b766b027f1a16c}{A\+L\+P\+H\+A}\label{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a47e073572a47a01522b766b027f1a16c}
+}]Capture uniquement les caractères de A à Z \index{A\+L\+P\+H\+A\+N\+U\+M\+E\+R\+I\+C@{A\+L\+P\+H\+A\+N\+U\+M\+E\+R\+I\+C}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!A\+L\+P\+H\+A\+N\+U\+M\+E\+R\+I\+C@{A\+L\+P\+H\+A\+N\+U\+M\+E\+R\+I\+C}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a9eb4563050fa6be12859bf9d7c0a690e}{A\+L\+P\+H\+A\+N\+U\+M\+E\+R\+I\+C}\label{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361a9eb4563050fa6be12859bf9d7c0a690e}
+}]Capture uniquement les caractères alphanumériques \index{N\+O\+M\+A\+S\+K@{N\+O\+M\+A\+S\+K}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!N\+O\+M\+A\+S\+K@{N\+O\+M\+A\+S\+K}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361aef8f0c1b507b09c6d3538644944d9bb3}{N\+O\+M\+A\+S\+K}\label{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361aef8f0c1b507b09c6d3538644944d9bb3}
+}]Capture tout, aucun masque de saisie \index{N\+O\+N\+E@{N\+O\+N\+E}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!N\+O\+N\+E@{N\+O\+N\+E}}\item[{\em 
+\hypertarget{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361ac157bdf0b85a40d2619cbc8bc1ae5fe2}{N\+O\+N\+E}\label{_e_s_d_l_8h_ad016ad49d94f7d9a0328aecd40afd361ac157bdf0b85a40d2619cbc8bc1ae5fe2}
+}]Lorsqu'il ne s'agit pas d'un champ de saisie \end{description}
+\end{Desc}
+
+
+\subsection{Documentation des fonctions}
+\hypertarget{_e_s_d_l_8h_a63ceff76b4f55f38d68b116c517a371b}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!aes\+\_\+init@{aes\+\_\+init}}
+\index{aes\+\_\+init@{aes\+\_\+init}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{aes\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}int aes\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{unsigned char $\ast$}]{key\+\_\+data, }
+\item[{int}]{key\+\_\+data\+\_\+len, }
+\item[{unsigned char $\ast$}]{salt, }
+\item[{E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$}]{e\+\_\+ctx, }
+\item[{E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$}]{d\+\_\+ctx}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a63ceff76b4f55f38d68b116c517a371b}
+Create an 256 bit key and I\+V using the supplied key\+\_\+data. salt can be added for taste. Fills in the encryption and decryption ctx objects and returns 0 on success \hypertarget{_e_s_d_l_8h_a9d9541bc4b96fce03fbf72b517def649}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!free\+Profil@{free\+Profil}}
+\index{free\+Profil@{free\+Profil}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{free\+Profil}]{\setlength{\rightskip}{0pt plus 5cm}void free\+Profil (
+\begin{DoxyParamCaption}
+\item[{{\bf d\+\_\+save} $\ast$}]{profil}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a9d9541bc4b96fce03fbf72b517def649}
+
+
+Libère le profil. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em profil} & Profil de données précédemment chargé avec \hyperlink{_e_s_d_l_8h_ae35cd624ea55c660e8333f484bad25b1}{init\+Profil()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ae35cd624ea55c660e8333f484bad25b1}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!init\+Profil@{init\+Profil}}
+\index{init\+Profil@{init\+Profil}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{init\+Profil}]{\setlength{\rightskip}{0pt plus 5cm}{\bf d\+\_\+save} $\ast$ init\+Profil (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ae35cd624ea55c660e8333f484bad25b1}
+
+
+Initialise le profil, obligatoire pour manipuler un profil de donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em filename} & Fichier sauvegarde à manipuler \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Pointeur vers le jeu de donnée d\+\_\+save$\ast$ 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a967e38c7eaeeda8539fa462d5475b1a6}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!read\+Param@{read\+Param}}
+\index{read\+Param@{read\+Param}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{read\+Param}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ read\+Param (
+\begin{DoxyParamCaption}
+\item[{{\bf d\+\_\+save} $\ast$}]{profil, }
+\item[{char $\ast$}]{param}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a967e38c7eaeeda8539fa462d5475b1a6}
+
+
+Récupère le contenu associé au paramètre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em profil} & Profil de données précédemment chargé avec \hyperlink{_e_s_d_l_8h_ae35cd624ea55c660e8333f484bad25b1}{init\+Profil()} \\
+\hline
+{\em param} & Nom du paramètre \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a50cbff1421d8783fdf04791ca51d4188}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!save\+Profil@{save\+Profil}}
+\index{save\+Profil@{save\+Profil}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{save\+Profil}]{\setlength{\rightskip}{0pt plus 5cm}int save\+Profil (
+\begin{DoxyParamCaption}
+\item[{{\bf d\+\_\+save} $\ast$}]{profil}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a50cbff1421d8783fdf04791ca51d4188}
+
+
+Sauvegarde le profil de données dans le fichier. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em profil} & Profil de données précédemment chargé avec \hyperlink{_e_s_d_l_8h_ae35cd624ea55c660e8333f484bad25b1}{init\+Profil()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_aa7bd3bd537cb03abab4b56700557120a}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+capture\+Input@{S\+D\+L\+\_\+capture\+Input}}
+\index{S\+D\+L\+\_\+capture\+Input@{S\+D\+L\+\_\+capture\+Input}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+capture\+Input}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+capture\+Input (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{obj}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_aa7bd3bd537cb03abab4b56700557120a}
+
+
+Copie le dernier caractère capturé dans la bonne destination. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em obj} & Identifiant de l'objet concerné \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ac5e2820a5985aa4b7295eb706308fcb7}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+context\+Empty@{S\+D\+L\+\_\+context\+Empty}}
+\index{S\+D\+L\+\_\+context\+Empty@{S\+D\+L\+\_\+context\+Empty}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+context\+Empty}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+context\+Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ac5e2820a5985aa4b7295eb706308fcb7}
+
+
+Vérifie si un contexte n'a pas de donnée chargé en mémoire. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte à vérifier, au préalable chargé avec S\+D\+L\+\_\+new\+Context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_aa220f313688a61600a39bed8712fba2b}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+del\+Image@{S\+D\+L\+\_\+del\+Image}}
+\index{S\+D\+L\+\_\+del\+Image@{S\+D\+L\+\_\+del\+Image}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+del\+Image}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+del\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{idimg}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_aa220f313688a61600a39bed8712fba2b}
+
+
+Supprimer une image d'un contexte. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em idimg} & Identifiant de l'image à supprimer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a350187f323b084a6c77dfc11518309e2}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+del\+Obj@{S\+D\+L\+\_\+del\+Obj}}
+\index{S\+D\+L\+\_\+del\+Obj@{S\+D\+L\+\_\+del\+Obj}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+del\+Obj}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+del\+Obj (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{obj}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a350187f323b084a6c77dfc11518309e2}
+
+
+Supprime d'un contexte un objet. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em obj} & Identifiant de l'objet à supprimer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a5e67425b0774f62401160f9e7117c67b}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+del\+Rect@{S\+D\+L\+\_\+del\+Rect}}
+\index{S\+D\+L\+\_\+del\+Rect@{S\+D\+L\+\_\+del\+Rect}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+del\+Rect}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+del\+Rect (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{idrect}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a5e67425b0774f62401160f9e7117c67b}
+
+
+Supprime un rectangle existant dans un contexte donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em idrect} & Identifiant du rectangle concerné \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a5a31bac8e6a4ac6f17a1e22e88f37179}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+del\+Sprite@{S\+D\+L\+\_\+del\+Sprite}}
+\index{S\+D\+L\+\_\+del\+Sprite@{S\+D\+L\+\_\+del\+Sprite}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+del\+Sprite}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+del\+Sprite (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{id\+Sprite}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a5a31bac8e6a4ac6f17a1e22e88f37179}
+
+
+Supprime un sprite d'un contexte donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em id\+Sprite} & Identifiant du sprite à supprimer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ac041e0aef6e1ab6939ef527880bf85ba}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+del\+Text@{S\+D\+L\+\_\+del\+Text}}
+\index{S\+D\+L\+\_\+del\+Text@{S\+D\+L\+\_\+del\+Text}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+del\+Text}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+del\+Text (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{idtext}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ac041e0aef6e1ab6939ef527880bf85ba}
+
+
+Supprime d'un contexte un objet texte. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em idtext} & Identifiant de l'objet texte à supprimer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a54afe7a4d2164a4ca5ab080ebe013b5f}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+edit\+Image@{S\+D\+L\+\_\+edit\+Image}}
+\index{S\+D\+L\+\_\+edit\+Image@{S\+D\+L\+\_\+edit\+Image}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+edit\+Image}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+edit\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{idimg, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a54afe7a4d2164a4ca5ab080ebe013b5f}
+
+
+Modifie les propriétés d'une image. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em idimg} & Identifiant de l'image dont les propriétés sont à modifier \\
+\hline
+{\em x} & Position x relative au contexte \\
+\hline
+{\em y} & Position y relative au contexte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ad6cdd9e87529ffb5380e2de13885727f}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+edit\+Obj@{S\+D\+L\+\_\+edit\+Obj}}
+\index{S\+D\+L\+\_\+edit\+Obj@{S\+D\+L\+\_\+edit\+Obj}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+edit\+Obj}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+edit\+Obj (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{obj, }
+\item[{{\bf t\+\_\+type\+Data}}]{type, }
+\item[{char $\ast$}]{title, }
+\item[{int}]{align, }
+\item[{char $\ast$}]{dest, }
+\item[{{\bf t\+\_\+type\+Form}}]{type\+Form, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ad6cdd9e87529ffb5380e2de13885727f}
+
+
+Modifie les propriétés d'un objet. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em obj} & Identifiant de l'objet à modifier \\
+\hline
+{\em type} & Bouton ou champ de saisie \\
+\hline
+{\em title} & Titre de l'objet \\
+\hline
+{\em align} & Alignement du texte \\
+\hline
+{\em dest} & S'il s'agit d'un champs de saisie, mettre la variable string dans laquel sera stocké le résultat, sinon mettre à N\+U\+L\+L. \\
+\hline
+{\em type\+Form} & S'il s'agit d'un champs de saisie, préciser le masque de saisie, sinon mettre N\+O\+N\+E. \\
+\hline
+{\em x} & Position x relative au contexte de l'objet \\
+\hline
+{\em y} & Position y relative au contexte de l'objet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a2b84e16b696a4a6d3d0b276ed5fd3c45}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+edit\+Rect@{S\+D\+L\+\_\+edit\+Rect}}
+\index{S\+D\+L\+\_\+edit\+Rect@{S\+D\+L\+\_\+edit\+Rect}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+edit\+Rect}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+edit\+Rect (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{idrect, }
+\item[{S\+D\+L\+\_\+\+Color}]{color, }
+\item[{int}]{height, }
+\item[{int}]{width, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a2b84e16b696a4a6d3d0b276ed5fd3c45}
+
+
+Modifie un rectangle existant dans un contexte donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em idrect} & Identifiant du rectangle concerné \\
+\hline
+{\em color} & Couleur du rectangle (S\+D\+L\+\_\+\+Color) \\
+\hline
+{\em height} & Hauteur du rectangle \\
+\hline
+{\em width} & Largeur du rectangle \\
+\hline
+{\em x} & Position x par rapport au contexte \\
+\hline
+{\em y} & Position y par rapport au contexte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a41d51a1d1bfdef4ffb041cba7ca26356}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+edit\+Sprite@{S\+D\+L\+\_\+edit\+Sprite}}
+\index{S\+D\+L\+\_\+edit\+Sprite@{S\+D\+L\+\_\+edit\+Sprite}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+edit\+Sprite}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+edit\+Sprite (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{id\+Sprite, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{position, }
+\item[{int}]{animation, }
+\item[{int}]{hide}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a41d51a1d1bfdef4ffb041cba7ca26356}
+
+
+Modifie le sprite d'un contexte donnée à condition qu'il soit déjà chargé avec \hyperlink{_e_s_d_l_8h_ac520f947f5f3d7a0efca3068294d2d18}{S\+D\+L\+\_\+new\+Sprite()} 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em id\+Sprite} & Identifiant du sprite concerné \\
+\hline
+{\em x} & Position x relative au contexte \\
+\hline
+{\em y} & Position y relative au contexte \\
+\hline
+{\em position} & Identifiant de la colonne (verticale) \\
+\hline
+{\em animation} & Identifiant de la ligne (horizontale) \\
+\hline
+{\em hide} & Pour ne pas afficher = 1, 0 pour afficher. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a5c0919aa6e89dc3da09f1a627803d214}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+edit\+Text@{S\+D\+L\+\_\+edit\+Text}}
+\index{S\+D\+L\+\_\+edit\+Text@{S\+D\+L\+\_\+edit\+Text}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+edit\+Text}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+edit\+Text (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{idtext, }
+\item[{char $\ast$}]{content, }
+\item[{S\+D\+L\+\_\+\+Color}]{couleur, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a5c0919aa6e89dc3da09f1a627803d214}
+
+
+Modifie une entrée texte au préalable chargée avec \hyperlink{_e_s_d_l_8h_a580996d9860e68cddb24dc6e7e12241f}{S\+D\+L\+\_\+new\+Text()} 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em idtext} & Identifiant de l'objet texte à modifier \\
+\hline
+{\em content} & La chaine de caractère à associé à cette objet texte. \\
+\hline
+{\em couleur} & La couleur du texte \\
+\hline
+{\em x} & Position x relative au contexte \\
+\hline
+{\em y} & Position y relative au contexte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ab7e2ffc47a30e31d5a8393befe0b7933}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+free\+Context@{S\+D\+L\+\_\+free\+Context}}
+\index{S\+D\+L\+\_\+free\+Context@{S\+D\+L\+\_\+free\+Context}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+free\+Context}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+free\+Context (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ab7e2ffc47a30e31d5a8393befe0b7933}
+
+
+Libère la mémoire, supprime les données chargés pour un contexte donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a91456bae8ffea1a6ea5841ea009f88db}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+generate@{S\+D\+L\+\_\+generate}}
+\index{S\+D\+L\+\_\+generate@{S\+D\+L\+\_\+generate}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+generate}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+generate (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a91456bae8ffea1a6ea5841ea009f88db}
+
+
+Génère une frame et l'affiche à l'écran, fonction blocante s'il existe des objets (bouton(s) ou champ(s) de saisie). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte pour lequel il faut générer une frame \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+L'identifiant du bouton choisis ou rien. 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a85cd8c78336d5d4843e35f48a4beada9}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+generate\+Frame@{S\+D\+L\+\_\+generate\+Frame}}
+\index{S\+D\+L\+\_\+generate\+Frame@{S\+D\+L\+\_\+generate\+Frame}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+generate\+Frame}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+generate\+Frame (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a85cd8c78336d5d4843e35f48a4beada9}
+
+
+Construit une frame pour un contexte donnée et la stocke dans la surface principale en attente de rafraichissement. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte pour lequel il faut construire une frame \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a5e6af77d47af2dd61ba898c9922f6d76}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+generate\+Menu@{S\+D\+L\+\_\+generate\+Menu}}
+\index{S\+D\+L\+\_\+generate\+Menu@{S\+D\+L\+\_\+generate\+Menu}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+generate\+Menu}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+generate\+Menu (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{background\+Pic, }
+\item[{int}]{nb\+Entries, }
+\item[{char $\ast$$\ast$}]{captions}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a5e6af77d47af2dd61ba898c9922f6d76}
+
+
+Génère un menu générique et attends que l'utilisateur fasse un choix. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em background\+Pic} & Nom de l'image à utiliser en fond \\
+\hline
+{\em nb\+Entries} & Nombre de bouton à générer \\
+\hline
+{\em captions} & Contient le texte associés au(x) bouton(s) (matrice $\ast$$\ast$char) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Identifiant du bouton choisis 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ab889914f885936ad7556bddb79290381}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+getimageheight@{S\+D\+L\+\_\+getimageheight}}
+\index{S\+D\+L\+\_\+getimageheight@{S\+D\+L\+\_\+getimageheight}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+getimageheight}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+getimageheight (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{imgid}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ab889914f885936ad7556bddb79290381}
+
+
+Nous informe de la hauteur d'une image depuis un contexte précis. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte concerné \\
+\hline
+{\em imgid} & Identifiant de l'image \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Hauteur en pixel (entier) 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a2c6c1e4b6bf182f21bc82dee3ab04680}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+getimagewidth@{S\+D\+L\+\_\+getimagewidth}}
+\index{S\+D\+L\+\_\+getimagewidth@{S\+D\+L\+\_\+getimagewidth}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+getimagewidth}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+getimagewidth (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{imgid}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a2c6c1e4b6bf182f21bc82dee3ab04680}
+
+
+Nous informe de la largeur d'une image depuis un contexte précis. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte concerné \\
+\hline
+{\em imgid} & Identifiant de l'image \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Largeur en pixel (entier) 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_acdc769a1c19af2b121774e5efe0e079e}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+getmousex@{S\+D\+L\+\_\+getmousex}}
+\index{S\+D\+L\+\_\+getmousex@{S\+D\+L\+\_\+getmousex}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+getmousex}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+getmousex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_acdc769a1c19af2b121774e5efe0e079e}
+
+
+Rend la position x de la souris par rapport à la fenêtre. 
+
+\begin{DoxyReturn}{Renvoie}
+Position x (entier) 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a0c1274143109aec6191ccf23ce0665b6}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+getmousey@{S\+D\+L\+\_\+getmousey}}
+\index{S\+D\+L\+\_\+getmousey@{S\+D\+L\+\_\+getmousey}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+getmousey}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+getmousey (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a0c1274143109aec6191ccf23ce0665b6}
+
+
+Rend la position y de la souris par rapport à la fenêtre. 
+
+\begin{DoxyReturn}{Renvoie}
+Position y (entier) 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a8b3f17e51b66b76d5a45627a10a0a48e}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+getposx@{S\+D\+L\+\_\+getposx}}
+\index{S\+D\+L\+\_\+getposx@{S\+D\+L\+\_\+getposx}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+getposx}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+getposx (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{id, }
+\item[{{\bf t\+\_\+type\+Data}}]{type}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a8b3f17e51b66b76d5a45627a10a0a48e}
+
+
+Nous informe de la position x d'un objet depuis un contexte précis. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte concerné \\
+\hline
+{\em id} & Identifiant de l'objet \\
+\hline
+{\em type} & Type d'objet, bouton, champs de saisie, image, etc.. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Position x, pixel (entier). 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_af7f194402a559e02891fe757bee60c7c}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+getposy@{S\+D\+L\+\_\+getposy}}
+\index{S\+D\+L\+\_\+getposy@{S\+D\+L\+\_\+getposy}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+getposy}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+getposy (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{id, }
+\item[{{\bf t\+\_\+type\+Data}}]{type}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_af7f194402a559e02891fe757bee60c7c}
+
+
+Nous informe de la position y d'un objet depuis un contexte précis. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte concerné \\
+\hline
+{\em id} & Identifiant de l'objet \\
+\hline
+{\em type} & Type d'objet, bouton, champs de saisie, image, etc.. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Position y, pixel (entier). 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a903d4e706938a4ab4b921858b9d6053c}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+init\+Window@{S\+D\+L\+\_\+init\+Window}}
+\index{S\+D\+L\+\_\+init\+Window@{S\+D\+L\+\_\+init\+Window}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+init\+Window}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+init\+Window (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height, }
+\item[{int}]{fullscreen, }
+\item[{char $\ast$}]{title, }
+\item[{char $\ast$}]{icon\+\_\+name, }
+\item[{int}]{ttf\+\_\+support, }
+\item[{char $\ast$}]{police\+\_\+name, }
+\item[{int}]{police\+\_\+size, }
+\item[{int}]{audio\+\_\+support}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a903d4e706938a4ab4b921858b9d6053c}
+
+
+Initialise les modules de base et ouvre une fenêtre S\+D\+L. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em width} & Largeur de la fenêtre S\+D\+L \\
+\hline
+{\em height} & Hauteur de la fenêtre S\+D\+L \\
+\hline
+{\em fullscreen} & Plein écran = 1, fenêtre = 0. \\
+\hline
+{\em title} & Titre de la fenêtre S\+D\+L \\
+\hline
+{\em icon\+\_\+name} & Chemin vers l'icone de l'application sinon N\+U\+L\+L pour aucune icone \\
+\hline
+{\em ttf\+\_\+support} & Charge le module de rendu texte = 1 sinon 0 \\
+\hline
+{\em police\+\_\+name} & Nom du fichier $\ast$.ttf pour le moteur de rendu texte \\
+\hline
+{\em police\+\_\+size} & Taille en pt de la police d'écriture \\
+\hline
+{\em audio\+\_\+support} & Prend en charge l'audio avec fmodex = 1 sinon 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a038beb15b30727bfdc316b8514947364}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+is\+Key\+Pressed@{S\+D\+L\+\_\+is\+Key\+Pressed}}
+\index{S\+D\+L\+\_\+is\+Key\+Pressed@{S\+D\+L\+\_\+is\+Key\+Pressed}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+is\+Key\+Pressed}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+is\+Key\+Pressed (
+\begin{DoxyParamCaption}
+\item[{int}]{K\+E\+Y\+\_\+\+S}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a038beb15b30727bfdc316b8514947364}
+
+
+Vérifie si une touche du clavier est enfoncée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em K\+E\+Y\+\_\+\+S} & Identifiant de la touche (constante S\+D\+L\+\_\+\+Keycode) (\href{https://wiki.libsdl.org/SDL_Keycode}{\tt https\+://wiki.\+libsdl.\+org/\+S\+D\+L\+\_\+\+Keycode}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a5c4a6319ee688992b017aee43a205253}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+ismouseover@{S\+D\+L\+\_\+ismouseover}}
+\index{S\+D\+L\+\_\+ismouseover@{S\+D\+L\+\_\+ismouseover}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+ismouseover}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+ismouseover (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{{\bf t\+\_\+type\+Data}}]{type}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a5c4a6319ee688992b017aee43a205253}
+
+
+Renvoie l'identifiant d'un objet (bouton, champ de saisie, image, sprite, texte) sur lequel la souris survol le-\/dit objet. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte pour lequel il faut vérifier \\
+\hline
+{\em type} & Le type à vérifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Identifiant de l'objet ou -\/1 si rien. 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_aab803843ca7ea680a4bab19a24317979}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+ismouseover\+Area@{S\+D\+L\+\_\+ismouseover\+Area}}
+\index{S\+D\+L\+\_\+ismouseover\+Area@{S\+D\+L\+\_\+ismouseover\+Area}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+ismouseover\+Area}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+ismouseover\+Area (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int}]{height, }
+\item[{int}]{width, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_aab803843ca7ea680a4bab19a24317979}
+
+
+Vérifie si la souris est dans la zone définie en paramètre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte de référence concerné \\
+\hline
+{\em height} & Hauteur de la zone en pixel \\
+\hline
+{\em width} & Largeur de la zone en pixel \\
+\hline
+{\em x} & Coordonnée x du point supérieur gauche \\
+\hline
+{\em y} & Coordonnée y du point supérieur gauche \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a0cfcec545e0c5fb0e8b231980dec8afe}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+is\+Mouse\+Pressed@{S\+D\+L\+\_\+is\+Mouse\+Pressed}}
+\index{S\+D\+L\+\_\+is\+Mouse\+Pressed@{S\+D\+L\+\_\+is\+Mouse\+Pressed}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+is\+Mouse\+Pressed}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+is\+Mouse\+Pressed (
+\begin{DoxyParamCaption}
+\item[{int}]{M\+O\+U\+S\+E\+\_\+\+S}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a0cfcec545e0c5fb0e8b231980dec8afe}
+
+
+Vérifie si une touche de la souris est enfoncée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em M\+O\+U\+S\+E\+\_\+\+S} & Identifiant de la touche (constante S\+D\+L\+\_\+\+Keycode) (\href{https://wiki.libsdl.org/SDL_Keycode}{\tt https\+://wiki.\+libsdl.\+org/\+S\+D\+L\+\_\+\+Keycode}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a35e30287a7fc99af32ff23fd86b8a195}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+load\+Ressources@{S\+D\+L\+\_\+load\+Ressources}}
+\index{S\+D\+L\+\_\+load\+Ressources@{S\+D\+L\+\_\+load\+Ressources}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+load\+Ressources}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+load\+Ressources (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a35e30287a7fc99af32ff23fd86b8a195}
+
+
+Charge en mémoire les ressources de base (Image bouton, champ saisie, son de selection, etc..) 
+
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a4b95ccd8fcf9f5350b423277eb8d0a9c}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+load\+Sound@{S\+D\+L\+\_\+load\+Sound}}
+\index{S\+D\+L\+\_\+load\+Sound@{S\+D\+L\+\_\+load\+Sound}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+load\+Sound}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+load\+Sound (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{sndfile}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a4b95ccd8fcf9f5350b423277eb8d0a9c}
+
+
+Chargement en mémoire d'un fichier audio. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em sndfile} & Fichier audio source ($\ast$.wav, $\ast$.mp3, $\ast$.ogg) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a0f38c5178aef2188696dcbb9f97b9950}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+nb\+Image@{S\+D\+L\+\_\+nb\+Image}}
+\index{S\+D\+L\+\_\+nb\+Image@{S\+D\+L\+\_\+nb\+Image}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+nb\+Image}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+nb\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a0f38c5178aef2188696dcbb9f97b9950}
+
+
+Compte le nombre d'image chargée en mémoire pour un contexte donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte à vérifier, au préalable chargé avec S\+D\+L\+\_\+new\+Context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Nombre d'image chargée 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a5498ffcab426f58f9dcad7c4d3adc4eb}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+nb\+Obj@{S\+D\+L\+\_\+nb\+Obj}}
+\index{S\+D\+L\+\_\+nb\+Obj@{S\+D\+L\+\_\+nb\+Obj}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+nb\+Obj}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+nb\+Obj (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a5498ffcab426f58f9dcad7c4d3adc4eb}
+
+
+Compte le nombre d'objet chargée en mémoire pour un contexte donnée (Comprend les bouttons et les champs de saisie) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte à vérifier, au préalable chargé avec S\+D\+L\+\_\+new\+Context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Nombre d'objet chargée 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a746810f1b4826d90608695548b034764}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+nb\+Sprite@{S\+D\+L\+\_\+nb\+Sprite}}
+\index{S\+D\+L\+\_\+nb\+Sprite@{S\+D\+L\+\_\+nb\+Sprite}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+nb\+Sprite}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+nb\+Sprite (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a746810f1b4826d90608695548b034764}
+
+
+Compte le nombre de sprite chargée en mémoire pour un contexte donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte à vérifier, au préalable chargé avec S\+D\+L\+\_\+new\+Context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Nombre de sprite chargée 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a4c85afa2353ec15ed5af9d14d5df96de}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+nb\+Text@{S\+D\+L\+\_\+nb\+Text}}
+\index{S\+D\+L\+\_\+nb\+Text@{S\+D\+L\+\_\+nb\+Text}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+nb\+Text}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+nb\+Text (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a4c85afa2353ec15ed5af9d14d5df96de}
+
+
+Compte le nombre d'objet texte chargée en mémoire pour un contexte donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Le contexte à vérifier, au préalable chargé avec S\+D\+L\+\_\+new\+Context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Nombre d'objet texte chargée 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_aadb4f3ad267385aab2202b7b2fef2ebc}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+new\+Context@{S\+D\+L\+\_\+new\+Context}}
+\index{S\+D\+L\+\_\+new\+Context@{S\+D\+L\+\_\+new\+Context}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+new\+Context}]{\setlength{\rightskip}{0pt plus 5cm}{\bf t\+\_\+context} $\ast$ S\+D\+L\+\_\+new\+Context (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{title, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{height, }
+\item[{int}]{width}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_aadb4f3ad267385aab2202b7b2fef2ebc}
+
+
+Création d'un nouveau contexte. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em title} & Le titre associé à ce nouveau contexte \\
+\hline
+{\em x} & Position x relative à la fenêtre S\+D\+L \\
+\hline
+{\em y} & Position y relative à la fenêtre S\+D\+L \\
+\hline
+{\em height} & Hauteur occupé en pixel par ce nouveau contexte \\
+\hline
+{\em width} & Largeur occupé en pixel par ce nouveau contexte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Adresse du nouvelle element \hyperlink{structt__context}{t\+\_\+context} $\ast$ 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ab3b350fae11af5ce5df871ae884008bd}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+new\+Image@{S\+D\+L\+\_\+new\+Image}}
+\index{S\+D\+L\+\_\+new\+Image@{S\+D\+L\+\_\+new\+Image}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+new\+Image}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+new\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int $\ast$}]{id, }
+\item[{char $\ast$}]{file, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ab3b350fae11af5ce5df871ae884008bd}
+
+
+Ajoute une image à un contexte. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em id} & Retourne l'identifiant de l'image crée mettre à N\+U\+L\+L si vous ne souhaitez pas récupérer son identifiant. \\
+\hline
+{\em file} & Le fichier image concerné \\
+\hline
+{\em x} & Position x relative au contexte \\
+\hline
+{\em y} & Position y relative au contexte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_af55473e46dd66808a20cadb546423285}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+new\+Obj@{S\+D\+L\+\_\+new\+Obj}}
+\index{S\+D\+L\+\_\+new\+Obj@{S\+D\+L\+\_\+new\+Obj}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+new\+Obj}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+new\+Obj (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int $\ast$}]{id, }
+\item[{{\bf t\+\_\+type\+Data}}]{type, }
+\item[{char $\ast$}]{title, }
+\item[{int}]{align, }
+\item[{char $\ast$}]{dest, }
+\item[{{\bf t\+\_\+type\+Form}}]{type\+Form, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_af55473e46dd66808a20cadb546423285}
+
+
+Création d'un nouvelle objet (bouton ou champs de saisie) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em id} & Retourne l'identifiant de l'objet crée mettre à N\+U\+L\+L si vous ne souhaitez pas récupérer son identifiant. \\
+\hline
+{\em type} & Bouton ou champ de saisie \\
+\hline
+{\em title} & Titre de l'objet \\
+\hline
+{\em align} & Alignement du texte \\
+\hline
+{\em dest} & S'il s'agit d'un champs de saisie, mettre la variable string dans laquelle sera stocké le résultat, sinon mettre à N\+U\+L\+L. \\
+\hline
+{\em type\+Form} & S'il s'agit d'un champs de saisie, préciser le masque de saisie, sinon mettre N\+O\+N\+E. \\
+\hline
+{\em x} & Position x relative au contexte de l'objet \\
+\hline
+{\em y} & Position y relative au contexte de l'objet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a8b79b4db20298f0b54aea9a4bf3668fa}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+new\+Rect@{S\+D\+L\+\_\+new\+Rect}}
+\index{S\+D\+L\+\_\+new\+Rect@{S\+D\+L\+\_\+new\+Rect}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+new\+Rect}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+new\+Rect (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int $\ast$}]{idrect, }
+\item[{S\+D\+L\+\_\+\+Color}]{color, }
+\item[{int}]{height, }
+\item[{int}]{width, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a8b79b4db20298f0b54aea9a4bf3668fa}
+
+
+Ajoute un nouveau rectangle pour un contexte donnée. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em idrect} & Lier à un entier le nouveau rectangle sinon mettre à N\+U\+L\+L \\
+\hline
+{\em color} & Couleur du rectangle (S\+D\+L\+\_\+\+Color) \\
+\hline
+{\em height} & Hauteur du nouveau rectangle \\
+\hline
+{\em width} & Largeur du nouveau rectangle \\
+\hline
+{\em x} & Position x par rapport au contexte \\
+\hline
+{\em y} & Position y par rapport au contexte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ac520f947f5f3d7a0efca3068294d2d18}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+new\+Sprite@{S\+D\+L\+\_\+new\+Sprite}}
+\index{S\+D\+L\+\_\+new\+Sprite@{S\+D\+L\+\_\+new\+Sprite}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+new\+Sprite}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+new\+Sprite (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{char $\ast$}]{filename, }
+\item[{S\+D\+L\+\_\+\+Color}]{transparancy, }
+\item[{int}]{sp\+\_\+height, }
+\item[{int}]{sp\+\_\+width, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{position, }
+\item[{int}]{animation, }
+\item[{int}]{hide}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ac520f947f5f3d7a0efca3068294d2d18}
+
+
+Ajoute un sprite pour un contexte. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em filename} & Fichier image du sprite (transparence png recommandé) \\
+\hline
+{\em transparancy} & Couleur de transparence \\
+\hline
+{\em sp\+\_\+height} & Hauteur d'une partie (souvent le personnage) \\
+\hline
+{\em sp\+\_\+width} & Largeur d'une partie (souvent le personnage) \\
+\hline
+{\em x} & Position x relative au contexte \\
+\hline
+{\em y} & Position y relative au contexte \\
+\hline
+{\em position} & Identifiant de la colonne (verticale) \\
+\hline
+{\em animation} & Identifiant de la ligne (horizontale) \\
+\hline
+{\em hide} & Pour ne pas afficher = 1, 0 pour afficher. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a580996d9860e68cddb24dc6e7e12241f}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+new\+Text@{S\+D\+L\+\_\+new\+Text}}
+\index{S\+D\+L\+\_\+new\+Text@{S\+D\+L\+\_\+new\+Text}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+new\+Text}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+new\+Text (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+context} $\ast$}]{context, }
+\item[{int $\ast$}]{id, }
+\item[{char $\ast$}]{content, }
+\item[{S\+D\+L\+\_\+\+Color}]{couleur, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a580996d9860e68cddb24dc6e7e12241f}
+
+
+Créer une ligne de texte à afficher pour un contexte. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em context} & Contexte concerné \\
+\hline
+{\em id} & Retourne l'identifiant de l'objet texte crée mettre à N\+U\+L\+L si vous ne souhaitez pas récupérer son identifiant. \\
+\hline
+{\em content} & La chaine de caractère à associé à cette objet texte. \\
+\hline
+{\em couleur} & La couleur du texte \\
+\hline
+{\em x} & Position x relative au contexte \\
+\hline
+{\em y} & Position y relative au contexte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_aa099c01d45ce935e0f99580273285d57}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+play\+Sound@{S\+D\+L\+\_\+play\+Sound}}
+\index{S\+D\+L\+\_\+play\+Sound@{S\+D\+L\+\_\+play\+Sound}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+play\+Sound}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+play\+Sound (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{sndfile}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_aa099c01d45ce935e0f99580273285d57}
+
+
+Lecture d'un fichier son court au préalable chargé avec S\+D\+L\+\_\+load\+Sound. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em sndfile} & Fichier audio source ($\ast$.wav, $\ast$.mp3, $\ast$.ogg) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a6e838b1c779505c8228d986116b029f3}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+request\+Exit@{S\+D\+L\+\_\+request\+Exit}}
+\index{S\+D\+L\+\_\+request\+Exit@{S\+D\+L\+\_\+request\+Exit}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+request\+Exit}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+request\+Exit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a6e838b1c779505c8228d986116b029f3}
+
+
+Vérifie si l'utilisateur requiert la fermeture du programme. 
+
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ace7633b1594edfa3b7a081190949ec64}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+set\+Delay\+Single\+Frame@{S\+D\+L\+\_\+set\+Delay\+Single\+Frame}}
+\index{S\+D\+L\+\_\+set\+Delay\+Single\+Frame@{S\+D\+L\+\_\+set\+Delay\+Single\+Frame}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+set\+Delay\+Single\+Frame}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+set\+Delay\+Single\+Frame (
+\begin{DoxyParamCaption}
+\item[{int}]{delay}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ace7633b1594edfa3b7a081190949ec64}
+
+
+Le temps de rafraichissement entre chaque frame, par défault 50 ms. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em delay} & Temps en milliseconde entre chaque frame rendu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_af37fa01e7446357cd563202000c7fa84}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+set\+I\+M\+G\+Folder@{S\+D\+L\+\_\+set\+I\+M\+G\+Folder}}
+\index{S\+D\+L\+\_\+set\+I\+M\+G\+Folder@{S\+D\+L\+\_\+set\+I\+M\+G\+Folder}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+set\+I\+M\+G\+Folder}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+set\+I\+M\+G\+Folder (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{new\+Folder}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_af37fa01e7446357cd563202000c7fa84}
+
+
+Change le dossier source pour les images. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em new\+Folder} & Chemin relatif ou absolu ce terminant par / \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a6d568d5b4bc5c0c9eb669472e79f81f3}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+set\+S\+N\+D\+Folder@{S\+D\+L\+\_\+set\+S\+N\+D\+Folder}}
+\index{S\+D\+L\+\_\+set\+S\+N\+D\+Folder@{S\+D\+L\+\_\+set\+S\+N\+D\+Folder}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+set\+S\+N\+D\+Folder}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+set\+S\+N\+D\+Folder (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{new\+Folder}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a6d568d5b4bc5c0c9eb669472e79f81f3}
+
+
+Change le dossier source pour les sons. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em new\+Folder} & Chemin relatif ou absolu ce terminant par / \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ab8bbb4217359e952a864cbb0c97f64b3}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+set\+T\+T\+F\+Folder@{S\+D\+L\+\_\+set\+T\+T\+F\+Folder}}
+\index{S\+D\+L\+\_\+set\+T\+T\+F\+Folder@{S\+D\+L\+\_\+set\+T\+T\+F\+Folder}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+set\+T\+T\+F\+Folder}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+set\+T\+T\+F\+Folder (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{new\+Folder}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ab8bbb4217359e952a864cbb0c97f64b3}
+
+
+Change le dossier source pour les polices d'écritures. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em new\+Folder} & Chemin relatif ou absolu ce terminant par / \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_acf1652604c91cfcd0571b35c2132d0aa}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+unload@{S\+D\+L\+\_\+unload}}
+\index{S\+D\+L\+\_\+unload@{S\+D\+L\+\_\+unload}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+unload}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+unload (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_acf1652604c91cfcd0571b35c2132d0aa}
+
+
+Décharge la mémoire des modules précédemment chargés et ferme le processus. 
+
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a2fa80b6dece5664515f166254c6b8342}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+unloadall\+Sound@{S\+D\+L\+\_\+unloadall\+Sound}}
+\index{S\+D\+L\+\_\+unloadall\+Sound@{S\+D\+L\+\_\+unloadall\+Sound}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+unloadall\+Sound}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+unloadall\+Sound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a2fa80b6dece5664515f166254c6b8342}
+
+
+Libère tout les fichiers audio chargé avec S\+D\+L\+\_\+load\+Sound. 
+
+\begin{DoxyReturn}{Renvoie}
+Bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a69cc0f15e05dd15c21793a2e8dccc0cf}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+unload\+Ressources@{S\+D\+L\+\_\+unload\+Ressources}}
+\index{S\+D\+L\+\_\+unload\+Ressources@{S\+D\+L\+\_\+unload\+Ressources}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+unload\+Ressources}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+unload\+Ressources (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a69cc0f15e05dd15c21793a2e8dccc0cf}
+
+
+Libère la mémoire des ressources de base, précédemment chargées avec \hyperlink{_e_s_d_l_8h_a35e30287a7fc99af32ff23fd86b8a195}{S\+D\+L\+\_\+load\+Ressources()} 
+
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ad14d22fa736edc1bca148db64d5a6c66}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+unload\+Sound@{S\+D\+L\+\_\+unload\+Sound}}
+\index{S\+D\+L\+\_\+unload\+Sound@{S\+D\+L\+\_\+unload\+Sound}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+unload\+Sound}]{\setlength{\rightskip}{0pt plus 5cm}int S\+D\+L\+\_\+unload\+Sound (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{sndfile}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ad14d22fa736edc1bca148db64d5a6c66}
+
+
+Libérer un fichier audio de la mémoire au préalable chargé avec S\+D\+L\+\_\+load\+Sound. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em sndfile} & Fichier audio source ($\ast$.wav, $\ast$.mp3, $\ast$.ogg) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Bool 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_ad155eac070cf8f59b88077e50fae0f61}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!S\+D\+L\+\_\+\+Update\+Events@{S\+D\+L\+\_\+\+Update\+Events}}
+\index{S\+D\+L\+\_\+\+Update\+Events@{S\+D\+L\+\_\+\+Update\+Events}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{S\+D\+L\+\_\+\+Update\+Events}]{\setlength{\rightskip}{0pt plus 5cm}void S\+D\+L\+\_\+\+Update\+Events (
+\begin{DoxyParamCaption}
+\item[{{\bf Input} $\ast$}]{in}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_ad155eac070cf8f59b88077e50fae0f61}
+
+
+Met à jour la table des évènements à un instant t. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em in} & Tableau dans lequel les données seront inscrite. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\hypertarget{_e_s_d_l_8h_a3d1c16f62bc4427cc46f054a230940dc}{\index{E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}!write\+Param@{write\+Param}}
+\index{write\+Param@{write\+Param}!E\+S\+D\+L.\+h@{E\+S\+D\+L.\+h}}
+\subsubsection[{write\+Param}]{\setlength{\rightskip}{0pt plus 5cm}int write\+Param (
+\begin{DoxyParamCaption}
+\item[{{\bf d\+\_\+save} $\ast$}]{profil, }
+\item[{char $\ast$}]{param, }
+\item[{char $\ast$}]{value}
+\end{DoxyParamCaption}
+)}}\label{_e_s_d_l_8h_a3d1c16f62bc4427cc46f054a230940dc}
+
+
+Sauve un paramètre avec sa valeur dans la mémoire (crypté) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em profil} & Profil de données précédemment chargé avec \hyperlink{_e_s_d_l_8h_ae35cd624ea55c660e8333f484bad25b1}{init\+Profil()} \\
+\hline
+{\em param} & Nom du paramètre \\
+\hline
+{\em value} & Contenu associé à param en clair. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+bool 
+\end{DoxyReturn}

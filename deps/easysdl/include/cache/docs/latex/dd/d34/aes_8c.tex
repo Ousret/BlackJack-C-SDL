@@ -1,0 +1,95 @@
+\hypertarget{aes_8c}{\section{Référence du fichier /\+Users/\+Ahmed/\+Documents/\+L2 S\+P\+I/\+C/\+Personnels/\+E\+S\+D\+L/src/aes.c}
+\label{aes_8c}\index{/\+Users/\+Ahmed/\+Documents/\+L2 S\+P\+I/\+C/\+Personnels/\+E\+S\+D\+L/src/aes.\+c@{/\+Users/\+Ahmed/\+Documents/\+L2 S\+P\+I/\+C/\+Personnels/\+E\+S\+D\+L/src/aes.\+c}}
+}
+
+
+Easy\+S\+D\+L\+: Encryption / Decryption management A\+E\+S 256bits.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}E\+S\+D\+L.\+h\char`\"{}}\\*
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{aes_8c_a4f0182811cb1b839d08984f0db12c0bd}{int {\bfseries aes\+\_\+custom\+\_\+32key} (const unsigned char $\ast$key32)}\label{aes_8c_a4f0182811cb1b839d08984f0db12c0bd}
+
+\item 
+\hypertarget{aes_8c_a379ce5b2ca63f180a575e637d58221b0}{void {\bfseries aes\+\_\+clean} ()}\label{aes_8c_a379ce5b2ca63f180a575e637d58221b0}
+
+\item 
+int \hyperlink{aes_8c_a63ceff76b4f55f38d68b116c517a371b}{aes\+\_\+init} (unsigned char $\ast$key\+\_\+data, int key\+\_\+data\+\_\+len, unsigned char $\ast$salt, E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$e\+\_\+ctx, E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$d\+\_\+ctx)
+\item 
+\hypertarget{aes_8c_a66d21d83db31f2c8a0a552eaff985698}{unsigned char $\ast$ {\bfseries aes\+\_\+encrypt} (E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$e, unsigned char $\ast$plaintext, int $\ast$len)}\label{aes_8c_a66d21d83db31f2c8a0a552eaff985698}
+
+\item 
+\hypertarget{aes_8c_a95bf2e0085af471ccb1a2112eafe42db}{unsigned char $\ast$ {\bfseries aes\+\_\+decrypt} (E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$e, unsigned char $\ast$ciphertext, int $\ast$len)}\label{aes_8c_a95bf2e0085af471ccb1a2112eafe42db}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{aes_8c_ac638f815d6ea12514f8fa77411edbbf7}{E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X {\bfseries en}}\label{aes_8c_ac638f815d6ea12514f8fa77411edbbf7}
+
+\item 
+\hypertarget{aes_8c_adee768efeaabf64acf53158d667a5c3a}{E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X {\bfseries de}}\label{aes_8c_adee768efeaabf64acf53158d667a5c3a}
+
+\item 
+\hypertarget{aes_8c_a7e3d6b0fb59b168df75990bb1bc4b60d}{unsigned int {\bfseries salt} \mbox{[}$\,$\mbox{]} = \{12345, 54321\}}\label{aes_8c_a7e3d6b0fb59b168df75990bb1bc4b60d}
+
+\item 
+const unsigned char {\bfseries key\+\_\+data} \mbox{[}$\,$\mbox{]}
+\item 
+\hypertarget{aes_8c_ae4fc5140cedf12c1e3d8823601fe9334}{const unsigned char $\ast$ {\bfseries key\+\_\+data\+\_\+op} = N\+U\+L\+L}\label{aes_8c_ae4fc5140cedf12c1e3d8823601fe9334}
+
+\item 
+\hypertarget{aes_8c_ab0dfae7a4d48161fbfb5548c5ac9ea74}{unsigned int {\bfseries allowcustomkey} = 0}\label{aes_8c_ab0dfae7a4d48161fbfb5548c5ac9ea74}
+
+\item 
+\hypertarget{aes_8c_a51f4eb9943d584656495e7e885f58728}{const int {\bfseries key\+\_\+data\+\_\+len} = 32}\label{aes_8c_a51f4eb9943d584656495e7e885f58728}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Easy\+S\+D\+L\+: Encryption / Decryption management A\+E\+S 256bits. 
+
+\begin{DoxyAuthor}{Auteur}
+T\+A\+H\+R\+I Ahmed 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+9 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+08-\/02-\/2015
+\end{DoxyDate}
+Easy\+S\+D\+L est une extension de la librairie S\+D\+L standard public domain code; Open\+S\+S\+L E\+V\+P apis. Started by Saju Pillai (\href{mailto:saju.pillai@gmail.com}{\tt saju.\+pillai@gmail.\+com}) Changed, adapted \& improved by T\+A\+H\+R\+I Ahmed () 
+
+\subsection{Documentation des fonctions}
+\hypertarget{aes_8c_a63ceff76b4f55f38d68b116c517a371b}{\index{aes.\+c@{aes.\+c}!aes\+\_\+init@{aes\+\_\+init}}
+\index{aes\+\_\+init@{aes\+\_\+init}!aes.\+c@{aes.\+c}}
+\subsubsection[{aes\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}int aes\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{unsigned char $\ast$}]{key\+\_\+data, }
+\item[{int}]{key\+\_\+data\+\_\+len, }
+\item[{unsigned char $\ast$}]{salt, }
+\item[{E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$}]{e\+\_\+ctx, }
+\item[{E\+V\+P\+\_\+\+C\+I\+P\+H\+E\+R\+\_\+\+C\+T\+X $\ast$}]{d\+\_\+ctx}
+\end{DoxyParamCaption}
+)}}\label{aes_8c_a63ceff76b4f55f38d68b116c517a371b}
+Create an 256 bit key and I\+V using the supplied key\+\_\+data. salt can be added for taste. Fills in the encryption and decryption ctx objects and returns 0 on success 
+
+\subsection{Documentation des variables}
+\hypertarget{aes_8c_a1bb0d0041196bc347e7bab0715da2e1c}{\index{aes.\+c@{aes.\+c}!key\+\_\+data@{key\+\_\+data}}
+\index{key\+\_\+data@{key\+\_\+data}!aes.\+c@{aes.\+c}}
+\subsubsection[{key\+\_\+data}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned char key\+\_\+data\mbox{[}$\,$\mbox{]}}}\label{aes_8c_a1bb0d0041196bc347e7bab0715da2e1c}
+{\bfseries Valeur initiale \+:}
+\begin{DoxyCode}
+= \{
+    0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77,
+    0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff,
+    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+    0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
+\}
+\end{DoxyCode}
