@@ -3,7 +3,8 @@ project(BlackJack-ESDL)
 
 set(EXECUTABLE_OUTPUT_PATH bin)
 add_definitions(-Wall -Wextra)
-#set(SDLCONF_OS "sdl-config --libs")
+#set(LD_LIBRARY_PATH "/usr/local/lib")
+SET(CMAKE_INSTALL_RPATH "/usr/local/lib")
 
 #set(CMAKE_C_FLAGS "`sdl-config --cflags`")
 
