@@ -4,11 +4,6 @@
 #  LIBEASYSDL_FOUND - System has EasySDL
 #  LIBEASYSDL_INCLUDE_DIRS - The EasySDL include directories
 #  LIBEASYSDL_LIBRARIES - The libraries needed to use EasySDL
-#  LIBEASYSDL_DEFINITIONS - Compiler switches required for using EasySDL
-
-find_package(PkgConfig)
-pkg_check_modules(PC_LIBEASYSDL QUIET libESDL)
-set(LIBEASYSDL_DEFINITIONS ${PC_LIBEASYSDL_CFLAGS_OTHER})
           
 FIND_PATH(LIBEASYSDL_INCLUDE_DIR ESDL.h
   HINTS
@@ -38,12 +33,6 @@ FIND_LIBRARY(LIBEASYSDL_LIBRARY
 
 set(LIBEASYSDL_LIBRARIES ${LIBEASYSDL_LIBRARY} )
 set(LIBEASYSDL_INCLUDE_DIRS ${LIBEASYSDL_INCLUDE_DIR} )
-
-include(FindPackageHandleStandardArgs)
-# handle the QUIETLY and REQUIRED arguments and set LIBFMODEX_FOUND to TRUE
-# if all listed variables are TRUE
-find_package_handle_standard_args(ESDL  DEFAULT_MSG
-                                  LIBEASYSDL_LIBRARY LIBEASYSDL_INCLUDE_DIR)
 
 IF(LIBFMODEX_LIBRARIES)
 	message(STATUS "Found EasySDL: ${LIBEASYSDL_LIBRARIES}" ", " ${LIBEASYSDL_INCLUDE_DIRS})

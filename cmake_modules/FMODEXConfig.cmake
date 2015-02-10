@@ -4,11 +4,6 @@
 #  LIBFMODEX_FOUND - System has FMODex
 #  LIBFMODEX_INCLUDE_DIRS - The FMODex include directories
 #  LIBFMODEX_LIBRARIES - The libraries needed to use FMODex
-#  LIBFMODEX_DEFINITIONS - Compiler switches required for using FMODex
-
-find_package(PkgConfig)
-pkg_check_modules(PC_LIBFMODEX QUIET libfmodex)
-set(LIBFMODEX_DEFINITIONS ${PC_LIBFMODEX_CFLAGS_OTHER})
           
 FIND_PATH(LIBFMODEX_INCLUDE_DIR fmodex/fmod.h
   HINTS
@@ -38,12 +33,6 @@ FIND_LIBRARY(LIBFMODEX_LIBRARY
 
 set(LIBFMODEX_LIBRARIES ${LIBFMODEX_LIBRARY} )
 set(LIBFMODEX_INCLUDE_DIRS ${LIBFMODEX_INCLUDE_DIR} )
-
-include(FindPackageHandleStandardArgs)
-# handle the QUIETLY and REQUIRED arguments and set LIBFMODEX_FOUND to TRUE
-# if all listed variables are TRUE
-find_package_handle_standard_args(fmodex  DEFAULT_MSG
-                                  LIBFMODEX_LIBRARY LIBFMODEX_INCLUDE_DIR)
 
 IF(LIBFMODEX_LIBRARIES)
 	message(STATUS "Found FMODex: ${LIBFMODEX_LIBRARIES}" ", " ${LIBFMODEX_INCLUDE_DIRS})
