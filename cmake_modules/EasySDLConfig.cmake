@@ -7,12 +7,12 @@
 #  LIBEASYSDL_DEFINITIONS - Compiler switches required for using EasySDL
 
 find_package(PkgConfig)
-pkg_check_modules(PC_LIBEASYSDL QUIET libesdl)
+pkg_check_modules(PC_LIBEASYSDL QUIET libESDL)
 set(LIBEASYSDL_DEFINITIONS ${PC_LIBEASYSDL_CFLAGS_OTHER})
           
 FIND_PATH(LIBEASYSDL_INCLUDE_DIR ESDL.h
   HINTS
-  $ENV{FMODDIR}
+  $ENV{EASYSDLDIR}
   PATH_SUFFIXES include
   PATHS
   /usr/local
@@ -23,9 +23,9 @@ FIND_PATH(LIBEASYSDL_INCLUDE_DIR ESDL.h
 )
 
 FIND_LIBRARY(LIBEASYSDL_LIBRARY 
-  NAMES esdl
+  NAMES ESDL
   HINTS
-  ${PC_LIBFMODEX_LIBDIR} ${PC_LIBFMODEX_LIBRARY_DIRS}
+  ${PC_LIBEASYSDL_LIBDIR} ${PC_LIBEASYSDL_LIBRARY_DIRS}
   PATH_SUFFIXES lib64 lib x86_64-linux-gnu
   PATHS
   /sw
@@ -42,7 +42,7 @@ set(LIBEASYSDL_INCLUDE_DIRS ${LIBEASYSDL_INCLUDE_DIR} )
 include(FindPackageHandleStandardArgs)
 # handle the QUIETLY and REQUIRED arguments and set LIBFMODEX_FOUND to TRUE
 # if all listed variables are TRUE
-find_package_handle_standard_args(esdl  DEFAULT_MSG
+find_package_handle_standard_args(ESDL  DEFAULT_MSG
                                   LIBEASYSDL_LIBRARY LIBEASYSDL_INCLUDE_DIR)
 
 IF(LIBFMODEX_LIBRARIES)
