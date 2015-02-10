@@ -5,9 +5,8 @@ set(EXECUTABLE_OUTPUT_PATH bin)
 add_definitions(-Wall -Wextra)
 #set(LD_LIBRARY_PATH "/usr/local/lib")
 
-#set(CMAKE_C_FLAGS "`sdl-config --cflags`")
-SET( CMAKE_EXE_LINKER_FLAGS "-L/usr/local/lib")
 
+#Needed for every SDL based program except NT system. 
 execute_process(COMMAND sdl-config --libs
                 OUTPUT_VARIABLE SDLCONF_OS)
 
@@ -20,6 +19,9 @@ if (SDL_FOUND)
 	include_directories(${SDL_INCLUDE_DIR})
 	message("EasySDL: SDL Header found : ${SDL_INCLUDE_DIR}")
 endif()
+
+set(FMODEX_DIR "${CMAKE_SOURCE_DIR}/cmake_modules")
+find_package(FMODEX REQUIRED)
 
 file(
         GLOB_RECURSE
@@ -34,15 +36,10 @@ add_executable(
 
 )
 
-
-
-#add_dependencies(blackjack ESDL)
-
 target_link_libraries(
 
         blackjack
-        ESDL
         ${SDLCONF_OS}
-        fmodex
+        ESDL
 
 )
