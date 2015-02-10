@@ -26,11 +26,12 @@ FIND_LIBRARY(LIBFMODEX_LIBRARY
   NAMES fmodex libfmodex
   HINTS
   ${PC_LIBFMODEX_LIBDIR} ${PC_LIBFMODEX_LIBRARY_DIRS}
-  PATH_SUFFIXES lib64 lib
+  PATH_SUFFIXES lib64 lib x86_64-linux-gnu
   PATHS
   /sw
   /opt/local
   /usr/local
+  /usr/local/lib #Linux AMD64 ARCH
   /opt/csw
   /opt
 )
@@ -50,6 +51,7 @@ IF(LIBFMODEX_LIBRARIES)
 	mark_as_advanced(LIBFMODEX_INCLUDE_DIR LIBFMODEX_LIBRARY )
 ELSE()
 	message(FATAL_ERROR "FMODex is not installed yet, cannot continue ! Reinstall EasySDL may solve this.")
+	message(STATUS "???? FMODex: ${LIBFMODEX_LIBRARIES}" ", " ${LIBFMODEX_INCLUDE_DIRS})
 	SET(LIBFMODEX_FOUND FALSE)
 ENDIF()
 
