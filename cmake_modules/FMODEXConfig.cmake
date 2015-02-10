@@ -31,7 +31,7 @@ set(LIBFMODEX_INCLUDE_DIRS ${LIBFMODEX_INCLUDE_DIR} )
 include(FindPackageHandleStandardArgs)
 # handle the QUIETLY and REQUIRED arguments and set LIBFMODEX_FOUND to TRUE
 # if all listed variables are TRUE
-find_package_handle_standard_args(Libfmodex  DEFAULT_MSG
+find_package_handle_standard_args(libfmodex  DEFAULT_MSG
                                   LIBFMODEX_LIBRARY LIBFMODEX_INCLUDE_DIR)
 
 IF(LIBFMODEX_LIBRARIES)
