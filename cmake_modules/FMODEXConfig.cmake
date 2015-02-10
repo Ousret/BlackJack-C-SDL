@@ -23,7 +23,7 @@ FIND_PATH(LIBFMODEX_INCLUDE_DIR fmodex/fmod.h
 )
 
 FIND_LIBRARY(LIBFMODEX_LIBRARY 
-  NAMES fmodex libfmodex
+  NAMES fmodex fmodex64 libfmodex libfmodex64
   HINTS
   ${PC_LIBFMODEX_LIBDIR} ${PC_LIBFMODEX_LIBRARY_DIRS}
   PATH_SUFFIXES lib64 lib x86_64-linux-gnu
@@ -31,7 +31,7 @@ FIND_LIBRARY(LIBFMODEX_LIBRARY
   /sw
   /opt/local
   /usr/local
-  /usr/local/lib #Linux AMD64 ARCH
+  /usr/local/lib #Linux
   /opt/csw
   /opt
 )
