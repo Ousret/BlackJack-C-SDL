@@ -26,7 +26,8 @@ find_package(FMODEX REQUIRED)
 set(EasySDL_DIR "${CMAKE_SOURCE_DIR}/cmake_modules")
 find_package(EasySDL REQUIRED)
 
-set(BUILD_LIBRARIES "${LIBEASYSDL_LIBRARIES} ${LIBFMODEX_LIBRARIES}")
+#set(BUILD_LIBRARIES "${LIBEASYSDL_LIBRARIES} ${LIBFMODEX_LIBRARIES}")
+message(STATUS ${SDLCONF_OS}, ${LIBEASYSDL_LIBRARIES}, ${LIBFMODEX_LIBRARIES})
 
 file(
         GLOB_RECURSE
@@ -44,7 +45,8 @@ add_executable(
 target_link_libraries(
 
         blackjack
+        ${LIBEASYSDL_LIBRARIES}
+        ${LIBFMODEX_LIBRARIES}
         ${SDLCONF_OS}
-        ${BUILD_LIBRARIES}
 
 )
