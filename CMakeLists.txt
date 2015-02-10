@@ -48,7 +48,6 @@ target_link_libraries(
 
         blackjack
         ${LIBEASYSDL_LIBRARIES}
-        fmodex64
         ${SDLCONF_OS}
 
 )
