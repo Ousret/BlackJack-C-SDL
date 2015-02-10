@@ -23,6 +23,8 @@ endif()
 set(FMODEX_DIR "${CMAKE_SOURCE_DIR}/cmake_modules")
 find_package(FMODEX REQUIRED)
 
+link_directories(/usr/local/lib)
+
 set(EasySDL_DIR "${CMAKE_SOURCE_DIR}/cmake_modules")
 find_package(EasySDL REQUIRED)
 
@@ -46,7 +48,7 @@ target_link_libraries(
 
         blackjack
         ${LIBEASYSDL_LIBRARIES}
-        ${LIBFMODEX_LIBRARIES}
+        fmodex64
         ${SDLCONF_OS}
 
 )
