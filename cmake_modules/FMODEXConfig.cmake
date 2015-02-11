@@ -38,14 +38,14 @@ if ("${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
   		$ENV{HOME}/local
   		deps/fmodex/linux
 	)
-	endif()
 
 else() 
-    FIND_LIBRARY(LIBFMODEX_LIBRARY 
+    
+FIND_LIBRARY(LIBFMODEX_LIBRARY 
   NAMES fmodex libfmodex
   HINTS
   ${PC_LIBFMODEX_LIBDIR} ${PC_LIBFMODEX_LIBRARY_DIRS}
-  PATH_SUFFIXES lib64 lib x86_64-linux-gnu
+  PATH_SUFFIXES lib i386-linux-gnu
   PATHS
   /sw
   /opt/local
@@ -56,6 +56,8 @@ else()
   $ENV{HOME}/local
   deps/fmodex/linux
 )
+
+endif()
 endif()
 
 

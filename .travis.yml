@@ -17,9 +17,6 @@ install:
   - cmake -G"Unix Makefiles"
   - make && sudo make install
   - cd ..
-  - sudo ln -s /usr/local/lib/libfmodex64.so.1 /usr/local/lib/libfmodex64.so
-  - sudo rm /usr/local/lib/libfmodex64.so
-  - sudo ln -s /usr/local/lib/libfmodex64.so.1 /usr/local/lib/libfmodex64.so
 
 # Build the module
 script:
