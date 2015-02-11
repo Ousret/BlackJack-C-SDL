@@ -1,14 +1,12 @@
 #
-# LuaDist Travis-CI Hook
+# BlackJack test
 #
 
 # We assume C build environments
 language: C
 
-# Try using multiple Lua Implementations
 env:
   - TOOL="gcc"                  # Use native compiler (GCC usually)
-  - TOOL="clang"                # Use clang
 
 # Install dependencies
 install:
@@ -30,7 +28,7 @@ branches:
   only:
     - master
 
-# Notify the LuaDist Dev group if needed
+# 
 #notifications:
 #  recipients:
 #    - luadist-dev@googlegroups.com
