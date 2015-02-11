@@ -4,7 +4,7 @@
 #  LIBFMODEX_FOUND - System has FMODex
 #  LIBFMODEX_INCLUDE_DIRS - The FMODex include directories
 #  LIBFMODEX_LIBRARIES - The libraries needed to use FMODex
-          
+     
 FIND_PATH(LIBFMODEX_INCLUDE_DIR fmodex/fmod.h
   HINTS
   $ENV{FMODDIR}
@@ -15,10 +15,34 @@ FIND_PATH(LIBFMODEX_INCLUDE_DIR fmodex/fmod.h
   /opt/local/include # DarwinPorts
   /opt/csw # Blastwave
   /opt
+  #$ENV{HOME}/local
+  include
 )
 
-FIND_LIBRARY(LIBFMODEX_LIBRARY 
-  NAMES fmodex fmodex64 libfmodex libfmodex64
+if ("${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
+
+	if(CMAKE_SIZEOF_VOID_P EQUAL 8) 
+	
+    	FIND_LIBRARY(LIBFMODEX_LIBRARY 
+		NAMES fmodex64 libfmodex64
+  		HINTS
+  		${PC_LIBFMODEX_LIBDIR} ${PC_LIBFMODEX_LIBRARY_DIRS}
+  		PATH_SUFFIXES lib64 lib x86_64-linux-gnu
+  		PATHS
+  		/sw
+  		/opt/local
+  		/usr/local
+  		/usr/local/lib #Linux
+  		/opt/csw
+  		/opt
+  		$ENV{HOME}/local
+  		deps/fmodex/linux
+	)
+	endif()
+
+else() 
+    FIND_LIBRARY(LIBFMODEX_LIBRARY 
+  NAMES fmodex libfmodex
   HINTS
   ${PC_LIBFMODEX_LIBDIR} ${PC_LIBFMODEX_LIBRARY_DIRS}
   PATH_SUFFIXES lib64 lib x86_64-linux-gnu
@@ -29,7 +53,31 @@ FIND_LIBRARY(LIBFMODEX_LIBRARY
   /usr/local/lib #Linux
   /opt/csw
   /opt
+  $ENV{HOME}/local
+  deps/fmodex/linux
 )
+endif()
+
+
+
+
+if ("${CMAKE_SYSTEM_NAME}" MATCHES "Darwin")
+FIND_LIBRARY(LIBFMODEX_LIBRARY 
+  NAMES fmodex libfmodex
+  HINTS
+  ${PC_LIBFMODEX_LIBDIR} ${PC_LIBFMODEX_LIBRARY_DIRS}
+  PATH_SUFFIXES lib64 lib x86_64-linux-gnu
+  PATHS
+  /sw
+  /opt/local
+  /usr/local
+  /usr/local/lib #Linux
+  /opt/csw
+  /opt
+  $ENV{HOME}/local
+  deps/fmodex/unix
+)
+endif()
 
 set(LIBFMODEX_LIBRARIES ${LIBFMODEX_LIBRARY} )
 set(LIBFMODEX_INCLUDE_DIRS ${LIBFMODEX_INCLUDE_DIR} )
@@ -43,4 +91,3 @@ ELSE()
 	message(STATUS "???? FMODex: ${LIBFMODEX_LIBRARIES}" ", " ${LIBFMODEX_INCLUDE_DIRS})
 	SET(LIBFMODEX_FOUND FALSE)
 ENDIF()
-
