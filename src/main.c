@@ -48,21 +48,21 @@ int main(int argc, char *argv[]) {
     
 	SDL_initWindow(800, 600, 0, "BlackJack with ESDL 0.5", "M_ICON.png", 1, "global.ttf", 20, 1); //800x600 +tff_support +audio_support
 	 
-	profil = initProfil("blackjack.sav");
+	profil = SDL_initProfil("blackjack.sav");
 	/* Get lastest data */
 	 
 	//writeParam(profil, "username", "Ousret");
 	
-	char *name_tmp = readParam(profil, "username");
+	char *name_tmp = SDL_readParam(profil, "username");
 	if (name_tmp) strcpy(name, name_tmp);
-	char *solde_tmp = readParam(profil, "account");
+	char *solde_tmp = SDL_readParam(profil, "account");
 	
 	if (solde_tmp) {
 		joueurs[1].solde = atoi(solde_tmp);
 	}else{
 		joueurs[1].solde = 3000;
 		sprintf(mise, "%li", joueurs[1].solde);
-		writeParam(profil, "account", mise);
+		SDL_writeParam(profil, "account", mise);
 		
 	}
 	
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
 				
 				SDL_freeContext(popup);
 				sprintf(mise, "%li", joueurs[1].solde);
-				writeParam(profil, "account", mise);
+				SDL_writeParam(profil, "account", mise);
 				
 				break;
 				
@@ -151,13 +151,13 @@ int main(int argc, char *argv[]) {
 				
 				SDL_generate(popup);
 				SDL_freeContext(popup);
-				writeParam(profil, "username", name);
+				SDL_writeParam(profil, "username", name);
 				
 				break;
 			
 			case 2:				
-				saveProfil(profil);
-				freeProfil(profil);
+				SDL_saveProfil(profil);
+				SDL_freeProfil(profil);
 				exit(0);
 				break;
 				
@@ -168,8 +168,8 @@ int main(int argc, char *argv[]) {
 		
 	}
 	
-	saveProfil(profil);
-	freeProfil(profil);
+	SDL_saveProfil(profil);
+	SDL_freeProfil(profil);
 	return 0;
 	
 }
