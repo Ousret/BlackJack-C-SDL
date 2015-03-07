@@ -19,7 +19,7 @@ add_definitions(-Wall -Wextra)
 execute_process(COMMAND sdl-config --libs
                 OUTPUT_VARIABLE SDLCONF_OS)
 
-STRING(REPLACE "\n" " " SDLCONF_OS ${SDLCONF_OS})
+STRING(REPLACE "\n" "" SDLCONF_OS ${SDLCONF_OS})
 
 include_directories(include)
 
