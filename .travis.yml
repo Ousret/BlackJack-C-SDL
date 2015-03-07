@@ -14,7 +14,7 @@ install:
   - sudo apt-get install -y libsdl1.2debian libsdl1.2-dev libsdl-image1.2 libsdl-image1.2-dev libsdl-ttf2.0-0 libsdl-ttf2.0-dev cmake
   - git clone https://github.com/Ousret/EasySDL.git
   - cd EasySDL/
-  - cmake -G"Unix Makefiles"
+  - cmake -G"Unix Makefiles" -DForceAMD64=ON
   - make && sudo make install
   - cd ..
 
